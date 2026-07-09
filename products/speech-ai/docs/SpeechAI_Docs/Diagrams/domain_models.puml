@@ -1,0 +1,82 @@
+@startuml domain_models
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+class Presentation {
+    - slides: List[Slide]
+    - statistics: Statistics
+    + add_slide(slide: Slide): void
+    + to_text(): str
+    + total_slides: int
+}
+
+class Slide {
+    - number: int
+    - title: str
+    - paragraphs: List[Paragraph]
+    - lists: List[ListBlock]
+    + add_paragraph(text: str): void
+    + add_list(items: List[str]): void
+    + to_text(): str
+}
+
+class Paragraph {
+    - text: str
+    + __str__(): str
+}
+
+class ListBlock {
+    - items: List[str]
+    + add_item(item: str): void
+    + to_text(): str
+}
+
+class Statistics {
+    - words: int
+    - characters: int
+    - sentences: int
+    - paragraphs: int
+    - estimated_minutes: float
+}
+
+class SpeechProfile {
+    - language: str
+    - voice: str
+    - reading_style: str
+    - complexity: str
+    - pacing: str
+    - recommended_wpm: int
+    - rate: str
+    - pitch: str
+    - confidence: float
+}
+
+class VoiceProfile {
+    - provider: str
+    - language: str
+    - locale: str
+    - voice: str
+    - name: str
+    - description: str
+    - rate: str
+    - pitch: str
+    - volume: str
+    - style: str
+    - role: str
+    - gender: str
+}
+
+class Language {
+    - code: str
+    - name: str
+    - confidence: float
+}
+
+Presentation "1" *-- "many" Slide
+Slide "1" *-- "many" Paragraph
+Slide "1" *-- "many" ListBlock
+Presentation "1" *-- "1" Statistics
+SpeechProfile "1" -- "1" VoiceProfile
+SpeechProfile "1" -- "1" Language
+
+@enduml

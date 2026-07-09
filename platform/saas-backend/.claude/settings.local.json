@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find / -iname \"*006-register-hash*\")",
+      "Bash(find / -path \"*tasks/saas*\" -maxdepth 6)",
+      "Bash(docker exec postgres *)",
+      "Bash(kill %1)"
+    ]
+  }
+}

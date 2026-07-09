@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Documentation - Speech AI Docs</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                🎙️ Speech AI Docs
+            </a>
+            <nav class="nav-main">
+                <a href="../../index.html">Início</a>
+                <a href="../../index.html#packs">Packs</a>
+                <a href="index.html">Pack: Foundation</a>
+                <input type="text" id="search-input" class="search-box" placeholder="Buscar documentação...">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>📦 Foundation Pack</h3>
+                <ul class="sidebar-nav"><li><a href="readme.html">README</a></li><li><a href="engineering-docs.html">Engineering Docs</a></li><li><a href="architecture.html">Architecture</a></li><li><a href="diagrams.html">Diagrams</a></li></ul>
+                
+                <h3>🔗 Geral</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="../../index.html">Voltar ao Início</a></li>
+                    <li><a href="index.html">Índice do Pack</a></li>
+                    <li><a href="../../diagrams/index.html">Diagramas</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="index.html">Foundation</a>
+                    <span>/</span>
+                    <span>Engineering Documentation</span>
+                </div>
+
+                <!-- Content -->
+                <h1>Engineering Documentation</h1>
+<h2>1. Executive Summary</h2>
+<p>Speech AI is a robust, Python-based application designed to convert textual scripts into synthesized audio using advanced TTS (Text-to-Speech) engines. Built on modern software engineering principles, the solution prioritizes modularity, scalability, and maintainability. By utilizing a pipeline architecture and dependency injection concepts, the system ensures that components such as text analysis, speech intelligence, and audio synthesis remain decoupled.</p>
+<h2>2. System Components</h2>
+<p>The application is divided into several cohesive modules:</p>
+<h3>2.1. App Kernel (<code>app/</code>)</h3>
+<p>The <code>SpeechAIApp</code> class serves as the orchestrator. It initializes configurations, sets up logging, and executes the pipeline sequentially, ensuring data flows correctly from input to the final audio file.</p>
+<h3>2.2. Configuration Management (<code>config/</code>)</h3>
+<p>Centralized configuration handling using <code>ConfigManager</code>.
+- <code>settings.json</code>: Defines input/output paths, default TTS provider, and speech pause parameters.
+- <code>voices.json</code>: Contains detailed voice profiles mapping languages and locales to specific neural voices (e.g., <code>en-US-GuyNeural</code>, <code>pt-BR-FranciscaNeural</code>).</p>
+<h3>2.3. Data Models (<code>models/</code>)</h3>
+<p>Rich domain models that encapsulate the state of the processing:
+- <code>Presentation</code> &amp; <code>Slide</code>: Represents the structured format of the input script.
+- <code>SpeechProfile</code>: The output of the intelligence engine, dictating how the text should be read (rate, pitch, volume, voice).
+- <code>Statistics</code>: Tracks word count, characters, and estimated duration.</p>
+<h3>2.4. Processing Pipeline (<code>pipeline/</code>)</h3>
+<p>The core transformation stages:
+- <strong>TextAnalyzer</strong>: Reads raw text, normalizes whitespace, detects slide boundaries, and parses content into the <code>Presentation</code> model.
+- <strong>NarrationBuilder</strong>: Formats the text for human reading, inserting breaks for long sentences.
+- <strong>SpeechBuilder</strong>: Prepares the text specifically for TTS engines, handling SSML tags or specific pause markers.</p>
+<h3>2.5. Intelligence &amp; Services (<code>services/</code>)</h3>
+<p>The brain of the application:
+- <strong>SpeechIntelligenceEngine</strong>: Orchestrates language detection, voice selection, and timing calculations to build an optimized <code>SpeechProfile</code>.
+- <strong>SpeechService</strong>: The facade that interacts with the TTS providers to synthesize the audio.</p>
+<h3>2.6. Provider Layer (<code>providers/</code>)</h3>
+<p>An extensible layer for external integrations:
+- <strong>ProviderFactory &amp; Registry</strong>: Implements the Factory pattern to instantiate the correct TTS provider based on configuration.
+- <strong>EdgeProvider</strong>: The current concrete implementation utilizing the <code>edge-tts</code> library to interface with Microsoft's Edge TTS API.</p>
+<h2>3. Technology Stack</h2>
+<ul>
+<li><strong>Language</strong>: Python 3.10+</li>
+<li><strong>Core Libraries</strong>: </li>
+<li><code>edge-tts</code>: Audio synthesis</li>
+<li><code>langdetect</code>: Language identification</li>
+<li><code>rich</code>: Console formatting</li>
+<li><code>python-dotenv</code>: Environment variable management</li>
+<li><strong>Architecture Patterns</strong>: Pipeline, Factory, Facade, Dependency Injection.</li>
+</ul>
+<h2>4. Engineering Principles Applied</h2>
+<ol>
+<li><strong>Separation of Concerns (SoC)</strong>: Each module has a single responsibility. The <code>TextAnalyzer</code> only parses text, while the <code>SpeechService</code> only generates audio.</li>
+<li><strong>Open/Closed Principle</strong>: The provider layer is open for extension (adding new TTS engines) but closed for modification.</li>
+<li><strong>Configuration over Code</strong>: Behavior is driven by JSON files, reducing the need for code changes when adding new voices or adjusting parameters.</li>
+<li><strong>Graceful Degradation</strong>: Robust error handling during file I/O and external API calls.</li>
+</ol>
+
+                <!-- Navigation -->
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border-color); display: flex; justify-content: space-between; gap: 1rem;">
+                    <a href="../../index.html" class="btn">← Voltar</a>
+                    <a href="index.html" class="btn">Índice do Pack</a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Speech AI Project. Documentação gerada por <a href="#">Manus AI</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

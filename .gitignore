@@ -1,0 +1,47 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/settings.json
+
+# Logs / temp
+*.log
+tmp/
+temp/
+*.tmp
+
+# Runtime / data
+/data/
+/data/platform/
+/runtime/
+/storage/
+
+# Local artifacts
+output/
+dist/
+build/
+
+# Node (caso use depois)
+node_modules/
+
+# SQLite / local db
+*.db
+*.sqlite3
+
+# Secrets / keys
+*.pem
+*.key
+id_ed25519
+id_ed25519.pub

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Metrics - Speech AI Docs</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                🎙️ Speech AI Docs
+            </a>
+            <nav class="nav-main">
+                <a href="../../index.html">Início</a>
+                <a href="../../index.html#packs">Packs</a>
+                <a href="index.html">Pack: Operations</a>
+                <input type="text" id="search-input" class="search-box" placeholder="Buscar documentação...">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>📦 Operations Pack</h3>
+                <ul class="sidebar-nav"><li><a href="security.html">Security</a></li><li><a href="operations-guide.html">Operations Guide</a></li><li><a href="project-metrics.html">Project Metrics</a></li><li><a href="release-process.html">Release Process</a></li></ul>
+                
+                <h3>🔗 Geral</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="../../index.html">Voltar ao Início</a></li>
+                    <li><a href="index.html">Índice do Pack</a></li>
+                    <li><a href="../../diagrams/index.html">Diagramas</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="index.html">Operations</a>
+                    <span>/</span>
+                    <span>Project Metrics</span>
+                </div>
+
+                <!-- Content -->
+                <h1>Project Metrics</h1>
+<h2>1. Overview</h2>
+<p>This document outlines the key performance indicators (KPIs) and operational metrics used to evaluate the health, efficiency, and quality of the Speech AI platform.</p>
+<h2>2. Operational Metrics</h2>
+<p>These metrics are essential for monitoring the system's performance in a production environment.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Metric</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Target / Threshold</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Processing Latency</strong></td>
+<td style="text-align: left;">The total time taken from reading the input script to saving the final audio file.</td>
+<td style="text-align: left;">Dependent on text length; monitor for unusual spikes indicating provider latency.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Provider Error Rate</strong></td>
+<td style="text-align: left;">The percentage of failed requests to external TTS providers (e.g., HTTP 5xx or 4xx errors).</td>
+<td style="text-align: left;">&lt; 1%</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Pipeline Success Rate</strong></td>
+<td style="text-align: left;">The percentage of input scripts successfully converted into audio files without internal application errors.</td>
+<td style="text-align: left;">&gt; 99%</td>
+</tr>
+</tbody>
+</table>
+<h2>3. Code Quality Metrics</h2>
+<p>These metrics are tracked during the development lifecycle to ensure the codebase remains maintainable.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Metric</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Current Status (Sprint 9)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Code Volume</strong></td>
+<td style="text-align: left;">Total lines of Python code, excluding comments and blank lines.</td>
+<td style="text-align: left;">~4,289 lines across 44 files.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Test Coverage</strong></td>
+<td style="text-align: left;">The percentage of code executed by the automated test suite.</td>
+<td style="text-align: left;"><em>To be measured via <code>coverage.py</code></em></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Static Analysis Score</strong></td>
+<td style="text-align: left;">Code quality score determined by linters (e.g., Pylint, Flake8).</td>
+<td style="text-align: left;"><em>To be integrated in CI/CD</em></td>
+</tr>
+</tbody>
+</table>
+<h2>4. Domain Metrics</h2>
+<p>These metrics are calculated internally by the <code>TextAnalyzer</code> and <code>SpeechIntelligenceEngine</code> for each processed script. They provide insight into the workload characteristics.</p>
+<ul>
+<li><strong>Total Words / Characters</strong>: Measures the volume of text processed.</li>
+<li><strong>Estimated Duration</strong>: The calculated audio length based on the text volume and selected voice profile's Words Per Minute (WPM).</li>
+<li><strong>Language Distribution</strong>: Tracking the frequency of different languages processed (e.g., 60% English, 30% Portuguese, 10% Spanish) helps prioritize future voice profile tuning.</li>
+</ul>
+
+                <!-- Navigation -->
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border-color); display: flex; justify-content: space-between; gap: 1rem;">
+                    <a href="../../index.html" class="btn">← Voltar</a>
+                    <a href="index.html" class="btn">Índice do Pack</a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Speech AI Project. Documentação gerada por <a href="#">Manus AI</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

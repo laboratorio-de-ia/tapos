@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Guide - Speech AI Docs</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                🎙️ Speech AI Docs
+            </a>
+            <nav class="nav-main">
+                <a href="../../index.html">Início</a>
+                <a href="../../index.html#packs">Packs</a>
+                <a href="index.html">Pack: Developer</a>
+                <input type="text" id="search-input" class="search-box" placeholder="Buscar documentação...">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>📦 Developer Pack</h3>
+                <ul class="sidebar-nav"><li><a href="developer-guide.html">Developer Guide</a></li><li><a href="coding-standards.html">Coding Standards</a></li><li><a href="contributing.html">Contributing</a></li><li><a href="testing-guide.html">Testing Guide</a></li></ul>
+                
+                <h3>🔗 Geral</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="../../index.html">Voltar ao Início</a></li>
+                    <li><a href="index.html">Índice do Pack</a></li>
+                    <li><a href="../../diagrams/index.html">Diagramas</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="index.html">Developer</a>
+                    <span>/</span>
+                    <span>Testing Guide</span>
+                </div>
+
+                <!-- Content -->
+                <h1>Testing Guide</h1>
+<h2>1. Testing Strategy</h2>
+<p>The Speech AI project relies on a comprehensive testing strategy to ensure the reliability of the text-to-audio pipeline. Because the system integrates with external APIs, we separate unit testing of the core logic from integration testing of the providers.</p>
+<h2>2. Test Structure</h2>
+<p>Tests are located in the <code>tests/</code> directory and are organized to mirror the application structure.</p>
+<ul>
+<li><strong>Unit Tests</strong>: Focus on isolated components, particularly the domain models (<code>models/</code>) and the pipeline logic (<code>pipeline/</code>).</li>
+<li><strong>Integration Tests</strong>: Verify the interaction between the application and external TTS providers (<code>providers/</code>).</li>
+</ul>
+<h2>3. Running Tests</h2>
+<p>We utilize the standard <code>unittest</code> framework provided by Python.</p>
+<p>To execute all tests, run the following command from the project root:</p>
+<pre class="codehilite"><code class="language-bash">python -m unittest discover -s tests
+</code></pre>
+
+<p>To run a specific test module:</p>
+<pre class="codehilite"><code class="language-bash">python -m unittest tests.test_app
+</code></pre>
+
+<h2>4. Writing Unit Tests</h2>
+<p>When writing unit tests for pipeline components like <code>TextAnalyzer</code> or <code>SpeechIntelligenceEngine</code>, adhere to the following principles:</p>
+<ol>
+<li><strong>Mocking Dependencies</strong>: Use <code>unittest.mock</code> to isolate the component being tested. For example, when testing the <code>SpeechIntelligenceEngine</code>, mock the <code>LanguageDetector</code> to return a predictable language code rather than relying on the actual detection algorithm.</li>
+<li><strong>Test Data</strong>: Use the sample scripts provided in the <code>input/</code> directory (e.g., <code>script_pt.txt</code>) or create small, focused text snippets within the test file to validate specific regex patterns or parsing logic.</li>
+<li><strong>Assertions</strong>: Verify that the state of the domain models (like <code>Presentation</code> or <code>SpeechProfile</code>) matches expectations after processing.</li>
+</ol>
+<h2>5. Integration Testing</h2>
+<p>Integration tests for TTS providers (like <code>run_test_tts.py</code>) actually execute network calls to the provider's API.</p>
+<ul>
+<li>These tests should not be run automatically in every CI build unless specific API keys and network access are configured.</li>
+<li>They are crucial for verifying that the <code>BaseProvider</code> implementation correctly handles the specific API requirements (e.g., SSML formatting, authentication, rate limits).</li>
+<li>Ensure that integration tests clean up any generated audio files after execution to prevent cluttering the repository.</li>
+</ul>
+
+                <!-- Navigation -->
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border-color); display: flex; justify-content: space-between; gap: 1rem;">
+                    <a href="../../index.html" class="btn">← Voltar</a>
+                    <a href="index.html" class="btn">Índice do Pack</a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Speech AI Project. Documentação gerada por <a href="#">Manus AI</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

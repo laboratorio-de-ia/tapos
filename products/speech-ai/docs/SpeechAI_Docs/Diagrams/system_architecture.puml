@@ -1,0 +1,102 @@
+@startuml system_architecture
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam componentStyle uml2
+
+package "Speech AI Platform" {
+    
+    package "Orchestration Layer" {
+        component [SpeechAIApp] as app
+        component [ConfigManager] as config
+    }
+    
+    package "Pipeline Layer" {
+        component [TextAnalyzer] as analyzer
+        component [NarrationBuilder] as narrator
+        component [SpeechBuilder] as builder
+    }
+    
+    package "Intelligence Layer" {
+        component [SpeechIntelligenceEngine] as intelligence
+        component [LanguageDetector] as langdetect
+        component [VoiceSelector] as voiceselector
+        component [SpeechAnalyzer] as speechanalyzer
+        component [TimingCalculator] as timing
+        component [SpeechOptimizer] as optimizer
+    }
+    
+    package "Infrastructure Layer" {
+        component [SpeechService] as service
+        component [ProviderFactory] as factory
+        component [ProviderRegistry] as registry
+    }
+    
+    package "Provider Layer" {
+        component [BaseProvider] as baseprovider
+        component [EdgeProvider] as edge
+        component [AzureProvider] as azure
+        component [OpenAIProvider] as openai
+    }
+    
+    package "Data Models" {
+        component [Presentation] as presentation
+        component [Slide] as slide
+        component [SpeechProfile] as profile
+        component [Statistics] as stats
+    }
+}
+
+package "External Services" {
+    component [Microsoft Edge TTS] as edgetts
+    component [Azure Speech] as azurespeech
+    component [OpenAI TTS] as openaitts
+}
+
+package "Configuration" {
+    component [settings.json] as settings
+    component [voices.json] as voices
+}
+
+package "I/O" {
+    component [Input Scripts] as input
+    component [Output Audio] as output
+    component [Logs] as logs
+}
+
+' Connections
+app --> config : loads
+app --> analyzer : orchestrates
+analyzer --> presentation : creates
+analyzer --> stats : calculates
+
+app --> intelligence : orchestrates
+intelligence --> langdetect : uses
+intelligence --> voiceselector : uses
+intelligence --> speechanalyzer : uses
+intelligence --> timing : uses
+intelligence --> optimizer : uses
+intelligence --> profile : produces
+
+app --> narrator : orchestrates
+app --> builder : orchestrates
+app --> service : orchestrates
+
+service --> factory : requests provider
+factory --> registry : queries
+registry --> baseprovider : returns
+baseprovider <|-- edge : implements
+baseprovider <|-- azure : implements
+baseprovider <|-- openai : implements
+
+edge --> edgetts : calls
+azure --> azurespeech : calls
+openai --> openaitts : calls
+
+config --> settings : reads
+config --> voices : reads
+
+analyzer --> input : reads
+service --> output : writes
+app --> logs : writes
+
+@enduml

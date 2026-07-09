@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como Começar - Speech AI Docs</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                🎙️ Speech AI Docs
+            </a>
+            <nav class="nav-main">
+                <a href="index.html">Início</a>
+                <a href="GETTING_STARTED.html">Como Começar</a>
+                <a href="index.html#packs">Packs</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>🚀 Início Rápido</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="#intro">Introdução</a></li>
+                    <li><a href="#roles">Seu Papel</a></li>
+                    <li><a href="#paths">Caminhos de Aprendizado</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+
+                <h3>📦 Packs</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="pages/foundation/index.html">Foundation</a></li>
+                    <li><a href="pages/sprint/index.html">Sprint</a></li>
+                    <li><a href="pages/developer/index.html">Developer</a></li>
+                    <li><a href="pages/operations/index.html">Operations</a></li>
+                </ul>
+
+                <h3>🔗 Geral</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="index.html">Voltar ao Início</a></li>
+                    <li><a href="README.md">README</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <h1>🚀 Como Começar com a Documentação Speech AI</h1>
+                <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2rem;">
+                    Bem-vindo! Este guia ajudará você a navegar pela documentação e encontrar exatamente o que precisa.
+                </p>
+
+                <!-- Introduction -->
+                <section id="intro">
+                    <h2>📖 O que é Speech AI?</h2>
+                    <div class="card info">
+                        <p>
+                            <strong>Speech AI</strong> é uma plataforma empresarial de Text-to-Audio que transforma 
+                            scripts em áudio de alta qualidade. Desenvolvida com arquitetura modular, oferece suporte 
+                            a múltiplos idiomas (Inglês, Português, Espanhol) e integração com diversos provedores TTS.
+                        </p>
+                    </div>
+
+                    <h3>🎯 Características Principais</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Característica</th>
+                                <th>Descrição</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>🌍 Multi-Idioma</strong></td>
+                                <td>Detecção automática de idioma e seleção de voz apropriada</td>
+                            </tr>
+                            <tr>
+                                <td><strong>🧠 Inteligência</strong></td>
+                                <td>Análise de complexidade de texto e otimização de narração</td>
+                            </tr>
+                            <tr>
+                                <td><strong>🔌 Extensível</strong></td>
+                                <td>Suporte para múltiplos provedores TTS (Edge, Azure, OpenAI)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>📦 Modular</strong></td>
+                                <td>Componentes desacoplados com responsabilidades claras</td>
+                            </tr>
+                            <tr>
+                                <td><strong>🚀 Escalável</strong></td>
+                                <td>Arquitetura pronta para produção em larga escala</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Roles -->
+                <section id="roles">
+                    <h2>👥 Qual é o Seu Papel?</h2>
+                    <p>Escolha seu perfil abaixo para obter um caminho de aprendizado personalizado:</p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 1.5rem 0;">
+                        <!-- Developer -->
+                        <div class="card">
+                            <h3>👨‍💻 Desenvolvedor</h3>
+                            <p>Você quer contribuir com código e entender a arquitetura técnica.</p>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Setup local</li>
+                                <li>Arquitetura do sistema</li>
+                                <li>Padrões de código</li>
+                                <li>Como contribuir</li>
+                            </ul>
+                            <a href="pages/developer/index.html" class="btn" style="margin-top: 1rem; width: 100%;">
+                                Ir para Developer Pack
+                            </a>
+                        </div>
+
+                        <!-- DevOps -->
+                        <div class="card">
+                            <h3>⚙️ DevOps / SRE</h3>
+                            <p>Você é responsável por deployment, segurança e operações.</p>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Deployment</li>
+                                <li>Segurança</li>
+                                <li>Monitoramento</li>
+                                <li>Release process</li>
+                            </ul>
+                            <a href="pages/operations/index.html" class="btn" style="margin-top: 1rem; width: 100%;">
+                                Ir para Operations Pack
+                            </a>
+                        </div>
+
+                        <!-- Architect -->
+                        <div class="card">
+                            <h3>🏗️ Arquiteto / Tech Lead</h3>
+                            <p>Você precisa entender decisões arquiteturais e design do sistema.</p>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Arquitetura</li>
+                                <li>Decisões (ADR)</li>
+                                <li>Componentes</li>
+                                <li>Padrões</li>
+                            </ul>
+                            <a href="pages/foundation/index.html" class="btn" style="margin-top: 1rem; width: 100%;">
+                                Ir para Foundation Pack
+                            </a>
+                        </div>
+
+                        <!-- Product Manager -->
+                        <div class="card">
+                            <h3>📊 Product Manager</h3>
+                            <p>Você precisa entender roadmap, features e progresso do projeto.</p>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Roadmap</li>
+                                <li>Histórico de sprints</li>
+                                <li>Features</li>
+                                <li>Métricas</li>
+                            </ul>
+                            <a href="pages/sprint/index.html" class="btn" style="margin-top: 1rem; width: 100%;">
+                                Ir para Sprint Pack
+                            </a>
+                        </div>
+
+                        <!-- New to Project -->
+                        <div class="card">
+                            <h3>🆕 Novo no Projeto</h3>
+                            <p>Você quer entender o projeto do zero.</p>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Visão geral</li>
+                                <li>Arquitetura</li>
+                                <li>Componentes</li>
+                                <li>Diagramas</li>
+                            </ul>
+                            <a href="pages/foundation/readme.html" class="btn" style="margin-top: 1rem; width: 100%;">
+                                Começar pelo README
+                            </a>
+                        </div>
+
+                        <!-- Security -->
+                        <div class="card">
+                            <h3>🔒 Security / Compliance</h3>
+                            <p>Você precisa revisar segurança e conformidade.</p>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Segurança</li>
+                                <li>Ameaças</li>
+                                <li>Mitigações</li>
+                                <li>Boas práticas</li>
+                            </ul>
+                            <a href="pages/operations/security.html" class="btn" style="margin-top: 1rem; width: 100%;">
+                                Ver Security Guide
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Learning Paths -->
+                <section id="paths">
+                    <h2>📚 Caminhos de Aprendizado</h2>
+
+                    <h3>🟢 Caminho: Novo Desenvolvedor (3-4 horas)</h3>
+                    <div class="card">
+                        <ol>
+                            <li><strong>Foundation Pack → README</strong> (15 min) - Entender o projeto</li>
+                            <li><strong>Foundation Pack → Architecture</strong> (30 min) - Aprender arquitetura</li>
+                            <li><strong>Developer Pack → Developer Guide</strong> (1 hora) - Setup local</li>
+                            <li><strong>Developer Pack → Coding Standards</strong> (30 min) - Padrões</li>
+                            <li><strong>Developer Pack → Contributing</strong> (30 min) - Como contribuir</li>
+                            <li><strong>Developer Pack → Testing Guide</strong> (30 min) - Testes</li>
+                        </ol>
+                    </div>
+
+                    <h3>🟡 Caminho: DevOps / Deployment (2-3 horas)</h3>
+                    <div class="card">
+                        <ol>
+                            <li><strong>Foundation Pack → README</strong> (15 min) - Visão geral</li>
+                            <li><strong>Operations Pack → Operations Guide</strong> (1 hora) - Deployment</li>
+                            <li><strong>Operations Pack → Security</strong> (45 min) - Segurança</li>
+                            <li><strong>Operations Pack → Release Process</strong> (30 min) - Releases</li>
+                            <li><strong>Operations Pack → Project Metrics</strong> (15 min) - Monitoramento</li>
+                        </ol>
+                    </div>
+
+                    <h3>🔵 Caminho: Arquiteto (2-3 horas)</h3>
+                    <div class="card">
+                        <ol>
+                            <li><strong>Foundation Pack → Engineering Documentation</strong> (30 min)</li>
+                            <li><strong>Foundation Pack → Architecture</strong> (45 min)</li>
+                            <li><strong>Sprint Pack → ADR</strong> (45 min) - Decisões passadas</li>
+                            <li><strong>Diagrams</strong> (30 min) - Visualizações</li>
+                            <li><strong>Sprint Pack → Roadmap</strong> (15 min) - Futuro</li>
+                        </ol>
+                    </div>
+
+                    <h3>🟣 Caminho: Product Manager (1-2 horas)</h3>
+                    <div class="card">
+                        <ol>
+                            <li><strong>Foundation Pack → README</strong> (15 min)</li>
+                            <li><strong>Sprint Pack → Sprint Roadmap</strong> (30 min)</li>
+                            <li><strong>Sprint Pack → Roadmap</strong> (30 min)</li>
+                            <li><strong>Operations Pack → Project Metrics</strong> (30 min)</li>
+                            <li><strong>Sprint Pack → Changelog</strong> (15 min)</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <!-- FAQ -->
+                <section id="faq">
+                    <h2>❓ Perguntas Frequentes</h2>
+
+                    <div class="card">
+                        <h4>P: Como faço para começar a desenvolver?</h4>
+                        <p>
+                            R: Acesse o <strong>Developer Pack</strong> e siga o <strong>Developer Guide</strong>. 
+                            Ele tem instruções passo-a-passo para setup local.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h4>P: Onde encontro informações sobre segurança?</h4>
+                        <p>
+                            R: Veja o <strong>Operations Pack → Security Guide</strong> para postura de segurança, 
+                            ameaças e mitigações.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h4>P: Como é a arquitetura do sistema?</h4>
+                        <p>
+                            R: Leia <strong>Foundation Pack → Architecture</strong> e veja os diagramas em 
+                            <strong>Diagrams</strong>.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h4>P: Qual é o roadmap do projeto?</h4>
+                        <p>
+                            R: Consulte <strong>Sprint Pack → Roadmap</strong> para a visão de produto com 3 fases 
+                            e timelines.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h4>P: Como faço para contribuir?</h4>
+                        <p>
+                            R: Veja <strong>Developer Pack → Contributing</strong> para workflow de contribuição, 
+                            branching strategy e processo de PR.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h4>P: Como faço deploy em produção?</h4>
+                        <p>
+                            R: Siga o <strong>Operations Pack → Operations Guide</strong> e 
+                            <strong>Release Process</strong>.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h4>P: Posso usar a documentação offline?</h4>
+                        <p>
+                            R: Sim! Todos os links são relativos. Baixe a pasta <code>Docs_HTML</code> 
+                            e abra <code>index.html</code> no seu navegador.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h4>P: Como atualizo a documentação?</h4>
+                        <p>
+                            R: Edite os arquivos Markdown em <code>SpeechAI_Docs/</code> e execute 
+                            <code>convert_md_to_html.py</code> para regenerar os HTMLs.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Quick Links -->
+                <section>
+                    <h2>🔗 Links Rápidos</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                        <a href="index.html" class="btn" style="text-align: center;">🏠 Página Principal</a>
+                        <a href="pages/foundation/readme.html" class="btn" style="text-align: center;">📖 README</a>
+                        <a href="pages/foundation/architecture.html" class="btn" style="text-align: center;">🏗️ Arquitetura</a>
+                        <a href="diagrams/index.html" class="btn" style="text-align: center;">📊 Diagramas</a>
+                        <a href="pages/developer/developer-guide.html" class="btn" style="text-align: center;">🛠️ Setup</a>
+                        <a href="pages/operations/operations-guide.html" class="btn" style="text-align: center;">⚙️ Deploy</a>
+                    </div>
+                </section>
+
+                <!-- Navigation -->
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border-color);">
+                    <a href="index.html" class="btn">← Voltar ao Início</a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Speech AI Project. Documentação gerada por <a href="#">Manus AI</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture - Speech AI Docs</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                🎙️ Speech AI Docs
+            </a>
+            <nav class="nav-main">
+                <a href="../../index.html">Início</a>
+                <a href="../../index.html#packs">Packs</a>
+                <a href="index.html">Pack: Foundation</a>
+                <input type="text" id="search-input" class="search-box" placeholder="Buscar documentação...">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>📦 Foundation Pack</h3>
+                <ul class="sidebar-nav"><li><a href="readme.html">README</a></li><li><a href="engineering-docs.html">Engineering Docs</a></li><li><a href="architecture.html">Architecture</a></li><li><a href="diagrams.html">Diagrams</a></li></ul>
+                
+                <h3>🔗 Geral</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="../../index.html">Voltar ao Início</a></li>
+                    <li><a href="index.html">Índice do Pack</a></li>
+                    <li><a href="../../diagrams/index.html">Diagramas</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="index.html">Foundation</a>
+                    <span>/</span>
+                    <span>Architecture</span>
+                </div>
+
+                <!-- Content -->
+                <h1>Architecture Overview</h1>
+<h2>1. Architectural Style</h2>
+<p>Speech AI utilizes a <strong>Pipes and Filters</strong> architectural style combined with a <strong>Layered Architecture</strong>. This ensures that data flows through distinct transformation stages while maintaining clear boundaries between core logic, external services, and configuration.</p>
+<h2>2. High-Level Architecture Diagram</h2>
+<pre class="codehilite"><code class="language-text">+-------------------+       +-------------------+       +-------------------+
+|   Input Source    | ----&gt; |   Text Analyzer   | ----&gt; | Presentation Model|
+|   (script.txt)    |       |   (Normalization) |       | (Slides, Stats)   |
++-------------------+       +-------------------+       +-------------------+
+                                                              |
+                                                              v
++-------------------+       +-------------------+       +-------------------+
+|   Speech Profile  | &lt;---- |Speech Intelligence| &lt;---- |  Speech &amp; Narration|
+| (Voice, Rate, etc)|       | (Lang, Voice, Opt)|       |      Builders     |
++-------------------+       +-------------------+       +-------------------+
+        |
+        v
++-------------------+       +-------------------+       +-------------------+
+|   Speech Service  | ----&gt; | Provider Factory  | ----&gt; |   Edge Provider   |
+|   (Orchestrator)  |       |    &amp; Registry     |       |   (edge-tts API)  |
++-------------------+       +-------------------+       +-------------------+
+                                                              |
+                                                              v
+                                                        +-------------------+
+                                                        |    Audio Output   |
+                                                        |       (.mp3)      |
+                                                        +-------------------+
+</code></pre>
+
+<h2>3. Core Layers</h2>
+<h3>3.1. Orchestration Layer (<code>app.py</code>, <code>speech_ai_app.py</code>)</h3>
+<p>Responsible for bootstrapping the application, loading configurations, and coordinating the sequence of operations. It holds the <code>ConfigManager</code> and passes state between the pipeline stages.</p>
+<h3>3.2. Pipeline Layer (<code>pipeline/</code>)</h3>
+<p>Handles data transformation. The input text is inherently unstructured. This layer structures it into domain models (<code>Presentation</code>, <code>Slide</code>, <code>Paragraph</code>) and then transforms it back into specialized text formats (<code>narration.txt</code>, <code>speech.txt</code>) optimized for synthesis.</p>
+<h3>3.3. Intelligence Layer (<code>services/speech_intelligence.py</code>)</h3>
+<p>This layer adds cognitive capabilities to the pipeline. It doesn't just pass text to a synthesizer; it:
+- Detects the language (<code>LanguageDetector</code>).
+- Selects the most appropriate voice profile (<code>VoiceSelector</code>).
+- Analyzes text complexity (<code>SpeechAnalyzer</code>).
+- Calculates pacing and pauses (<code>TimingCalculator</code>).
+- Produces a final <code>SpeechProfile</code> that acts as the contract for the TTS engine.</p>
+<h3>3.4. Infrastructure / Provider Layer (<code>providers/</code>)</h3>
+<p>Isolates external dependencies. By using a <code>ProviderFactory</code>, the system can dynamically load the required TTS engine (currently Edge TTS) without hardcoding dependencies in the <code>SpeechService</code>. This is critical for future scalability (e.g., adding Azure, AWS Polly, or OpenAI TTS).</p>
+<h2>4. Data Flow Sequence</h2>
+<ol>
+<li><strong>Initialization</strong>: <code>SpeechAIApp</code> loads <code>settings.json</code> and <code>voices.json</code>.</li>
+<li><strong>Ingestion</strong>: <code>TextAnalyzer</code> reads <code>script.txt</code>.</li>
+<li><strong>Parsing</strong>: Text is split into logical slides and paragraphs. Statistics (words, estimated time) are calculated.</li>
+<li><strong>Intelligence</strong>: <code>SpeechIntelligenceEngine</code> analyzes the presentation, detects language, and assigns a <code>SpeechProfile</code>.</li>
+<li><strong>Formatting</strong>: <code>NarrationBuilder</code> and <code>SpeechBuilder</code> create optimized text artifacts.</li>
+<li><strong>Synthesis</strong>: <code>SpeechService</code> receives the optimized text and <code>SpeechProfile</code>, requests a provider instance from <code>ProviderFactory</code>, and triggers audio generation.</li>
+<li><strong>Output</strong>: The provider streams the synthesized audio to an <code>.mp3</code> file in the <code>output/</code> directory.</li>
+</ol>
+<h2>5. Architectural Decisions (Summary)</h2>
+<ul>
+<li><strong>JSON Configuration</strong>: Chosen for ease of modification by non-developers.</li>
+<li><strong>Provider Abstraction</strong>: Essential for avoiding vendor lock-in with TTS services.</li>
+<li><strong>Rich Domain Models</strong>: Using classes like <code>Presentation</code> and <code>Slide</code> instead of raw dictionaries improves type safety and encapsulates business logic (like word counting).</li>
+</ul>
+
+                <!-- Navigation -->
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border-color); display: flex; justify-content: space-between; gap: 1rem;">
+                    <a href="../../index.html" class="btn">← Voltar</a>
+                    <a href="index.html" class="btn">Índice do Pack</a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Speech AI Project. Documentação gerada por <a href="#">Manus AI</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

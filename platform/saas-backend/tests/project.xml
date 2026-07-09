@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project root="/workspace/tecle/platform/saas-backend/tests">
+    <file name="__init__.py" path="__init__.py" extension=".py" size="0" lines="0">
+        <imports />
+        <classes />
+        <functions />
+    </file>
+    <file name="project_to_xml.py" path="project_to_xml.py" extension=".py" size="3075" lines="130">
+        <imports>
+            <import module="pathlib" />
+            <import name="ast" />
+            <import name="xml.etree.ElementTree" />
+        </imports>
+        <classes />
+        <functions>
+            <function name="parse_python" line="24" />
+            <function name="scan_directory" line="65" />
+        </functions>
+    </file>
+    <file name="test_security.py" path="test_security.py" extension=".py" size="1563" lines="59">
+        <imports>
+            <import module="jose" />
+            <import module="app.security" />
+        </imports>
+        <classes />
+        <functions>
+            <function name="test_hash_password_does_not_return_plain_text" line="12" />
+            <function name="test_hash_password_produces_bcrypt_hash" line="18" />
+            <function name="test_verify_password_succeeds_for_correct_password" line="24" />
+            <function name="test_verify_password_fails_for_incorrect_password" line="30" />
+            <function name="test_hash_password_generates_different_hashes_for_same_password" line="36" />
+            <function name="test_create_access_token_contains_subject_and_expiration" line="43" />
+            <function name="test_create_access_token_is_decodable_only_with_correct_secret" line="52" />
+        </functions>
+    </file>
+</project>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operations Guide - Speech AI Docs</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                🎙️ Speech AI Docs
+            </a>
+            <nav class="nav-main">
+                <a href="../../index.html">Início</a>
+                <a href="../../index.html#packs">Packs</a>
+                <a href="index.html">Pack: Operations</a>
+                <input type="text" id="search-input" class="search-box" placeholder="Buscar documentação...">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>📦 Operations Pack</h3>
+                <ul class="sidebar-nav"><li><a href="security.html">Security</a></li><li><a href="operations-guide.html">Operations Guide</a></li><li><a href="project-metrics.html">Project Metrics</a></li><li><a href="release-process.html">Release Process</a></li></ul>
+                
+                <h3>🔗 Geral</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="../../index.html">Voltar ao Início</a></li>
+                    <li><a href="index.html">Índice do Pack</a></li>
+                    <li><a href="../../diagrams/index.html">Diagramas</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="index.html">Operations</a>
+                    <span>/</span>
+                    <span>Operations Guide</span>
+                </div>
+
+                <!-- Content -->
+                <h1>Operations Guide</h1>
+<h2>1. System Operation</h2>
+<p>This guide provides instructions for IT Operations and DevOps teams responsible for deploying, monitoring, and maintaining the Speech AI platform.</p>
+<h2>2. Deployment</h2>
+<p>Currently, the application is executed as a standalone Python script. Future iterations will include Docker containerization.</p>
+<h3>2.1. Prerequisites</h3>
+<ul>
+<li>A Linux or Windows server environment.</li>
+<li>Python 3.10 or higher installed.</li>
+<li>Network access to the required external TTS provider APIs (e.g., Microsoft Edge endpoints).</li>
+</ul>
+<h3>2.2. Installation Steps</h3>
+<ol>
+<li>Deploy the application code to the target server.</li>
+<li>Install dependencies using <code>pip install -r requirements.txt</code>.</li>
+<li>Configure the environment variables (e.g., API keys) securely.</li>
+<li>Ensure the <code>input/</code>, <code>output/</code>, and <code>logs/</code> directories exist and have the correct permissions.</li>
+</ol>
+<h2>3. Configuration Management</h2>
+<p>Operational behavior is controlled via the <code>config/</code> directory.</p>
+<ul>
+<li><strong><code>settings.json</code></strong>: Controls the input/output paths and the default TTS provider. Modify this file to change where the system looks for scripts or where it saves the resulting audio.</li>
+<li><strong><code>voices.json</code></strong>: Defines the available voice profiles. Operations teams can update this file to adjust speech rates, pitches, or add new voices without requiring a code deployment.</li>
+</ul>
+<h2>4. Monitoring and Logging</h2>
+<p>The application utilizes the standard Python <code>logging</code> module.</p>
+<ul>
+<li><strong>Log Location</strong>: All logs are written to the <code>logs/app.log</code> file.</li>
+<li><strong>Log Levels</strong>: The application logs at the <code>INFO</code> level by default, providing details on pipeline progression, language detection, and provider selection. Errors during processing or API calls are logged at the <code>ERROR</code> level.</li>
+<li><strong>Monitoring Strategy</strong>: Operations teams should monitor <code>app.log</code> for <code>ERROR</code> entries. Additionally, monitoring the execution time of the <code>SpeechService</code> can help identify latency issues with external TTS providers.</li>
+</ul>
+<h2>5. Troubleshooting Common Issues</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Issue</th>
+<th style="text-align: left;">Potential Cause</th>
+<th style="text-align: left;">Resolution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Application crashes on startup.</td>
+<td style="text-align: left;">Missing configuration files.</td>
+<td style="text-align: left;">Ensure <code>settings.json</code> and <code>voices.json</code> are present in the <code>config/</code> directory and contain valid JSON.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Audio file is not generated.</td>
+<td style="text-align: left;">Network failure or invalid provider credentials.</td>
+<td style="text-align: left;">Check <code>app.log</code> for connection errors or unauthorized responses from the TTS provider. Verify API keys.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Incorrect language detected.</td>
+<td style="text-align: left;">Input script is too short or ambiguous.</td>
+<td style="text-align: left;">Review the input script. The <code>LanguageDetector</code> requires sufficient text context to accurately identify the language.</td>
+</tr>
+</tbody>
+</table>
+
+                <!-- Navigation -->
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border-color); display: flex; justify-content: space-between; gap: 1rem;">
+                    <a href="../../index.html" class="btn">← Voltar</a>
+                    <a href="index.html" class="btn">Índice do Pack</a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Speech AI Project. Documentação gerada por <a href="#">Manus AI</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

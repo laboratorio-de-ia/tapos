@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Release Process - Speech AI Docs</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                🎙️ Speech AI Docs
+            </a>
+            <nav class="nav-main">
+                <a href="../../index.html">Início</a>
+                <a href="../../index.html#packs">Packs</a>
+                <a href="index.html">Pack: Operations</a>
+                <input type="text" id="search-input" class="search-box" placeholder="Buscar documentação...">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>📦 Operations Pack</h3>
+                <ul class="sidebar-nav"><li><a href="security.html">Security</a></li><li><a href="operations-guide.html">Operations Guide</a></li><li><a href="project-metrics.html">Project Metrics</a></li><li><a href="release-process.html">Release Process</a></li></ul>
+                
+                <h3>🔗 Geral</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="../../index.html">Voltar ao Início</a></li>
+                    <li><a href="index.html">Índice do Pack</a></li>
+                    <li><a href="../../diagrams/index.html">Diagramas</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="index.html">Operations</a>
+                    <span>/</span>
+                    <span>Release Process</span>
+                </div>
+
+                <!-- Content -->
+                <h1>Release Process</h1>
+<h2>1. Introduction</h2>
+<p>This document details the standard procedure for releasing new versions of the Speech AI platform. It ensures that deployments are consistent, tested, and documented.</p>
+<h2>2. Pre-Release Checklist</h2>
+<p>Before a release candidate is finalized, the following steps must be completed:</p>
+<ol>
+<li><strong>Code Freeze</strong>: A code freeze is enacted on the <code>develop</code> branch. Only critical bug fixes are permitted.</li>
+<li><strong>Testing</strong>: All unit and integration tests must pass successfully.</li>
+<li><strong>Documentation Update</strong>: Ensure that the <code>CHANGELOG.md</code> is updated with all notable changes for the upcoming release. Verify that the <code>ROADMAP.md</code> and any relevant architectural documents accurately reflect the new state of the system.</li>
+<li><strong>Version Bump</strong>: Update the <code>version</code> field in <code>config/settings.json</code> to reflect the new semantic version (e.g., from <code>1.0.0</code> to <code>1.1.0</code>).</li>
+</ol>
+<h2>3. Release Execution</h2>
+<ol>
+<li><strong>Merge to Main</strong>: Create a Pull Request from <code>develop</code> to the <code>main</code> branch.</li>
+<li><strong>Tagging</strong>: Once merged, create a Git tag on the <code>main</code> branch corresponding to the new version number (e.g., <code>v1.1.0</code>).</li>
+<li><strong>Artifact Generation</strong>: Create a release package containing the source code, configuration files, and documentation.</li>
+<li><strong>Deployment</strong>: Deploy the new release package to the target production servers following the instructions in the <code>OPERATIONS_GUIDE.md</code>.</li>
+</ol>
+<h2>4. Post-Release</h2>
+<ol>
+<li><strong>Verification</strong>: Perform a smoke test in the production environment by running a standard input script through the pipeline to ensure the system is functioning correctly.</li>
+<li><strong>Monitoring</strong>: Closely monitor the <code>app.log</code> file for any unexpected errors or performance degradation following the deployment.</li>
+<li><strong>Communication</strong>: Notify stakeholders that the new version has been successfully deployed and highlight the key features introduced.</li>
+</ol>
+
+                <!-- Navigation -->
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border-color); display: flex; justify-content: space-between; gap: 1rem;">
+                    <a href="../../index.html" class="btn">← Voltar</a>
+                    <a href="index.html" class="btn">Índice do Pack</a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Speech AI Project. Documentação gerada por <a href="#">Manus AI</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

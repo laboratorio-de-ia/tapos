@@ -1,0 +1,9 @@
+edge-tts>=7.2.3
+
+lxml>=5.2.2
+
+rich>=13.7.1
+
+python-dotenv>=1.0.1
+
+langdetect>=1.0.9

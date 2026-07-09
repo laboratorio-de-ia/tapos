@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelog - Speech AI Docs</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                🎙️ Speech AI Docs
+            </a>
+            <nav class="nav-main">
+                <a href="../../index.html">Início</a>
+                <a href="../../index.html#packs">Packs</a>
+                <a href="index.html">Pack: Sprint</a>
+                <input type="text" id="search-input" class="search-box" placeholder="Buscar documentação...">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>📦 Sprint Pack</h3>
+                <ul class="sidebar-nav"><li><a href="sprint-roadmap.html">Sprint Roadmap</a></li><li><a href="adr.html">ADR</a></li><li><a href="changelog.html">Changelog</a></li><li><a href="roadmap.html">Roadmap</a></li></ul>
+                
+                <h3>🔗 Geral</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="../../index.html">Voltar ao Início</a></li>
+                    <li><a href="index.html">Índice do Pack</a></li>
+                    <li><a href="../../diagrams/index.html">Diagramas</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="index.html">Sprint</a>
+                    <span>/</span>
+                    <span>Changelog</span>
+                </div>
+
+                <!-- Content -->
+                <h1>Changelog</h1>
+<p>All notable changes to the Speech AI project will be documented in this file.</p>
+<p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>, and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
+<h2>[1.0.0] - Sprint 9 Release</h2>
+<h3>Added</h3>
+<ul>
+<li><strong>Provider Factory Architecture</strong>: Introduced <code>ProviderFactory</code>, <code>ProviderRegistry</code>, and <code>BaseProvider</code> to decouple the TTS engine from core logic.</li>
+<li><strong>Edge Provider Integration</strong>: Fully abstracted <code>edge-tts</code> implementation behind the new provider interface.</li>
+<li><strong>Voice Profiles</strong>: Externalized voice configurations to <code>config/voices.json</code>, supporting detailed attributes (rate, pitch, volume, style).</li>
+<li><strong>Speech Intelligence Engine</strong>: Added intelligent language detection and voice selection based on input text analysis.</li>
+<li><strong>Domain Models</strong>: Introduced <code>Presentation</code>, <code>Slide</code>, <code>SpeechProfile</code>, and <code>Statistics</code> models for robust state management.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Refactored <code>SpeechAIApp</code> to act purely as an orchestrator, moving business logic to specific pipeline components.</li>
+<li>Upgraded <code>TextAnalyzer</code> to support robust regex-based slide detection.</li>
+<li>Improved logging format and output structure.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Addressed issues with long sentence processing by implementing <code>_break_long_sentence()</code> in <code>NarrationBuilder</code>.</li>
+<li>Fixed whitespace normalization bugs in raw text input.</li>
+</ul>
+<h2>[0.8.0] - Sprint 8.5</h2>
+<h3>Added</h3>
+<ul>
+<li>Initial implementation of <code>TextAnalyzer</code> with basic slide parsing.</li>
+<li>Statistics calculation (word count, estimated duration).</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Moved text normalization logic into a dedicated pipeline stage.</li>
+</ul>
+<h2>[0.6.0] - Sprint 6.3</h2>
+<h3>Added</h3>
+<ul>
+<li>Centralized <code>SpeechAIApp</code> class for application bootstrapping.</li>
+<li><code>ConfigManager</code> for reading <code>settings.json</code>.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Basic integration with <code>edge-tts</code> stabilized.</li>
+</ul>
+
+                <!-- Navigation -->
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border-color); display: flex; justify-content: space-between; gap: 1rem;">
+                    <a href="../../index.html" class="btn">← Voltar</a>
+                    <a href="index.html" class="btn">Índice do Pack</a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Speech AI Project. Documentação gerada por <a href="#">Manus AI</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

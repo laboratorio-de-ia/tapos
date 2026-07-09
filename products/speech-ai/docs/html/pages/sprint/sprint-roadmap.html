@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprint Roadmap - Speech AI Docs</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                🎙️ Speech AI Docs
+            </a>
+            <nav class="nav-main">
+                <a href="../../index.html">Início</a>
+                <a href="../../index.html#packs">Packs</a>
+                <a href="index.html">Pack: Sprint</a>
+                <input type="text" id="search-input" class="search-box" placeholder="Buscar documentação...">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>📦 Sprint Pack</h3>
+                <ul class="sidebar-nav"><li><a href="sprint-roadmap.html">Sprint Roadmap</a></li><li><a href="adr.html">ADR</a></li><li><a href="changelog.html">Changelog</a></li><li><a href="roadmap.html">Roadmap</a></li></ul>
+                
+                <h3>🔗 Geral</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="../../index.html">Voltar ao Início</a></li>
+                    <li><a href="index.html">Índice do Pack</a></li>
+                    <li><a href="../../diagrams/index.html">Diagramas</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="index.html">Sprint</a>
+                    <span>/</span>
+                    <span>Sprint Roadmap</span>
+                </div>
+
+                <!-- Content -->
+                <h1>Sprint Roadmap</h1>
+<h2>Overview</h2>
+<p>The Speech AI project is developed using an iterative, agile approach. This document outlines the historical progression of the project up to the current release, and the immediate focus for upcoming sprints.</p>
+<h2>Historical Sprints (Foundation Phase)</h2>
+<h3>Sprints 1-5: Core Platform Initialization</h3>
+<ul>
+<li><strong>Goal</strong>: Establish the basic pipeline for text-to-speech conversion.</li>
+<li><strong>Key Deliverables</strong>:</li>
+<li>Basic <code>TextAnalyzer</code> for parsing scripts.</li>
+<li>Integration with <code>edge-tts</code> for audio synthesis.</li>
+<li>Initial configuration management (<code>settings.json</code>).</li>
+<li>Basic logging and error handling.</li>
+</ul>
+<h3>Sprints 6-8: Intelligence and Modularity</h3>
+<ul>
+<li><strong>Goal</strong>: Introduce "Speech Intelligence" and prepare the architecture for multiple providers.</li>
+<li><strong>Key Deliverables</strong>:</li>
+<li><strong>Sprint 6.3</strong>: Refactoring of the application kernel (<code>SpeechAIApp</code>) to centralize orchestration.</li>
+<li><strong>Sprint 7.x</strong>: Introduction of domain models (<code>Presentation</code>, <code>Slide</code>, <code>SpeechProfile</code>).</li>
+<li><strong>Sprint 8.5</strong>: Advanced <code>TextAnalyzer</code> with robust slide detection and statistics calculation. Implementation of the <code>SpeechIntelligenceEngine</code> for dynamic language detection and voice selection.</li>
+</ul>
+<h3>Sprint 9: Dependency Injection &amp; Provider Abstraction (Current Focus)</h3>
+<ul>
+<li><strong>Goal</strong>: Completely decouple the TTS engine from the core application logic.</li>
+<li><strong>Key Deliverables</strong>:</li>
+<li>Implementation of <code>ProviderFactory</code> and <code>ProviderRegistry</code>.</li>
+<li>Abstraction of <code>EdgeProvider</code> behind a common interface.</li>
+<li>Voice profiles externalized to <code>voices.json</code>.</li>
+</ul>
+<h2>Upcoming Sprints (Expansion Phase)</h2>
+<h3>Sprint 10: Multi-Provider Integration</h3>
+<ul>
+<li><strong>Goal</strong>: Add support for premium enterprise TTS providers.</li>
+<li><strong>Planned Features</strong>:</li>
+<li>Integration with Azure Cognitive Services (Speech).</li>
+<li>Integration with OpenAI TTS.</li>
+<li>Fallback mechanisms between providers.</li>
+</ul>
+<h3>Sprint 11: Web UI and API Interface</h3>
+<ul>
+<li><strong>Goal</strong>: Move beyond CLI execution to provide web-based accessibility.</li>
+<li><strong>Planned Features</strong>:</li>
+<li>RESTful API (FastAPI) for programmatic access.</li>
+<li>Simple Web UI for uploading scripts and downloading audio.</li>
+</ul>
+<h3>Sprint 12: Enterprise Packaging &amp; Deployment</h3>
+<ul>
+<li><strong>Goal</strong>: Prepare the solution for cloud-native deployment.</li>
+<li><strong>Planned Features</strong>:</li>
+<li>Dockerization of the application.</li>
+<li>CI/CD pipeline setup (GitHub Actions).</li>
+<li>Kubernetes deployment manifests.</li>
+</ul>
+
+                <!-- Navigation -->
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border-color); display: flex; justify-content: space-between; gap: 1rem;">
+                    <a href="../../index.html" class="btn">← Voltar</a>
+                    <a href="index.html" class="btn">Índice do Pack</a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Speech AI Project. Documentação gerada por <a href="#">Manus AI</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>
