@@ -224,6 +224,16 @@
   </div>
 
   <div class="card">
+    <div class="card-header"><span class="badge">5</span><h2>Speech-AI — execução assíncrona (fila)</h2></div>
+    <div class="card-body">
+      <button onclick="submitSpeechAiAsync()">Executar assíncrono</button>
+      <label>Job ID <input type="text" id="job-id" placeholder="uuid retornado pelo submit"></label>
+      <button class="secondary" onclick="checkJobStatus()">Consultar job</button>
+      <div id="job-feedback" class="inline-feedback"></div>
+    </div>
+  </div>
+
+  <div class="card">
     <div class="card-header"><span class="badge">✓</span><h2>Resultado</h2></div>
     <div class="card-body">
       <pre id="output">—</pre>
@@ -392,6 +402,34 @@ async function runSpeechAi() {
     addLog("Speech-AI executado novamente.", "ok");
   } catch {
     addLog("Falha ao executar Speech-AI novamente.", "err");
+  }
+}
+
+async function submitSpeechAiAsync() {
+  try {
+    const data = await api("/products/speech-ai/submit", { method: "POST" });
+    document.getElementById("job-id").value = data.job_id;
+    setInlineFeedback("job-feedback", "Job submetido: " + data.job_id + " (status: " + data.status + ")", "ok");
+    addLog("Job assíncrono submetido: " + data.job_id, "ok");
+  } catch {
+    setInlineFeedback("job-feedback", "Falha ao submeter job assíncrono.", "err");
+    addLog("Falha ao submeter job assíncrono.", "err");
+  }
+}
+
+async function checkJobStatus() {
+  const jobId = document.getElementById("job-id").value.trim();
+  if (!jobId) {
+    setInlineFeedback("job-feedback", "Informe um job_id.", "err");
+    return;
+  }
+  try {
+    const data = await api("/jobs/" + jobId);
+    setInlineFeedback("job-feedback", "Status do job " + jobId + ": " + data.status, "ok");
+    addLog("Consulta de job " + jobId + ": " + data.status, "ok");
+  } catch {
+    setInlineFeedback("job-feedback", "Falha ao consultar job " + jobId + ".", "err");
+    addLog("Falha ao consultar job: " + jobId, "err");
   }
 }
 </script>
