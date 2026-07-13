@@ -59,7 +59,22 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:8000/health)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:8000/ui/)",
       "Bash(curl -s http://localhost:8000/ui/)",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Bash(systemctl status *)",
+      "Bash(nc -zv localhost 5672)",
+      "Bash(nc -zv localhost 5432)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(curl -s -o /dev/null -w \"no-token status: %{http_code}\\\\n\" http://localhost:8000/jobs/does-not-exist)",
+      "Bash(bash test_auth.sh)",
+      "Bash(curl -s http://localhost:8000/health)",
+      "Bash(curl -s -o /dev/null -w \"GET /ui status: %{http_code}\\\\n\" http://localhost:8000/ui)",
+      "Bash(curl -s http://localhost:8000/ui)",
+      "Bash(bash /workspace/tecle/test_auth.sh)",
+      "Bash(curl -s -L http://localhost:8000/ui)",
+      "Bash(curl -s -o /dev/null -w \"GET /ui/ status: %{http_code}\\\\n\" -L http://localhost:8000/ui)",
+      "Bash(chmod +x /workspace/tecle/test_task015.sh)",
+      "Bash(bash test_task015.sh)"
     ]
   }
 }
