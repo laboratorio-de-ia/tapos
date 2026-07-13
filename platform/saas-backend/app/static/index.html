@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TAPOS — Painel de Teste</title>
+<style>
+  :root {
+    --navy: #0f2942;
+    --navy-2: #163a5c;
+    --blue: #2f6fb8;
+    --blue-light: #eaf2fb;
+    --blue-mid: #d6e7f8;
+    --bg: #eef3f8;
+    --card: #ffffff;
+    --border: #dbe6f2;
+    --text: #1a2b3c;
+    --text-soft: #5a6b7d;
+    --ok-bg: #e8f7ef;
+    --ok: #16794f;
+    --err-bg: #fdeceb;
+    --err: #b3261e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0 0 60px;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header.top {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+    color: #fff;
+    padding: 26px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 10px rgba(15, 41, 66, 0.25);
+  }
+  header.top .logo {
+    width: 46px; height: 46px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.12);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  header.top h1 { margin: 0; font-size: 1.35rem; letter-spacing: 0.5px; }
+  header.top p { margin: 2px 0 0; font-size: 0.85rem; color: #b9cbe0; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+
+  .status-bar {
+    margin-top: -22px;
+    display: flex; justify-content: flex-end;
+  }
+  #token-status {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.8rem; font-weight: 600;
+    padding: 7px 14px; border-radius: 999px;
+    background: var(--card); border: 1px solid var(--border);
+    box-shadow: 0 4px 10px rgba(15,41,66,0.08);
+  }
+  #token-status.ok { color: var(--ok); background: var(--ok-bg); border-color: #bfe6d2; }
+  #token-status.err { color: var(--err); background: var(--err-bg); border-color: #f3c9c5; }
+  #token-status .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-top: 22px;
+    box-shadow: 0 4px 14px rgba(15, 41, 66, 0.06);
+    overflow: hidden;
+  }
+  .card-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 20px;
+    background: var(--blue-light);
+    border-bottom: 1px solid var(--border);
+  }
+  .card-header .badge {
+    width: 30px; height: 30px; border-radius: 9px;
+    background: var(--blue); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.95rem; flex-shrink: 0;
+  }
+  .card-header h2 {
+    margin: 0; font-size: 0.98rem; color: var(--navy); font-weight: 700;
+  }
+  .card-body { padding: 18px 20px 20px; }
+
+  label { display: block; font-size: 0.82rem; color: var(--text-soft); margin-top: 12px; font-weight: 600; }
+  label:first-child { margin-top: 0; }
+  input[type=text], input[type=email], input[type=password] {
+    width: 100%; padding: 9px 10px; margin-top: 5px;
+    border: 1px solid var(--border); border-radius: 8px;
+    font-size: 0.9rem; color: var(--text);
+    background: #fbfdff;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
+    outline: none; border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(47,111,184,0.15);
+  }
+  input[type=file] { margin-top: 6px; font-size: 0.85rem; }
+
+  button {
+    margin-top: 14px; margin-right: 8px;
+    padding: 9px 18px; cursor: pointer;
+    border: none; border-radius: 8px;
+    background: var(--blue); color: #fff;
+    font-size: 0.85rem; font-weight: 600;
+    box-shadow: 0 3px 8px rgba(47,111,184,0.3);
+    transition: transform 0.1s, background 0.15s;
+  }
+  button:hover { background: var(--navy-2); }
+  button:active { transform: translateY(1px); }
+  button.secondary {
+    background: #fff; color: var(--blue);
+    border: 1px solid var(--blue);
+    box-shadow: none;
+  }
+  button.secondary:hover { background: var(--blue-light); }
+
+  .inline-feedback {
+    margin-top: 10px; font-size: 0.82rem; font-weight: 600;
+    padding: 8px 12px; border-radius: 8px;
+    display: none;
+  }
+  .inline-feedback.show { display: block; }
+  .inline-feedback.ok { background: var(--ok-bg); color: var(--ok); }
+  .inline-feedback.err { background: var(--err-bg); color: var(--err); }
+
+  pre {
+    background: #0f2942; color: #dfeaf6;
+    padding: 14px; border-radius: 10px;
+    overflow-x: auto; font-size: 0.78rem;
+    white-space: pre-wrap; word-break: break-word;
+    margin: 0;
+  }
+
+  .log-list {
+    list-style: none; margin: 0; padding: 0;
+    max-height: 260px; overflow-y: auto;
+  }
+  .log-list li {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 0.8rem; padding: 8px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .log-list li:last-child { border-bottom: none; }
+  .log-time { color: var(--text-soft); flex-shrink: 0; font-variant-numeric: tabular-nums; }
+  .log-tag {
+    flex-shrink: 0; font-weight: 700; padding: 1px 8px;
+    border-radius: 999px; font-size: 0.7rem;
+  }
+  .log-tag.ok { background: var(--ok-bg); color: var(--ok); }
+  .log-tag.err { background: var(--err-bg); color: var(--err); }
+  .log-tag.info { background: var(--blue-mid); color: var(--navy-2); }
+  .log-msg { color: var(--text); }
+  .log-empty { color: var(--text-soft); font-size: 0.85rem; padding: 6px 0; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="logo">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="9" y="2" width="6" height="12" rx="3" fill="#fff"/>
+      <path d="M5 11a7 7 0 0 0 14 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 18v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div>
+    <h1>TAPOS</h1>
+    <p>Painel de Teste — SaaS Backend</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="status-bar">
+    <span id="token-status"><span class="dot"></span><span id="token-status-text">Sem token.</span></span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge">1</span><h2>Cadastro</h2></div>
+    <div class="card-body">
+      <label>Email <input type="email" id="reg-email" value="teste@tecle.com"></label>
+      <label>Senha <input type="password" id="reg-password" value="123456"></label>
+      <button onclick="register()">Cadastrar</button>
+      <div id="reg-feedback" class="inline-feedback"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge">2</span><h2>Login</h2></div>
+    <div class="card-body">
+      <label>Email <input type="email" id="login-email" value="teste@tecle.com"></label>
+      <label>Senha <input type="password" id="login-password" value="123456"></label>
+      <button onclick="login()">Entrar</button>
+      <div id="login-feedback" class="inline-feedback"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge">3</span><h2>Produtos e assinatura</h2></div>
+    <div class="card-body">
+      <button class="secondary" onclick="listProducts()">Listar produtos</button>
+      <label>Slug do produto <input type="text" id="sub-slug" value="speech-ai"></label>
+      <button onclick="subscribe()">Assinar</button>
+      <button class="secondary" onclick="listSubscriptions()">Minhas assinaturas</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge">4</span><h2>Speech-AI — enviar arquivo fonte</h2></div>
+    <div class="card-body">
+      <label>Arquivo de texto (.txt)
+        <input type="file" id="speech-file">
+      </label>
+      <button onclick="uploadSpeechAi()">Enviar e processar</button>
+      <button class="secondary" onclick="runSpeechAi()">Rodar novamente (sem novo arquivo)</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge">✓</span><h2>Resultado</h2></div>
+    <div class="card-body">
+      <pre id="output">—</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge">≡</span><h2>Log de atividades</h2></div>
+    <div class="card-body">
+      <ul class="log-list" id="activity-log">
+        <li class="log-empty">Nenhuma ação registrada ainda.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+let token = localStorage.getItem("tapos_token") || "";
+updateTokenStatus();
+
+function updateTokenStatus() {
+  const el = document.getElementById("token-status");
+  const text = document.getElementById("token-status-text");
+  text.textContent = token ? "Token ativo (armazenado localmente)." : "Sem token.";
+  el.className = token ? "ok" : "err";
+}
+
+function show(data) {
+  document.getElementById("output").textContent =
+    typeof data === "string" ? data : JSON.stringify(data, null, 2);
+}
+
+function nowLabel() {
+  const d = new Date();
+  return d.toLocaleTimeString("pt-BR", { hour12: false });
+}
+
+function addLog(message, type = "info") {
+  const list = document.getElementById("activity-log");
+  const empty = list.querySelector(".log-empty");
+  if (empty) empty.remove();
+
+  const tagText = type === "ok" ? "sucesso" : type === "err" ? "erro" : "info";
+  const li = document.createElement("li");
+  li.innerHTML =
+    '<span class="log-time">' + nowLabel() + '</span>' +
+    '<span class="log-tag ' + type + '">' + tagText + '</span>' +
+    '<span class="log-msg"></span>';
+  li.querySelector(".log-msg").textContent = message;
+  list.prepend(li);
+}
+
+function setInlineFeedback(elId, message, type) {
+  const el = document.getElementById(elId);
+  el.textContent = message;
+  el.className = "inline-feedback show " + type;
+}
+
+async function api(path, options = {}) {
+  const headers = options.headers || {};
+  if (token) headers["Authorization"] = "Bearer " + token;
+  const res = await fetch(path, { ...options, headers });
+  let body;
+  try { body = await res.json(); } catch { body = await res.text(); }
+  if (!res.ok) {
+    show({ status: res.status, error: body });
+    throw new Error("request failed");
+  }
+  show(body);
+  return body;
+}
+
+async function register() {
+  const email = document.getElementById("reg-email").value;
+  const password = document.getElementById("reg-password").value;
+  try {
+    await api("/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    setInlineFeedback("reg-feedback", "Usuário " + email + " cadastrado com sucesso.", "ok");
+    addLog("Usuário cadastrado: " + email, "ok");
+  } catch {
+    setInlineFeedback("reg-feedback", "Falha ao cadastrar " + email + ". Veja o resultado abaixo.", "err");
+    addLog("Falha ao cadastrar: " + email, "err");
+  }
+}
+
+async function login() {
+  const email = document.getElementById("login-email").value;
+  const password = document.getElementById("login-password").value;
+  try {
+    const data = await api("/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    token = data.access_token;
+    localStorage.setItem("tapos_token", token);
+    updateTokenStatus();
+    setInlineFeedback("login-feedback", "Login efetuado como " + email + ".", "ok");
+    addLog("Login efetuado: " + email, "ok");
+  } catch {
+    setInlineFeedback("login-feedback", "Falha no login de " + email + ".", "err");
+    addLog("Falha no login: " + email, "err");
+  }
+}
+
+async function listProducts() {
+  try {
+    await api("/products");
+    addLog("Produtos listados.", "ok");
+  } catch {
+    addLog("Falha ao listar produtos.", "err");
+  }
+}
+
+async function subscribe() {
+  const product_slug = document.getElementById("sub-slug").value;
+  try {
+    await api("/subscriptions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ product_slug }),
+    });
+    addLog("Assinatura criada para: " + product_slug, "ok");
+  } catch {
+    addLog("Falha ao assinar: " + product_slug, "err");
+  }
+}
+
+async function listSubscriptions() {
+  try {
+    await api("/subscriptions");
+    addLog("Assinaturas listadas.", "ok");
+  } catch {
+    addLog("Falha ao listar assinaturas.", "err");
+  }
+}
+
+async function uploadSpeechAi() {
+  const fileInput = document.getElementById("speech-file");
+  if (!fileInput.files.length) {
+    show("Selecione um arquivo primeiro.");
+    addLog("Upload cancelado: nenhum arquivo selecionado.", "err");
+    return;
+  }
+  const fileName = fileInput.files[0].name;
+  const formData = new FormData();
+  formData.append("file", fileInput.files[0]);
+  try {
+    await api("/products/speech-ai/upload", {
+      method: "POST",
+      body: formData,
+    });
+    addLog("Arquivo enviado e processado: " + fileName, "ok");
+  } catch {
+    addLog("Falha ao enviar/processar: " + fileName, "err");
+  }
+}
+
+async function runSpeechAi() {
+  try {
+    await api("/products/speech-ai/run", { method: "POST" });
+    addLog("Speech-AI executado novamente.", "ok");
+  } catch {
+    addLog("Falha ao executar Speech-AI novamente.", "err");
+  }
+}
+</script>
+
+</body>
+</html>

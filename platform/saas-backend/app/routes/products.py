@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException
+from pathlib import Path
+
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
 from sqlalchemy.orm import Session
 
 from app.db import get_db
@@ -7,6 +9,8 @@ from app.models import User, Product, Subscription
 from app.products.speech_ai_adapter import run_speech_ai_product
 
 router = APIRouter(prefix="/products", tags=["products"])
+
+SPEECH_AI_INPUT_FILE = Path("/workspace/tecle/products/speech-ai/input/script.txt")
 
 
 @router.get("")
@@ -56,6 +60,32 @@ def run_speech_ai(
 
     if not subscription:
         raise HTTPException(status_code=403, detail="Access denied")
+
+    result = run_speech_ai_product()
+    return result
+
+
+@router.post("/speech-ai/upload")
+async def upload_speech_ai_source(
+    file: UploadFile = File(...),
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    product = db.query(Product).filter(Product.slug == "speech-ai").first()
+    if not product:
+        raise HTTPException(status_code=404, detail="Product not found")
+
+    subscription = db.query(Subscription).filter(
+        Subscription.user_id == current_user.id,
+        Subscription.product_id == product.id,
+        Subscription.is_active == True
+    ).first()
+
+    if not subscription:
+        raise HTTPException(status_code=403, detail="Access denied")
+
+    content = await file.read()
+    SPEECH_AI_INPUT_FILE.write_bytes(content)
 
     result = run_speech_ai_product()
     return result

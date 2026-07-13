@@ -1,0 +1,101 @@
+{
+  "titulo": "Painel de Teste — Login e Speech-AI (TAPOS)",
+  "data_documentacao": "2026-07-12",
+  "objetivo": "Interface HTML simples, servida pelo próprio backend FastAPI, para testar manualmente cadastro, login, assinatura de produtos e upload/execução do Speech-AI, sem depender de Postman/curl.",
+  "localizacao": {
+    "frontend": "app/static/index.html",
+    "montagem_backend": {
+      "arquivo": "app/main.py",
+      "rota": "/ui",
+      "mecanismo": "StaticFiles(directory=app/static, html=True) montado via app.mount"
+    }
+  },
+  "fluxo_da_tela": [
+    {
+      "secao": 1,
+      "nome": "Cadastro",
+      "endpoint": "POST /auth/register",
+      "campos": ["email", "senha"],
+      "valores_default": { "email": "teste@tecle.com", "senha": "123456" },
+      "detalhe": "Cria User com senha hasheada via bcrypt (hash_password)."
+    },
+    {
+      "secao": 2,
+      "nome": "Login",
+      "endpoint": "POST /auth/login",
+      "campos": ["email", "senha"],
+      "detalhe": "Valida credenciais (verify_password) e retorna JWT via create_access_token. Token salvo em localStorage (chave tapos_token) e reutilizado no header Authorization: Bearer <token> em todas as chamadas subsequentes. Indicador visual mostra status do token (ativo/ausente)."
+    },
+    {
+      "secao": 3,
+      "nome": "Produtos e assinatura",
+      "endpoints": [
+        "GET /products",
+        "POST /subscriptions",
+        "GET /subscriptions"
+      ],
+      "detalhe": "Lista produtos, cria assinatura por slug (default speech-ai) e lista assinaturas do usuário logado."
+    },
+    {
+      "secao": 4,
+      "nome": "Speech-AI — envio de arquivo fonte",
+      "endpoints": [
+        "POST /products/speech-ai/upload",
+        "POST /products/speech-ai/run"
+      ],
+      "detalhe": "Upload envia um .txt que substitui o arquivo de entrada e dispara o pipeline; run reexecuta usando o último arquivo salvo."
+    },
+    {
+      "secao": "resultado",
+      "nome": "Resultado",
+      "detalhe": "Exibe a resposta JSON bruta (ou erro) de qualquer chamada em um bloco <pre>."
+    },
+    {
+      "secao": "log",
+      "nome": "Log de atividades",
+      "detalhe": "Histórico client-side (não persistido) de cada ação com timestamp e status: sucesso, erro ou info."
+    }
+  ],
+  "alteracoes_backend": [
+    {
+      "arquivo": "app/routes/products.py",
+      "mudancas": [
+        "Import de Path, File, UploadFile",
+        "Constante SPEECH_AI_INPUT_FILE apontando para /workspace/tecle/products/speech-ai/input/script.txt",
+        "Novo endpoint POST /products/speech-ai/upload: autentica usuário (get_current_user), valida existência do produto speech-ai, valida assinatura ativa (Subscription.is_active == True), grava o conteúdo enviado no arquivo de entrada e executa run_speech_ai_product()"
+      ]
+    },
+    {
+      "arquivo": "app/main.py",
+      "mudancas": [
+        "Import de StaticFiles",
+        "app.mount('/ui', StaticFiles(directory=app/static, html=True), name='ui')"
+      ]
+    },
+    {
+      "arquivo": "requirements.txt",
+      "mudancas": [
+        "Adicionado python-multipart (necessário para UploadFile / multipart form-data no FastAPI)"
+      ]
+    }
+  ],
+  "endpoints_resumo": [
+    { "metodo": "POST", "rota": "/auth/register", "auth": false, "descricao": "Cria usuário (email + senha com hash bcrypt)" },
+    { "metodo": "POST", "rota": "/auth/login", "auth": false, "descricao": "Retorna JWT (access_token)" },
+    { "metodo": "GET", "rota": "/products", "auth": false, "descricao": "Lista produtos" },
+    { "metodo": "POST", "rota": "/subscriptions", "auth": true, "descricao": "Cria assinatura para o usuário logado" },
+    { "metodo": "GET", "rota": "/subscriptions", "auth": true, "descricao": "Lista assinaturas do usuário logado" },
+    { "metodo": "POST", "rota": "/products/speech-ai/upload", "auth": true, "requer_assinatura_ativa": true, "descricao": "Recebe .txt, salva e executa o Speech-AI" },
+    { "metodo": "POST", "rota": "/products/speech-ai/run", "auth": true, "requer_assinatura_ativa": true, "descricao": "Reexecuta o Speech-AI com o último arquivo salvo" }
+  ],
+  "pontos_de_atencao": [
+    "Caminho do arquivo de entrada (SPEECH_AI_INPUT_FILE) está hardcoded fora do diretório do serviço (products/speech-ai/input/script.txt), não portável sem ajuste via variável de ambiente.",
+    "Front-end é apenas para teste manual: sem build step, sem framework, guarda JWT em localStorage — aceitável para painel de teste local, não deve ser replicado em produção sem revisão de segurança.",
+    "Log de atividades é somente client-side, perdido ao recarregar a página."
+  ],
+  "como_testar": [
+    "Subir o backend: uvicorn app.main:app --reload (a partir de platform/saas-backend)",
+    "Acessar http://localhost:8000/ui",
+    "Cadastrar → Login → Assinar produto speech-ai → Enviar um .txt na seção 4 → Conferir resultado e log de atividades"
+  ]
+}
