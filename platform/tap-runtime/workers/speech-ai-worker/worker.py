@@ -1,8 +1,16 @@
 import json
 import os
+import sys
 
 import pika
 import psycopg2
+
+SAAS_BACKEND_ROOT = os.getenv(
+    "SAAS_BACKEND_ROOT", "/workspace/tecle/platform/saas-backend"
+)
+sys.path.insert(0, SAAS_BACKEND_ROOT)
+
+from app.products.speech_ai_adapter import run_speech_ai_product  # noqa: E402
 
 DATABASE_URL = os.getenv(
     "DATABASE_URL", "postgresql://admin:admin@localhost:5432/platform"
@@ -48,7 +56,7 @@ def _mark_failed(job_id: str, error_message: str) -> None:
 def process_message(job_id: str, product_slug: str) -> None:
     _mark_running(job_id)
     try:
-        result = {"status": "executed", "product_slug": product_slug}
+        result = run_speech_ai_product()
         _mark_completed(job_id, result)
     except Exception as exc:  # noqa: BLE001
         _mark_failed(job_id, str(exc))
