@@ -1,3 +1,4 @@
+import uuid
 from pathlib import Path
 
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
@@ -5,7 +6,9 @@ from sqlalchemy.orm import Session
 
 from app.db import get_db
 from app.deps import get_current_user
-from app.models import User, Product, Subscription
+from app.jobs.publisher import publish_job
+from app.jobs.schemas import JobSubmitResponse
+from app.models import Job, User, Product, Subscription
 from app.products.speech_ai_adapter import run_speech_ai_product
 
 router = APIRouter(prefix="/products", tags=["products"])
@@ -63,6 +66,41 @@ def run_speech_ai(
 
     result = run_speech_ai_product()
     return result
+
+
+@router.post("/speech-ai/submit", response_model=JobSubmitResponse)
+def submit_speech_ai(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    product = db.query(Product).filter(Product.slug == "speech-ai").first()
+    if not product:
+        raise HTTPException(status_code=404, detail="Product not found")
+
+    subscription = db.query(Subscription).filter(
+        Subscription.user_id == current_user.id,
+        Subscription.product_id == product.id,
+        Subscription.is_active == True
+    ).first()
+
+    if not subscription:
+        raise HTTPException(status_code=403, detail="Access denied")
+
+    job = Job(
+        job_id=str(uuid.uuid4()),
+        user_id=current_user.id,
+        product_slug="speech-ai",
+        status="queued",
+    )
+    db.add(job)
+    db.commit()
+    db.refresh(job)
+
+    publish_job(job_id=job.job_id, product_slug=job.product_slug)
+
+    return JobSubmitResponse(
+        job_id=job.job_id, status=job.status, product_slug=job.product_slug
+    )
 
 
 @router.post("/speech-ai/upload")
