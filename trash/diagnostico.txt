@@ -1,0 +1,1479 @@
+======================================================
+DIAGNOSTICO CLAUDE CODE
+======================================================
+
+DATA
+Mon Jul 13 04:39:59 PM -03 2026
+
+======================================================
+SISTEMA
+======================================================
+  Static hostname: srvTAPOS
+        Icon name: computer-vm
+          Chassis: vm 🖴
+Chassis Asset Tag: No Asset Tag
+       Machine ID: 777127cccde64f2fbe5c9d329a4d8b4d
+          Boot ID: 5fa084564a314ce3bc7de2098f799ee3
+     AF_VSOCK CID: 1840501633
+   Virtualization: vmware
+ Operating System: Ubuntu 26.04 LTS
+           Kernel: Linux 7.0.0-27-generic
+     Architecture: x86-64
+  Hardware Vendor: VMware, Inc.
+   Hardware Model: VMware Virtual Platform
+ Hardware Version: None
+ Firmware Version: 6.00
+    Firmware Date: Thu 2020-11-12
+     Firmware Age: 5y 8month
+
+======================================================
+KERNEL
+======================================================
+Linux srvTAPOS 7.0.0-27-generic #27-Ubuntu SMP PREEMPT_DYNAMIC Thu Jun 18 19:13:49 UTC 2026 x86_64 GNU/Linux
+
+======================================================
+UPTIME
+======================================================
+ 16:39:59 up 18 min,  3 users,  load average: 0.07, 0.15, 0.31
+
+======================================================
+IP
+======================================================
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: ens33: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 1000
+    link/ether 00:0c:29:b3:d3:81 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.191.133/24 brd 192.168.191.255 scope global dynamic noprefixroute ens33
+       valid_lft 1590sec preferred_lft 1590sec
+    inet6 fe80::20c:29ff:feb3:d381/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: br-8625d1970a3a: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+    link/ether de:bb:b0:2e:7c:0f brd ff:ff:ff:ff:ff:ff
+    inet 172.20.0.1/16 brd 172.20.255.255 scope global br-8625d1970a3a
+       valid_lft forever preferred_lft forever
+    inet6 fe80::dcbb:b0ff:fe2e:7c0f/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+4: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether be:e7:35:2d:54:0e brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+5: br-fcf22af35a17: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+    link/ether d6:19:6d:aa:65:28 brd ff:ff:ff:ff:ff:ff
+    inet 172.21.0.1/16 brd 172.21.255.255 scope global br-fcf22af35a17
+       valid_lft forever preferred_lft forever
+    inet6 fe80::d419:6dff:feaa:6528/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+6: vethf52f5d2@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-8625d1970a3a state UP group default 
+    link/ether d6:ed:7e:a9:62:3f brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet6 fe80::2087:6fff:feec:80b6/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+7: veth4773170@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-fcf22af35a17 state UP group default 
+    link/ether be:31:85:d4:68:ea brd ff:ff:ff:ff:ff:ff link-netnsid 1
+    inet6 fe80::d487:3aff:fe6f:7103/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+8: vethab36d22@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-8625d1970a3a state UP group default 
+    link/ether ea:b5:aa:70:80:42 brd ff:ff:ff:ff:ff:ff link-netnsid 2
+    inet6 fe80::5004:79ff:fe90:d125/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+9: veth66d84cd@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-fcf22af35a17 state UP group default 
+    link/ether ee:b0:84:dc:49:21 brd ff:ff:ff:ff:ff:ff link-netnsid 3
+    inet6 fe80::88b5:8dff:fe93:d9bd/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+10: vethff0b191@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-8625d1970a3a state UP group default 
+    link/ether fa:79:2c:ff:ea:bc brd ff:ff:ff:ff:ff:ff link-netnsid 4
+    inet6 fe80::e80d:92ff:fef4:b65e/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+11: veth0737ed7@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-8625d1970a3a state UP group default 
+    link/ether 5a:10:55:47:a5:e8 brd ff:ff:ff:ff:ff:ff link-netnsid 5
+    inet6 fe80::9c42:dfff:fea4:28f7/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+12: veth1a7c76b@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-8625d1970a3a state UP group default 
+    link/ether 22:14:4d:0f:60:e9 brd ff:ff:ff:ff:ff:ff link-netnsid 6
+    inet6 fe80::83b:adff:fe88:679f/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+13: vethcacf25b@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-8625d1970a3a state UP group default 
+    link/ether f2:ed:0f:18:cc:3e brd ff:ff:ff:ff:ff:ff link-netnsid 7
+    inet6 fe80::f082:a4ff:fe22:52d9/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+
+======================================================
+ROTAS
+======================================================
+default via 192.168.191.2 dev ens33 proto dhcp src 192.168.191.133 metric 100 
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown 
+172.20.0.0/16 dev br-8625d1970a3a proto kernel scope link src 172.20.0.1 
+172.21.0.0/16 dev br-fcf22af35a17 proto kernel scope link src 172.21.0.1 
+192.168.191.0/24 dev ens33 proto kernel scope link src 192.168.191.133 metric 100 
+
+======================================================
+DNS
+======================================================
+# This is /run/systemd/resolve/stub-resolv.conf managed by man:systemd-resolved(8).
+# Do not edit.
+#
+# This file might be symlinked as /etc/resolv.conf. If you're looking at
+# /etc/resolv.conf and seeing this text, you have followed the symlink.
+#
+# This is a dynamic resolv.conf file for connecting local clients to the
+# internal DNS stub resolver of systemd-resolved. This file lists all
+# configured search domains.
+#
+# Run "resolvectl status" to see details about the uplink DNS servers
+# currently in use.
+#
+# Third party programs should typically not access this file directly, but only
+# through the symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a
+# different way, replace this symlink by a static file or a different symlink.
+#
+# See man:systemd-resolved.service(8) for details about the supported modes of
+# operation for /etc/resolv.conf.
+
+nameserver 127.0.0.53
+options edns0 trust-ad
+search localdomain
+
+======================================================
+MTU
+======================================================
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: ens33: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN mode DEFAULT group default qlen 1000
+    link/ether 00:0c:29:b3:d3:81 brd ff:ff:ff:ff:ff:ff
+3: br-8625d1970a3a: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default 
+    link/ether de:bb:b0:2e:7c:0f brd ff:ff:ff:ff:ff:ff
+4: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN mode DEFAULT group default 
+    link/ether be:e7:35:2d:54:0e brd ff:ff:ff:ff:ff:ff
+5: br-fcf22af35a17: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default 
+    link/ether d6:19:6d:aa:65:28 brd ff:ff:ff:ff:ff:ff
+6: vethf52f5d2@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-8625d1970a3a state UP mode DEFAULT group default 
+    link/ether d6:ed:7e:a9:62:3f brd ff:ff:ff:ff:ff:ff link-netnsid 0
+7: veth4773170@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-fcf22af35a17 state UP mode DEFAULT group default 
+    link/ether be:31:85:d4:68:ea brd ff:ff:ff:ff:ff:ff link-netnsid 1
+8: vethab36d22@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-8625d1970a3a state UP mode DEFAULT group default 
+    link/ether ea:b5:aa:70:80:42 brd ff:ff:ff:ff:ff:ff link-netnsid 2
+9: veth66d84cd@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-fcf22af35a17 state UP mode DEFAULT group default 
+    link/ether ee:b0:84:dc:49:21 brd ff:ff:ff:ff:ff:ff link-netnsid 3
+10: vethff0b191@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-8625d1970a3a state UP mode DEFAULT group default 
+    link/ether fa:79:2c:ff:ea:bc brd ff:ff:ff:ff:ff:ff link-netnsid 4
+11: veth0737ed7@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-8625d1970a3a state UP mode DEFAULT group default 
+    link/ether 5a:10:55:47:a5:e8 brd ff:ff:ff:ff:ff:ff link-netnsid 5
+12: veth1a7c76b@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-8625d1970a3a state UP mode DEFAULT group default 
+    link/ether 22:14:4d:0f:60:e9 brd ff:ff:ff:ff:ff:ff link-netnsid 6
+13: vethcacf25b@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-8625d1970a3a state UP mode DEFAULT group default 
+    link/ether f2:ed:0f:18:cc:3e brd ff:ff:ff:ff:ff:ff link-netnsid 7
+
+======================================================
+ARP
+======================================================
+172.21.0.2 dev br-fcf22af35a17 lladdr d2:c5:8f:4f:b7:82 STALE 
+172.20.0.6 dev br-8625d1970a3a lladdr ae:0d:fe:86:87:88 STALE 
+172.21.0.3 dev br-fcf22af35a17 lladdr 4e:62:da:d9:33:99 STALE 
+192.168.191.254 dev ens33 lladdr 00:50:56:e3:64:6b STALE 
+192.168.191.2 dev ens33 lladdr 00:50:56:ed:53:34 REACHABLE 
+192.168.191.1 dev ens33 lladdr 00:50:56:c0:00:08 REACHABLE 
+172.20.0.2 dev br-8625d1970a3a lladdr 3e:d6:6c:1d:da:c3 STALE 
+fe80::eab4:3255:9904:fd8b dev ens33 lladdr 00:50:56:c0:00:08 STALE 
+
+======================================================
+SOCKETS HTTPS
+======================================================
+ESTAB     0      0      192.168.191.133:60014  4.150.223.97:443   users:(("MainThread",pid=6686,fd=31))     
+ESTAB     0      0      192.168.191.133:60028  4.150.223.97:443   users:(("MainThread",pid=6686,fd=36))     
+ESTAB     0      0      192.168.191.133:40920 160.79.104.10:443   users:(("claude",pid=7021,fd=16))         
+ESTAB     0      0      192.168.191.133:60984 160.79.104.10:443   users:(("claude",pid=7021,fd=15))         
+
+======================================================
+PORTAS EM LISTEN
+======================================================
+State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess                                    
+LISTEN 0      4096         0.0.0.0:9443       0.0.0.0:*                                              
+LISTEN 0      511        127.0.0.1:44183      0.0.0.0:*    users:(("MainThread",pid=6686,fd=41))     
+LISTEN 0      511        127.0.0.1:44287      0.0.0.0:*    users:(("MainThread",pid=6686,fd=35))     
+LISTEN 0      4096         0.0.0.0:9000       0.0.0.0:*                                              
+LISTEN 0      4096         0.0.0.0:9001       0.0.0.0:*                                              
+LISTEN 0      4096         0.0.0.0:11434      0.0.0.0:*                                              
+LISTEN 0      4096         0.0.0.0:15672      0.0.0.0:*                                              
+LISTEN 0      4096      127.0.0.54:53         0.0.0.0:*                                              
+LISTEN 0      128        127.0.0.1:36115      0.0.0.0:*    users:(("code-fc3def6774",pid=6539,fd=9)) 
+LISTEN 0      128        127.0.0.1:35559      0.0.0.0:*    users:(("code-fc3def6774",pid=6561,fd=11))
+LISTEN 0      4096   127.0.0.53%lo:53         0.0.0.0:*                                              
+LISTEN 0      4096         0.0.0.0:22         0.0.0.0:*                                              
+LISTEN 0      4096       127.0.0.1:631        0.0.0.0:*                                              
+LISTEN 0      4096         0.0.0.0:3000       0.0.0.0:*                                              
+LISTEN 0      4096         0.0.0.0:5432       0.0.0.0:*                                              
+LISTEN 0      4096         0.0.0.0:5672       0.0.0.0:*                                              
+LISTEN 0      4096         0.0.0.0:6333       0.0.0.0:*                                              
+LISTEN 0      4096         0.0.0.0:6379       0.0.0.0:*                                              
+LISTEN 0      4096            [::]:9443          [::]:*                                              
+LISTEN 0      4096            [::]:9000          [::]:*                                              
+LISTEN 0      4096            [::]:9001          [::]:*                                              
+LISTEN 0      4096            [::]:11434         [::]:*                                              
+LISTEN 0      4096           [::1]:631           [::]:*                                              
+LISTEN 0      4096            [::]:15672         [::]:*                                              
+LISTEN 0      4096            [::]:22            [::]:*                                              
+LISTEN 0      4096            [::]:3000          [::]:*                                              
+LISTEN 0      4096            [::]:5432          [::]:*                                              
+LISTEN 0      4096            [::]:5672          [::]:*                                              
+LISTEN 0      4096            [::]:6333          [::]:*                                              
+LISTEN 0      4096            [::]:6379          [::]:*                                              
+
+======================================================
+DOCKER
+======================================================
+CONTAINER ID   IMAGE                                COMMAND                  CREATED      STATUS                    PORTS                                                                                                                                                     NAMES
+87d69e5bc82f   postgres:15                          "docker-entrypoint.s…"   5 days ago   Up 18 minutes             0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp                                                                                                               postgres
+39355b2f1bb6   redis:7-alpine                       "docker-entrypoint.s…"   5 days ago   Up 18 minutes             0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp                                                                                                               redis
+854bbd3f4510   ghcr.io/open-webui/open-webui:main   "bash start.sh"          5 days ago   Up 18 minutes (healthy)   0.0.0.0:3000->8080/tcp, [::]:3000->8080/tcp                                                                                                               open-webui
+aca099ce31bc   rabbitmq:3-management                "docker-entrypoint.s…"   5 days ago   Up 18 minutes             4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, [::]:5672->5672/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 0.0.0.0:15672->15672/tcp, [::]:15672->15672/tcp   rabbitmq
+bd95e717d36f   portainer/portainer-ce:latest        "/portainer"             5 days ago   Up 18 minutes             8000/tcp, 9000/tcp, 0.0.0.0:9443->9443/tcp, [::]:9443->9443/tcp                                                                                           portainer
+74e40865ff53   qdrant/qdrant:latest                 "./entrypoint.sh"        5 days ago   Up 18 minutes             0.0.0.0:6333->6333/tcp, [::]:6333->6333/tcp, 6334/tcp                                                                                                     qdrant
+c5f1dbd763ed   minio/minio                          "/usr/bin/docker-ent…"   5 days ago   Up 18 minutes             0.0.0.0:9000-9001->9000-9001/tcp, [::]:9000-9001->9000-9001/tcp                                                                                           minio
+e0e63b94f7b6   ollama/ollama:latest                 "/bin/ollama serve"      5 days ago   Up 18 minutes             0.0.0.0:11434->11434/tcp, [::]:11434->11434/tcp                                                                                                           ollama
+
+======================================================
+DOCKER INFO
+======================================================
+Client: Docker Engine - Community
+ Version:    29.6.1
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.35.0
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v5.3.1
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
+
+Server:
+ Containers: 8
+  Running: 8
+  Paused: 0
+  Stopped: 0
+ Images: 8
+ Server Version: 29.6.1
+ Storage Driver: overlayfs
+  driver-type: io.containerd.snapshotter.v1
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ CDI spec directories:
+  /etc/cdi
+  /var/run/cdi
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: e53c7c1516c3b2bff98eb76f1f4117477e6f4e66
+ runc version: v1.3.6-0-g491b69ba
+ init version: de40ad0
+ Security Options:
+  apparmor
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 7.0.0-27-generic
+ Operating System: Ubuntu 26.04 LTS
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 4
+ Total Memory: 30.29GiB
+ Name: srvTAPOS
+ ID: a42c3d2d-c728-4e27-9dd5-c76c65c7475c
+ Docker Root Dir: /data/platform/runtime/docker
+ Debug Mode: false
+ Experimental: false
+ Insecure Registries:
+  ::1/128
+  127.0.0.0/8
+ Live Restore Enabled: false
+ Firewall Backend: iptables
+  EnableUserlandProxy: true
+  UserlandProxyPath: /usr/bin/docker-proxy
+
+
+======================================================
+DOCKER LOGS (1h)
+======================================================
+Jul 13 16:20:53 srvTAPOS systemd[1]: Stopping docker.service - Docker Application Container Engine...
+Jul 13 16:20:53 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:53.164514595-03:00" level=info msg="Processing signal 'terminated'"
+Jul 13 16:20:53 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:53.164750793-03:00" level=info msg="stopping restart-manager" container=bd95e717d36fb534f7c459ba5e1e07821ce0914a3166bbd7f4b0a643839fd952
+Jul 13 16:20:53 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:53.164796415-03:00" level=info msg="stopping restart-manager" container=e0e63b94f7b6ad0545547fdf84791a7a6fe6f572a110e43b52136fec6f60554b
+Jul 13 16:20:53 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:53.164861543-03:00" level=info msg="stopping restart-manager" container=74e40865ff53fe4d34f66c97f37bdd3f826fa55229bc2f0d8f9d114d336c569f
+Jul 13 16:20:53 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:53.164895770-03:00" level=info msg="stopping restart-manager" container=aca099ce31bc3e8b2a6054366025b8139f580577da052fca32d24e775dd4906e
+Jul 13 16:20:53 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:53.164754584-03:00" level=info msg="stopping restart-manager" container=c5f1dbd763edbf100e581070359036182faeafb43fade6f88e3ba6efe48c7fb5
+Jul 13 16:20:53 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:53.164764701-03:00" level=info msg="stopping restart-manager" container=39355b2f1bb6791d19c876bcb3aee8ad9e9a81c974d72596c1f9c3e16f763914
+Jul 13 16:20:53 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:53.164784275-03:00" level=info msg="stopping restart-manager" container=87d69e5bc82f74e1b3dbbff6b96b74fe32d235cb821c0dcf3a0a0826bb47f328
+Jul 13 16:20:53 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:53.164791717-03:00" level=info msg="stopping restart-manager" container=854bbd3f451019aabdde3a0d940bba975957e4bc692abca91604613b4d719059
+Jul 13 16:20:53 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:53.547705258-03:00" level=info msg="received task-delete event from containerd" container=39355b2f1bb6791d19c876bcb3aee8ad9e9a81c974d72596c1f9c3e16f763914 module=libcontainerd namespace=moby topic=/tasks/delete type="*events.TaskDelete"
+Jul 13 16:20:53 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:53.547758778-03:00" level=info msg="received task-delete event from containerd" container=bd95e717d36fb534f7c459ba5e1e07821ce0914a3166bbd7f4b0a643839fd952 module=libcontainerd namespace=moby topic=/tasks/delete type="*events.TaskDelete"
+Jul 13 16:20:53 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:53.548747660-03:00" level=info msg="received task-delete event from containerd" container=c5f1dbd763edbf100e581070359036182faeafb43fade6f88e3ba6efe48c7fb5 module=libcontainerd namespace=moby topic=/tasks/delete type="*events.TaskDelete"
+Jul 13 16:20:53 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:53.551843356-03:00" level=info msg="received task-delete event from containerd" container=87d69e5bc82f74e1b3dbbff6b96b74fe32d235cb821c0dcf3a0a0826bb47f328 module=libcontainerd namespace=moby topic=/tasks/delete type="*events.TaskDelete"
+Jul 13 16:20:53 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:53.555956708-03:00" level=info msg="received task-delete event from containerd" container=74e40865ff53fe4d34f66c97f37bdd3f826fa55229bc2f0d8f9d114d336c569f module=libcontainerd namespace=moby topic=/tasks/delete type="*events.TaskDelete"
+Jul 13 16:20:54 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:54.221519421-03:00" level=info msg="received task-delete event from containerd" container=e0e63b94f7b6ad0545547fdf84791a7a6fe6f572a110e43b52136fec6f60554b module=libcontainerd namespace=moby topic=/tasks/delete type="*events.TaskDelete"
+Jul 13 16:20:54 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:54.681353038-03:00" level=info msg="received task-delete event from containerd" container=aca099ce31bc3e8b2a6054366025b8139f580577da052fca32d24e775dd4906e module=libcontainerd namespace=moby topic=/tasks/delete type="*events.TaskDelete"
+Jul 13 16:20:56 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:56.114240998-03:00" level=info msg="received task-delete event from containerd" container=854bbd3f451019aabdde3a0d940bba975957e4bc692abca91604613b4d719059 module=libcontainerd namespace=moby topic=/tasks/delete type="*events.TaskDelete"
+Jul 13 16:20:56 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:56.325846905-03:00" level=info msg="stopping event stream following graceful shutdown" error="<nil>" module=libcontainerd namespace=moby
+Jul 13 16:20:56 srvTAPOS dockerd[2246]: time="2026-07-13T16:20:56.326782547-03:00" level=info msg="Daemon shutdown complete"
+Jul 13 16:20:56 srvTAPOS systemd[1]: docker.service: Deactivated successfully.
+Jul 13 16:20:56 srvTAPOS systemd[1]: Stopped docker.service - Docker Application Container Engine.
+Jul 13 16:20:56 srvTAPOS systemd[1]: docker.service: Consumed 3min 13.932s CPU time over 1d 1h 58min 31.662s wall clock time, 212.3M memory peak.
+-- Boot 5fa084564a314ce3bc7de2098f799ee3 --
+Jul 13 16:21:33 srvTAPOS systemd[1]: Starting docker.service - Docker Application Container Engine...
+Jul 13 16:21:34 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:34.273430144-03:00" level=info msg="Starting up"
+Jul 13 16:21:34 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:34.276920797-03:00" level=info msg="OTEL tracing is not configured, using no-op tracer provider"
+Jul 13 16:21:34 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:34.277212897-03:00" level=info msg="CDI directory does not exist, skipping" dir=/etc/cdi
+Jul 13 16:21:34 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:34.277266086-03:00" level=info msg="CDI directory does not exist, skipping" dir=/var/run/cdi
+Jul 13 16:21:34 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:34.277492048-03:00" level=info msg="detected 127.0.0.53 nameserver, assuming systemd-resolved, so using resolv.conf: /run/systemd/resolve/resolv.conf"
+Jul 13 16:21:34 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:34.382955560-03:00" level=info msg="Creating a containerd client" address=/run/containerd/containerd.sock timeout=1m0s
+Jul 13 16:21:34 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:34.388054744-03:00" level=info msg="Loading containers: start."
+Jul 13 16:21:34 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:34.392538413-03:00" level=info msg="NRI is disabled"
+Jul 13 16:21:34 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:34.392725325-03:00" level=info msg="Starting daemon with containerd snapshotter integration enabled"
+Jul 13 16:21:34 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:34.396038549-03:00" level=info msg="Restoring containers: start."
+Jul 13 16:21:34 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:34.462607513-03:00" level=info msg="Deleting nftables IPv4 rules" error="running nft: /dev/stdin:1:17-30: Error: Could not process rule: No such file or directory\ndelete table ip docker-bridges\n                ^^^^^^^^^^^^^^\n exit status 1"
+Jul 13 16:21:34 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:34.471578916-03:00" level=info msg="Deleting nftables IPv6 rules" error="running nft: /dev/stdin:1:18-31: Error: Could not process rule: No such file or directory\ndelete table ip6 docker-bridges\n                 ^^^^^^^^^^^^^^\n exit status 1"
+Jul 13 16:21:35 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:35.612555482-03:00" level=info msg="sbJoin: gwep4 ''->'8cc3ab2889e6', gwep6 ''->''" eid=8cc3ab2889e6 ep=ollama net=ai_net nid=fcf22af35a17
+Jul 13 16:21:35 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:35.615743176-03:00" level=info msg="sbJoin: gwep4 ''->'68498adcc3d9', gwep6 ''->''" eid=68498adcc3d9 ep=minio net=core_net nid=8625d1970a3a
+Jul 13 16:21:35 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:35.646629312-03:00" level=info msg="sbJoin: gwep4 ''->'16ad2635a9b1', gwep6 ''->''" eid=16ad2635a9b1 ep=postgres net=core_net nid=8625d1970a3a
+Jul 13 16:21:35 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:35.682546339-03:00" level=info msg="sbJoin: gwep4 ''->'be35cfc63d50', gwep6 ''->''" eid=be35cfc63d50 ep=open-webui net=ai_net nid=fcf22af35a17
+Jul 13 16:21:35 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:35.695330660-03:00" level=info msg="sbJoin: gwep4 ''->'040870b178dd', gwep6 ''->''" eid=040870b178dd ep=rabbitmq net=core_net nid=8625d1970a3a
+Jul 13 16:21:35 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:35.700538093-03:00" level=info msg="sbJoin: gwep4 ''->'01af870e2b13', gwep6 ''->''" eid=01af870e2b13 ep=portainer net=core_net nid=8625d1970a3a
+Jul 13 16:21:35 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:35.743499092-03:00" level=info msg="sbJoin: gwep4 ''->'5714ccb9aaf7', gwep6 ''->''" eid=5714ccb9aaf7 ep=qdrant net=core_net nid=8625d1970a3a
+Jul 13 16:21:35 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:35.748315494-03:00" level=info msg="sbJoin: gwep4 ''->'6aaf7211be41', gwep6 ''->''" eid=6aaf7211be41 ep=redis net=core_net nid=8625d1970a3a
+Jul 13 16:21:37 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:37.018217890-03:00" level=info msg="Loading containers: done."
+Jul 13 16:21:37 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:37.228211406-03:00" level=info msg="Docker daemon" commit=8ec5ab3 containerd-snapshotter=true storage-driver=overlayfs version=29.6.1
+Jul 13 16:21:37 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:37.228446440-03:00" level=info msg="Initializing buildkit"
+Jul 13 16:21:37 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:37.792655636-03:00" level=info msg="Completed buildkit initialization"
+Jul 13 16:21:37 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:37.800444078-03:00" level=info msg="Daemon has completed initialization"
+Jul 13 16:21:37 srvTAPOS dockerd[2019]: time="2026-07-13T16:21:37.800524614-03:00" level=info msg="API listen on /run/docker.sock"
+Jul 13 16:21:37 srvTAPOS systemd[1]: Started docker.service - Docker Application Container Engine.
+
+======================================================
+NETWORKMANAGER
+======================================================
+Jul 13 15:44:47 srvTAPOS NetworkManager[1806]: <info>  [1783968287.1385] dhcp4 (ens33): state changed new lease, address=192.168.191.133
+Jul 13 15:58:48 srvTAPOS NetworkManager[1806]: <info>  [1783969128.0908] device (ens33): state change: activated -> unavailable (reason 'carrier-changed', managed-type: 'full')
+Jul 13 15:58:48 srvTAPOS NetworkManager[1806]: <info>  [1783969128.0910] dhcp4 (ens33): canceled DHCP transaction
+Jul 13 15:58:48 srvTAPOS NetworkManager[1806]: <info>  [1783969128.0911] dhcp4 (ens33): activation: beginning transaction (timeout in 45 seconds)
+Jul 13 15:58:48 srvTAPOS NetworkManager[1806]: <info>  [1783969128.0911] dhcp4 (ens33): state changed no lease
+Jul 13 15:58:49 srvTAPOS NetworkManager[1806]: <info>  [1783969129.1381] manager: NetworkManager state is now CONNECTED_LOCAL
+Jul 13 15:58:52 srvTAPOS NetworkManager[1806]: <info>  [1783969132.0687] device (ens33): carrier: link connected
+Jul 13 15:58:52 srvTAPOS NetworkManager[1806]: <info>  [1783969132.0699] device (ens33): state change: unavailable -> disconnected (reason 'carrier-changed', managed-type: 'full')
+Jul 13 15:58:52 srvTAPOS NetworkManager[1806]: <info>  [1783969132.4836] policy: auto-activating connection 'netplan-ens33' (14f59568-5076-387a-aef6-10adfcca2e26)
+Jul 13 15:58:52 srvTAPOS NetworkManager[1806]: <info>  [1783969132.4841] device (ens33): Activation: starting connection 'netplan-ens33' (14f59568-5076-387a-aef6-10adfcca2e26)
+Jul 13 15:58:52 srvTAPOS NetworkManager[1806]: <info>  [1783969132.4841] device (ens33): state change: disconnected -> prepare (reason 'none', managed-type: 'full')
+Jul 13 15:58:52 srvTAPOS NetworkManager[1806]: <info>  [1783969132.4842] manager: NetworkManager state is now CONNECTING
+Jul 13 15:58:52 srvTAPOS NetworkManager[1806]: <info>  [1783969132.4843] device (ens33): state change: prepare -> config (reason 'none', managed-type: 'full')
+Jul 13 15:58:52 srvTAPOS NetworkManager[1806]: <info>  [1783969132.6905] device (ens33): state change: config -> ip-config (reason 'none', managed-type: 'full')
+Jul 13 15:58:53 srvTAPOS NetworkManager[1806]: <info>  [1783969133.1004] dhcp4 (ens33): activation: beginning transaction (timeout in 45 seconds)
+Jul 13 15:58:53 srvTAPOS NetworkManager[1806]: <info>  [1783969133.1915] dhcp4 (ens33): state changed new lease, address=192.168.191.133, acd pending
+Jul 13 15:58:53 srvTAPOS NetworkManager[1806]: <info>  [1783969133.5229] dhcp4 (ens33): state changed new lease, address=192.168.191.133
+Jul 13 15:58:53 srvTAPOS NetworkManager[1806]: <info>  [1783969133.9345] policy: set 'netplan-ens33' (ens33) as default for IPv4 routing and DNS
+Jul 13 15:58:53 srvTAPOS NetworkManager[1806]: <info>  [1783969133.9438] device (ens33): state change: ip-config -> ip-check (reason 'none', managed-type: 'full')
+Jul 13 15:58:53 srvTAPOS NetworkManager[1806]: <info>  [1783969133.9470] device (ens33): state change: ip-check -> secondaries (reason 'none', managed-type: 'full')
+Jul 13 15:58:53 srvTAPOS NetworkManager[1806]: <info>  [1783969133.9472] device (ens33): state change: secondaries -> activated (reason 'none', managed-type: 'full')
+Jul 13 15:58:53 srvTAPOS NetworkManager[1806]: <info>  [1783969133.9474] manager: NetworkManager state is now CONNECTED_SITE
+Jul 13 15:58:53 srvTAPOS NetworkManager[1806]: <info>  [1783969133.9475] device (ens33): Activation: successful, device activated.
+Jul 13 15:58:54 srvTAPOS NetworkManager[1806]: <info>  [1783969134.3094] manager: NetworkManager state is now CONNECTED_GLOBAL
+Jul 13 16:02:52 srvTAPOS NetworkManager[1806]: <info>  [1783969372.0603] device (ens33): state change: activated -> unavailable (reason 'carrier-changed', managed-type: 'full')
+Jul 13 16:02:52 srvTAPOS NetworkManager[1806]: <info>  [1783969372.0605] dhcp4 (ens33): canceled DHCP transaction
+Jul 13 16:02:52 srvTAPOS NetworkManager[1806]: <info>  [1783969372.0605] dhcp4 (ens33): activation: beginning transaction (timeout in 45 seconds)
+Jul 13 16:02:52 srvTAPOS NetworkManager[1806]: <info>  [1783969372.0605] dhcp4 (ens33): state changed no lease
+Jul 13 16:02:53 srvTAPOS NetworkManager[1806]: <info>  [1783969373.0935] manager: NetworkManager state is now CONNECTED_LOCAL
+Jul 13 16:02:56 srvTAPOS NetworkManager[1806]: <info>  [1783969376.0359] device (ens33): carrier: link connected
+Jul 13 16:02:56 srvTAPOS NetworkManager[1806]: <info>  [1783969376.0360] device (ens33): state change: unavailable -> disconnected (reason 'carrier-changed', managed-type: 'full')
+Jul 13 16:02:56 srvTAPOS NetworkManager[1806]: <info>  [1783969376.4478] policy: auto-activating connection 'netplan-ens33' (14f59568-5076-387a-aef6-10adfcca2e26)
+Jul 13 16:02:56 srvTAPOS NetworkManager[1806]: <info>  [1783969376.4483] device (ens33): Activation: starting connection 'netplan-ens33' (14f59568-5076-387a-aef6-10adfcca2e26)
+Jul 13 16:02:56 srvTAPOS NetworkManager[1806]: <info>  [1783969376.4485] device (ens33): state change: disconnected -> prepare (reason 'none', managed-type: 'full')
+Jul 13 16:02:56 srvTAPOS NetworkManager[1806]: <info>  [1783969376.4487] manager: NetworkManager state is now CONNECTING
+Jul 13 16:02:56 srvTAPOS NetworkManager[1806]: <info>  [1783969376.4489] device (ens33): state change: prepare -> config (reason 'none', managed-type: 'full')
+Jul 13 16:02:56 srvTAPOS NetworkManager[1806]: <info>  [1783969376.6556] device (ens33): state change: config -> ip-config (reason 'none', managed-type: 'full')
+Jul 13 16:02:57 srvTAPOS NetworkManager[1806]: <info>  [1783969377.0647] dhcp4 (ens33): activation: beginning transaction (timeout in 45 seconds)
+Jul 13 16:02:57 srvTAPOS NetworkManager[1806]: <info>  [1783969377.0661] dhcp4 (ens33): state changed new lease, address=192.168.191.133, acd pending
+Jul 13 16:02:57 srvTAPOS NetworkManager[1806]: <info>  [1783969377.2732] dhcp4 (ens33): state changed new lease, address=192.168.191.133
+Jul 13 16:02:57 srvTAPOS NetworkManager[1806]: <info>  [1783969377.2751] policy: set 'netplan-ens33' (ens33) as default for IPv4 routing and DNS
+Jul 13 16:02:57 srvTAPOS NetworkManager[1806]: <info>  [1783969377.2846] device (ens33): state change: ip-config -> ip-check (reason 'none', managed-type: 'full')
+Jul 13 16:02:57 srvTAPOS NetworkManager[1806]: <info>  [1783969377.2868] device (ens33): state change: ip-check -> secondaries (reason 'none', managed-type: 'full')
+Jul 13 16:02:57 srvTAPOS NetworkManager[1806]: <info>  [1783969377.2937] device (ens33): state change: secondaries -> activated (reason 'none', managed-type: 'full')
+Jul 13 16:02:57 srvTAPOS NetworkManager[1806]: <info>  [1783969377.2939] manager: NetworkManager state is now CONNECTED_SITE
+Jul 13 16:02:57 srvTAPOS NetworkManager[1806]: <info>  [1783969377.2941] device (ens33): Activation: successful, device activated.
+Jul 13 16:02:57 srvTAPOS NetworkManager[1806]: <info>  [1783969377.9313] manager: NetworkManager state is now CONNECTED_GLOBAL
+Jul 13 16:17:57 srvTAPOS NetworkManager[1806]: <info>  [1783970277.0686] dhcp4 (ens33): state changed new lease, address=192.168.191.133
+Jul 13 16:19:45 srvTAPOS systemd[1]: Stopping NetworkManager.service - Network Manager...
+Jul 13 16:19:45 srvTAPOS NetworkManager[1806]: <info>  [1783970385.7703] caught SIGTERM, shutting down normally.
+Jul 13 16:19:45 srvTAPOS NetworkManager[1806]: <info>  [1783970385.7711] dhcp4 (ens33): canceled DHCP transaction
+Jul 13 16:19:45 srvTAPOS NetworkManager[1806]: <info>  [1783970385.7711] dhcp4 (ens33): activation: beginning transaction (timeout in 45 seconds)
+Jul 13 16:19:45 srvTAPOS NetworkManager[1806]: <info>  [1783970385.7711] dhcp4 (ens33): state changed no lease
+Jul 13 16:19:45 srvTAPOS NetworkManager[1806]: <info>  [1783970385.7712] manager: NetworkManager state is now CONNECTED_SITE
+Jul 13 16:19:45 srvTAPOS NetworkManager[1806]: <info>  [1783970385.7717] device (br-8625d1970a3a): bridge port veth1bb8455 was detached
+Jul 13 16:19:45 srvTAPOS NetworkManager[1806]: <info>  [1783970385.7718] device (br-fcf22af35a17): bridge port vethf9390fc was detached
+Jul 13 16:19:45 srvTAPOS NetworkManager[1806]: <info>  [1783970385.7719] device (br-8625d1970a3a): bridge port veth016420c was detached
+Jul 13 16:19:45 srvTAPOS NetworkManager[1806]: <info>  [1783970385.7720] device (br-fcf22af35a17): bridge port vethf249d75 was detached
+Jul 13 16:19:45 srvTAPOS NetworkManager[1806]: <info>  [1783970385.7721] device (br-8625d1970a3a): bridge port veth589c41e was detached
+Jul 13 16:19:45 srvTAPOS NetworkManager[1806]: <info>  [1783970385.7722] device (br-8625d1970a3a): bridge port veth91704c7 was detached
+Jul 13 16:19:45 srvTAPOS NetworkManager[1806]: <info>  [1783970385.7723] device (br-8625d1970a3a): bridge port veth9fa3577 was detached
+Jul 13 16:19:45 srvTAPOS NetworkManager[1806]: <info>  [1783970385.7769] device (br-8625d1970a3a): bridge port vethc32ee9a was detached
+Jul 13 16:19:45 srvTAPOS NetworkManager[1806]: <info>  [1783970385.7802] exiting (success)
+Jul 13 16:19:45 srvTAPOS systemd[1]: NetworkManager.service: Deactivated successfully.
+Jul 13 16:19:45 srvTAPOS systemd[1]: Stopped NetworkManager.service - Network Manager.
+Jul 13 16:19:45 srvTAPOS systemd[1]: NetworkManager.service: Consumed 12.486s CPU time over 1d 1h 57min 23.427s wall clock time, 18.6M memory peak.
+Jul 13 16:19:45 srvTAPOS systemd[1]: Starting NetworkManager.service - Network Manager...
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.8409] NetworkManager (version 1.54.3) is starting... (after a restart, boot:7df4a145-5dc0-4585-bd14-351bbb08e982)
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.8410] Read config: /etc/NetworkManager/NetworkManager.conf, /usr/lib/NetworkManager/conf.d/{10-default-firewall-use-iptables.conf,20-connectivity-ubuntu.conf,no-mac-addr-change.conf}, /run/NetworkManager/conf.d/10-globally-managed-devices.conf, /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.8548] manager[0x5cd3257a5260]: monitoring kernel firmware directory '/lib/firmware'.
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.8549] monitoring ifupdown state file '/run/network/ifstate'.
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9791] hostname: hostname: using hostnamed
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9792] hostname: static hostname changed from (none) to "srvTAPOS"
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9796] dns-mgr: init: dns=systemd-resolved rc-manager=unmanaged (auto), plugin=systemd-resolved
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9799] manager[0x5cd3257a5260]: rfkill: Wi-Fi hardware radio set enabled
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9800] manager[0x5cd3257a5260]: rfkill: WWAN hardware radio set enabled
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9811] Loaded device plugin: NMWwanFactory (/usr/lib/x86_64-linux-gnu/NetworkManager/1.54.3/libnm-device-plugin-wwan.so)
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9813] Loaded device plugin: NMWifiFactory (/usr/lib/x86_64-linux-gnu/NetworkManager/1.54.3/libnm-device-plugin-wifi.so)
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9821] Loaded device plugin: NMTeamFactory (/usr/lib/x86_64-linux-gnu/NetworkManager/1.54.3/libnm-device-plugin-team.so)
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9824] Loaded device plugin: NMAtmManager (/usr/lib/x86_64-linux-gnu/NetworkManager/1.54.3/libnm-device-plugin-adsl.so)
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9827] Loaded device plugin: NMBluezManager (/usr/lib/x86_64-linux-gnu/NetworkManager/1.54.3/libnm-device-plugin-bluetooth.so)
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9831] manager: rfkill: Wi-Fi enabled by radio killswitch; enabled by state file
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9832] manager: rfkill: WWAN enabled by radio killswitch; enabled by state file
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9832] manager: Networking is enabled by state file
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9835] settings: Loaded settings plugin: ifupdown ("/usr/lib/x86_64-linux-gnu/NetworkManager/1.54.3/libnm-settings-plugin-ifupdown.so")
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9836] settings: Loaded settings plugin: keyfile (internal)
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9836] ifupdown: management mode: unmanaged
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9836] ifupdown: interfaces file /etc/network/interfaces doesn't exist
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9960] dhcp: init: Using DHCP client 'internal'
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9961] manager: (lo): new Loopback device (/org/freedesktop/NetworkManager/Devices/1)
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9963] device (lo): state change: unmanaged -> unavailable (reason 'connection-assumed', managed-type: 'external')
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9970] device (lo): state change: unavailable -> disconnected (reason 'connection-assumed', managed-type: 'external')
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9975] device (lo): Activation: starting connection 'lo' (b69420cf-a7f3-4d1b-bf88-150e9ad32479)
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9978] device (br-8625d1970a3a): carrier: link connected
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9979] manager: (br-8625d1970a3a): new Bridge device (/org/freedesktop/NetworkManager/Devices/2)
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9987] device (br-8625d1970a3a): state change: unmanaged -> unavailable (reason 'connection-assumed', managed-type: 'external')
+Jul 13 16:19:45 srvTAPOS NetworkManager[193005]: <info>  [1783970385.9995] device (br-8625d1970a3a): state change: unavailable -> disconnected (reason 'connection-assumed', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0005] device (br-8625d1970a3a): Activation: starting connection 'br-8625d1970a3a' (8ff2618a-bbdd-4c3e-ba3e-1f03ea74275f)
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0009] device (br-fcf22af35a17): carrier: link connected
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0010] manager: (br-fcf22af35a17): new Bridge device (/org/freedesktop/NetworkManager/Devices/3)
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0019] device (br-fcf22af35a17): state change: unmanaged -> unavailable (reason 'connection-assumed', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0027] device (br-fcf22af35a17): state change: unavailable -> disconnected (reason 'connection-assumed', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0033] device (br-fcf22af35a17): Activation: starting connection 'br-fcf22af35a17' (cfca7ad9-9fd9-4b58-be9e-6fc5a3281e84)
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0037] manager: (docker0): new Bridge device (/org/freedesktop/NetworkManager/Devices/4)
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0045] device (docker0): state change: unmanaged -> unavailable (reason 'connection-assumed', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0049] device (docker0): state change: unavailable -> disconnected (reason 'connection-assumed', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0054] device (docker0): Activation: starting connection 'docker0' (14ac34bc-ee35-4cad-8e7b-be5ba9ba1fc3)
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0057] device (ens33): carrier: link connected
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0061] manager: (ens33): new Ethernet device (/org/freedesktop/NetworkManager/Devices/5)
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0065] manager: (ens33): assume: will attempt to assume matching connection 'netplan-ens33' (14f59568-5076-387a-aef6-10adfcca2e26) (indicated)
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0065] device (ens33): state change: unmanaged -> unavailable (reason 'connection-assumed', managed-type: 'assume')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0078] device (ens33): state change: unavailable -> disconnected (reason 'connection-assumed', managed-type: 'assume')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0083] device (ens33): Activation: starting connection 'netplan-ens33' (14f59568-5076-387a-aef6-10adfcca2e26)
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0086] device (veth016420c): carrier: link connected
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0087] manager: (veth016420c): new Veth device (/org/freedesktop/NetworkManager/Devices/6)
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0090] device (veth1bb8455): carrier: link connected
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0092] manager: (veth1bb8455): new Veth device (/org/freedesktop/NetworkManager/Devices/7)
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0095] device (veth589c41e): carrier: link connected
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0096] manager: (veth589c41e): new Veth device (/org/freedesktop/NetworkManager/Devices/8)
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0099] device (veth91704c7): carrier: link connected
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0101] manager: (veth91704c7): new Veth device (/org/freedesktop/NetworkManager/Devices/9)
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0103] device (veth9fa3577): carrier: link connected
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0109] manager: (veth9fa3577): new Veth device (/org/freedesktop/NetworkManager/Devices/10)
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0115] device (vethc32ee9a): carrier: link connected
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0117] manager: (vethc32ee9a): new Veth device (/org/freedesktop/NetworkManager/Devices/11)
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0122] device (vethf249d75): carrier: link connected
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0126] manager: (vethf249d75): new Veth device (/org/freedesktop/NetworkManager/Devices/12)
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0135] device (vethf9390fc): carrier: link connected
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0137] manager: (vethf9390fc): new Veth device (/org/freedesktop/NetworkManager/Devices/13)
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0144] failed to open /run/network/ifstate
+Jul 13 16:19:46 srvTAPOS systemd[1]: Started NetworkManager.service - Network Manager.
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0160] bus-manager: acquired D-Bus service "org.freedesktop.NetworkManager"
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0177] device (lo): state change: disconnected -> prepare (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0180] device (lo): state change: prepare -> config (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0183] device (lo): state change: config -> ip-config (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0185] device (br-8625d1970a3a): state change: disconnected -> prepare (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0186] device (br-8625d1970a3a): state change: prepare -> config (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0187] device (br-8625d1970a3a): state change: config -> ip-config (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0187] device (br-fcf22af35a17): state change: disconnected -> prepare (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0198] device (br-fcf22af35a17): state change: prepare -> config (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0199] device (br-fcf22af35a17): state change: config -> ip-config (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0199] device (docker0): state change: disconnected -> prepare (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0200] device (docker0): state change: prepare -> config (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0201] device (docker0): state change: config -> ip-config (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0210] device (ens33): state change: disconnected -> prepare (reason 'none', managed-type: 'assume')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0220] device (ens33): state change: prepare -> config (reason 'none', managed-type: 'assume')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0432] modem-manager: oFono is not available
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0789] modem-manager: ModemManager available
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0825] device (lo): state change: ip-config -> ip-check (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0829] device (br-8625d1970a3a): state change: ip-config -> ip-check (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0833] device (br-fcf22af35a17): state change: ip-config -> ip-check (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0836] device (docker0): state change: ip-config -> ip-check (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0840] device (ens33): state change: config -> ip-config (reason 'none', managed-type: 'assume')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0842] dhcp4 (ens33): activation: beginning transaction (timeout in 45 seconds)
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0850] dhcp4 (ens33): state changed new lease, address=192.168.191.133, acd pending
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0851] dhcp4 (ens33): state changed new lease, address=192.168.191.133
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.0857] policy: set 'netplan-ens33' (ens33) as default for IPv4 routing and DNS
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1084] device (lo): state change: ip-check -> secondaries (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1087] device (br-8625d1970a3a): state change: ip-check -> secondaries (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1089] device (br-fcf22af35a17): state change: ip-check -> secondaries (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1090] device (docker0): state change: ip-check -> secondaries (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1091] device (lo): state change: secondaries -> activated (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1096] device (lo): Activation: successful, device activated.
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1098] device (br-8625d1970a3a): state change: secondaries -> activated (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1100] manager: NetworkManager state is now CONNECTED_LOCAL
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1101] device (br-8625d1970a3a): Activation: successful, device activated.
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1103] device (br-fcf22af35a17): state change: secondaries -> activated (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1109] device (br-fcf22af35a17): Activation: successful, device activated.
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1117] device (docker0): state change: secondaries -> activated (reason 'none', managed-type: 'external')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1120] device (docker0): Activation: successful, device activated.
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1758] device (ens33): state change: ip-config -> ip-check (reason 'none', managed-type: 'assume')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1778] device (ens33): state change: ip-check -> secondaries (reason 'none', managed-type: 'assume')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1781] device (ens33): state change: secondaries -> activated (reason 'none', managed-type: 'assume')
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1786] manager: NetworkManager state is now CONNECTED_SITE
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1790] device (ens33): Activation: successful, device activated.
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.1795] manager: startup complete
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.2783] agent-manager: agent[c453710c7253218e,:1.96/org.gnome.Shell.NetworkAgent/1000]: agent registered
+Jul 13 16:19:46 srvTAPOS NetworkManager[193005]: <info>  [1783970386.3925] manager: NetworkManager state is now CONNECTED_GLOBAL
+Jul 13 16:20:53 srvTAPOS NetworkManager[193005]: <info>  [1783970453.1648] modem-manager: ModemManager no longer available
+Jul 13 16:20:54 srvTAPOS NetworkManager[193005]: <info>  [1783970454.2919] manager: (veth83f06fa): new Veth device (/org/freedesktop/NetworkManager/Devices/14)
+Jul 13 16:20:54 srvTAPOS NetworkManager[193005]: <info>  [1783970454.3990] manager: (vethfa456dc): new Veth device (/org/freedesktop/NetworkManager/Devices/15)
+Jul 13 16:20:54 srvTAPOS NetworkManager[193005]: <info>  [1783970454.5300] manager: (veth71a6c27): new Veth device (/org/freedesktop/NetworkManager/Devices/16)
+Jul 13 16:20:54 srvTAPOS NetworkManager[193005]: <info>  [1783970454.6685] manager: (veth364a420): new Veth device (/org/freedesktop/NetworkManager/Devices/17)
+Jul 13 16:20:54 srvTAPOS NetworkManager[193005]: <info>  [1783970454.7264] manager: (veth8bdc5c6): new Veth device (/org/freedesktop/NetworkManager/Devices/18)
+Jul 13 16:20:54 srvTAPOS NetworkManager[193005]: <info>  [1783970454.8055] manager: (veth7f0c844): new Veth device (/org/freedesktop/NetworkManager/Devices/19)
+Jul 13 16:20:54 srvTAPOS NetworkManager[193005]: <info>  [1783970454.8954] manager: (veth2f381d9): new Veth device (/org/freedesktop/NetworkManager/Devices/20)
+Jul 13 16:20:56 srvTAPOS NetworkManager[193005]: <info>  [1783970456.2024] manager: (veth3535591): new Veth device (/org/freedesktop/NetworkManager/Devices/21)
+Jul 13 16:21:01 srvTAPOS systemd[1]: Stopping NetworkManager.service - Network Manager...
+Jul 13 16:21:01 srvTAPOS NetworkManager[193005]: <info>  [1783970461.4617] caught SIGTERM, shutting down normally.
+Jul 13 16:21:01 srvTAPOS NetworkManager[193005]: <info>  [1783970461.4623] dhcp4 (ens33): canceled DHCP transaction
+Jul 13 16:21:01 srvTAPOS NetworkManager[193005]: <info>  [1783970461.4623] dhcp4 (ens33): activation: beginning transaction (timeout in 45 seconds)
+Jul 13 16:21:01 srvTAPOS NetworkManager[193005]: <info>  [1783970461.4623] dhcp4 (ens33): state changed no lease
+Jul 13 16:21:01 srvTAPOS NetworkManager[193005]: <info>  [1783970461.4624] manager: NetworkManager state is now CONNECTED_SITE
+Jul 13 16:21:01 srvTAPOS NetworkManager[193005]: <info>  [1783970461.4647] exiting (success)
+Jul 13 16:21:01 srvTAPOS systemd[1]: NetworkManager.service: Deactivated successfully.
+Jul 13 16:21:01 srvTAPOS systemd[1]: Stopped NetworkManager.service - Network Manager.
+-- Boot 5fa084564a314ce3bc7de2098f799ee3 --
+Jul 13 16:21:31 srvTAPOS systemd[1]: Starting NetworkManager.service - Network Manager...
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.5178] NetworkManager (version 1.54.3) is starting... (boot:5fa08456-4a31-4ce3-bc7d-e2098f799ee3)
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.5179] Read config: /etc/NetworkManager/NetworkManager.conf, /usr/lib/NetworkManager/conf.d/{10-default-firewall-use-iptables.conf,20-connectivity-ubuntu.conf,no-mac-addr-change.conf}, /run/NetworkManager/conf.d/10-globally-managed-devices.conf, /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.5324] manager[0x5bd57adc0620]: monitoring kernel firmware directory '/lib/firmware'.
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.5324] monitoring ifupdown state file '/run/network/ifstate'.
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6341] hostname: hostname: using hostnamed
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6342] hostname: static hostname changed from (none) to "srvTAPOS"
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6344] dns-mgr: init: dns=systemd-resolved rc-manager=unmanaged (auto), plugin=systemd-resolved
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6347] manager[0x5bd57adc0620]: rfkill: Wi-Fi hardware radio set enabled
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6347] manager[0x5bd57adc0620]: rfkill: WWAN hardware radio set enabled
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6413] Loaded device plugin: NMWwanFactory (/usr/lib/x86_64-linux-gnu/NetworkManager/1.54.3/libnm-device-plugin-wwan.so)
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6441] Loaded device plugin: NMWifiFactory (/usr/lib/x86_64-linux-gnu/NetworkManager/1.54.3/libnm-device-plugin-wifi.so)
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6478] Loaded device plugin: NMTeamFactory (/usr/lib/x86_64-linux-gnu/NetworkManager/1.54.3/libnm-device-plugin-team.so)
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6507] Loaded device plugin: NMAtmManager (/usr/lib/x86_64-linux-gnu/NetworkManager/1.54.3/libnm-device-plugin-adsl.so)
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6534] Loaded device plugin: NMBluezManager (/usr/lib/x86_64-linux-gnu/NetworkManager/1.54.3/libnm-device-plugin-bluetooth.so)
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6537] manager: rfkill: Wi-Fi enabled by radio killswitch; enabled by state file
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6540] manager: rfkill: WWAN enabled by radio killswitch; enabled by state file
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6541] manager: Networking is enabled by state file
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6555] settings: Loaded settings plugin: ifupdown ("/usr/lib/x86_64-linux-gnu/NetworkManager/1.54.3/libnm-settings-plugin-ifupdown.so")
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6556] settings: Loaded settings plugin: keyfile (internal)
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6557] ifupdown: management mode: unmanaged
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6560] ifupdown: interfaces file /etc/network/interfaces doesn't exist
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6632] dhcp: init: Using DHCP client 'internal'
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6635] manager: (lo): new Loopback device (/org/freedesktop/NetworkManager/Devices/1)
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6646] device (lo): state change: unmanaged -> unavailable (reason 'connection-assumed', managed-type: 'external')
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6651] device (lo): state change: unavailable -> disconnected (reason 'connection-assumed', managed-type: 'external')
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6658] device (lo): Activation: starting connection 'lo' (10ee7864-38b2-4a7b-b426-016b3397202f)
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6665] manager: (ens33): new Ethernet device (/org/freedesktop/NetworkManager/Devices/2)
+Jul 13 16:21:31 srvTAPOS NetworkManager[1724]: <info>  [1783970491.6669] device (ens33): state change: unmanaged -> unavailable (reason 'managed', managed-type: 'external')
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.0789] failed to open /run/network/ifstate
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.0794] bus-manager: acquired D-Bus service "org.freedesktop.NetworkManager"
+Jul 13 16:21:32 srvTAPOS systemd[1]: Started NetworkManager.service - Network Manager.
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.0800] device (lo): state change: disconnected -> prepare (reason 'none', managed-type: 'external')
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.0801] device (lo): state change: prepare -> config (reason 'none', managed-type: 'external')
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.0802] device (lo): state change: config -> ip-config (reason 'none', managed-type: 'external')
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.0803] device (ens33): carrier: link connected
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.0804] device (lo): state change: ip-config -> ip-check (reason 'none', managed-type: 'external')
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.0806] device (ens33): state change: unavailable -> disconnected (reason 'carrier-changed', managed-type: 'full')
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.4882] modem-manager: oFono is not available
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.4883] modem-manager: ModemManager available
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.4883] policy: auto-activating connection 'netplan-ens33' (14f59568-5076-387a-aef6-10adfcca2e26)
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.4884] device (lo): state change: ip-check -> secondaries (reason 'none', managed-type: 'external')
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.4886] device (ens33): Activation: starting connection 'netplan-ens33' (14f59568-5076-387a-aef6-10adfcca2e26)
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.4886] device (lo): state change: secondaries -> activated (reason 'none', managed-type: 'external')
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.4887] device (lo): Activation: successful, device activated.
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.4889] device (ens33): state change: disconnected -> prepare (reason 'none', managed-type: 'full')
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.4889] manager: NetworkManager state is now CONNECTING
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.4890] device (ens33): state change: prepare -> config (reason 'none', managed-type: 'full')
+Jul 13 16:21:32 srvTAPOS NetworkManager[1724]: <info>  [1783970492.6928] device (ens33): state change: config -> ip-config (reason 'none', managed-type: 'full')
+Jul 13 16:21:33 srvTAPOS NetworkManager[1724]: <info>  [1783970493.1141] dhcp4 (ens33): activation: beginning transaction (timeout in 45 seconds)
+Jul 13 16:21:33 srvTAPOS NetworkManager[1724]: <info>  [1783970493.1226] dhcp4 (ens33): state changed new lease, address=192.168.191.133, acd pending
+Jul 13 16:21:33 srvTAPOS NetworkManager[1724]: <info>  [1783970493.5226] dhcp4 (ens33): state changed new lease, address=192.168.191.133
+Jul 13 16:21:33 srvTAPOS NetworkManager[1724]: <info>  [1783970493.7275] policy: set 'netplan-ens33' (ens33) as default for IPv4 routing and DNS
+Jul 13 16:21:33 srvTAPOS NetworkManager[1724]: <info>  [1783970493.7336] device (ens33): state change: ip-config -> ip-check (reason 'none', managed-type: 'full')
+Jul 13 16:21:33 srvTAPOS NetworkManager[1724]: <info>  [1783970493.7363] device (ens33): state change: ip-check -> secondaries (reason 'none', managed-type: 'full')
+Jul 13 16:21:33 srvTAPOS NetworkManager[1724]: <info>  [1783970493.7364] device (ens33): state change: secondaries -> activated (reason 'none', managed-type: 'full')
+Jul 13 16:21:33 srvTAPOS NetworkManager[1724]: <info>  [1783970493.7365] manager: NetworkManager state is now CONNECTED_SITE
+Jul 13 16:21:33 srvTAPOS NetworkManager[1724]: <info>  [1783970493.7366] device (ens33): Activation: successful, device activated.
+Jul 13 16:21:33 srvTAPOS NetworkManager[1724]: <info>  [1783970493.7369] manager: startup complete
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.0899] manager: NetworkManager state is now CONNECTED_GLOBAL
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.8046] manager: (br-8625d1970a3a): new Bridge device (/org/freedesktop/NetworkManager/Devices/3)
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.8697] device (br-8625d1970a3a): state change: unmanaged -> unavailable (reason 'connection-assumed', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.8699] device (br-8625d1970a3a): state change: unavailable -> disconnected (reason 'connection-assumed', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.8701] device (br-8625d1970a3a): Activation: starting connection 'br-8625d1970a3a' (6e5a4409-90ad-467e-a66e-a53ada9aae3b)
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.8703] device (br-8625d1970a3a): state change: disconnected -> prepare (reason 'none', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.8703] device (br-8625d1970a3a): state change: prepare -> config (reason 'none', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.8704] device (br-8625d1970a3a): state change: config -> ip-config (reason 'none', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.8707] manager: (docker0): new Bridge device (/org/freedesktop/NetworkManager/Devices/4)
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.8708] device (br-8625d1970a3a): state change: ip-config -> ip-check (reason 'none', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.8734] device (br-8625d1970a3a): state change: ip-check -> secondaries (reason 'none', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.8735] device (br-8625d1970a3a): state change: secondaries -> activated (reason 'none', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.8737] device (br-8625d1970a3a): Activation: successful, device activated.
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9119] device (docker0): state change: unmanaged -> unavailable (reason 'connection-assumed', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9122] device (docker0): state change: unavailable -> disconnected (reason 'connection-assumed', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9125] device (docker0): Activation: starting connection 'docker0' (2d907e5a-cf8e-441f-9389-f43bc87a9fcd)
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9128] manager: (br-fcf22af35a17): new Bridge device (/org/freedesktop/NetworkManager/Devices/5)
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9129] device (docker0): state change: disconnected -> prepare (reason 'none', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9130] device (docker0): state change: prepare -> config (reason 'none', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9131] device (docker0): state change: config -> ip-config (reason 'none', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9132] device (docker0): state change: ip-config -> ip-check (reason 'none', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9164] device (docker0): state change: ip-check -> secondaries (reason 'none', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9165] device (docker0): state change: secondaries -> activated (reason 'none', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9166] device (docker0): Activation: successful, device activated.
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9541] device (br-fcf22af35a17): state change: unmanaged -> unavailable (reason 'connection-assumed', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9546] device (br-fcf22af35a17): state change: unavailable -> disconnected (reason 'connection-assumed', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9557] device (br-fcf22af35a17): Activation: starting connection 'br-fcf22af35a17' (777bf54a-61c7-4f6a-a27e-4e47c49fa3f2)
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9559] device (br-fcf22af35a17): state change: disconnected -> prepare (reason 'none', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9562] device (br-fcf22af35a17): state change: prepare -> config (reason 'none', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9564] device (br-fcf22af35a17): state change: config -> ip-config (reason 'none', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9565] device (br-fcf22af35a17): state change: ip-config -> ip-check (reason 'none', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9578] device (br-fcf22af35a17): state change: ip-check -> secondaries (reason 'none', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9580] device (br-fcf22af35a17): state change: secondaries -> activated (reason 'none', managed-type: 'external')
+Jul 13 16:21:34 srvTAPOS NetworkManager[1724]: <info>  [1783970494.9584] device (br-fcf22af35a17): Activation: successful, device activated.
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.5176] manager: (vethf52f5d2): new Veth device (/org/freedesktop/NetworkManager/Devices/6)
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.5425] manager: (veth4773170): new Veth device (/org/freedesktop/NetworkManager/Devices/7)
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.5628] manager: (vethab36d22): new Veth device (/org/freedesktop/NetworkManager/Devices/8)
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.5748] manager: (veth66d84cd): new Veth device (/org/freedesktop/NetworkManager/Devices/9)
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.5864] manager: (vethff0b191): new Veth device (/org/freedesktop/NetworkManager/Devices/10)
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.6081] manager: (veth0737ed7): new Veth device (/org/freedesktop/NetworkManager/Devices/11)
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.6097] device (veth4773170): carrier: link connected
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.6097] device (br-fcf22af35a17): carrier: link connected
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.6128] device (vethf52f5d2): carrier: link connected
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.6130] device (br-8625d1970a3a): carrier: link connected
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.6414] manager: (veth1a7c76b): new Veth device (/org/freedesktop/NetworkManager/Devices/12)
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.6428] device (vethab36d22): carrier: link connected
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.6727] manager: (vethcacf25b): new Veth device (/org/freedesktop/NetworkManager/Devices/13)
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.6735] device (veth66d84cd): carrier: link connected
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.6809] device (vethff0b191): carrier: link connected
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.6910] device (veth0737ed7): carrier: link connected
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.7419] device (veth1a7c76b): carrier: link connected
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.7468] device (vethcacf25b): carrier: link connected
+Jul 13 16:21:35 srvTAPOS NetworkManager[1724]: <info>  [1783970495.1484] agent-manager: agent[86ae94ddf98d4f71,:1.38/org.gnome.Shell.NetworkAgent/60578]: agent registered
+Jul 13 16:22:16 srvTAPOS NetworkManager[1724]: <info>  [1783970536.5375] agent-manager: agent[5834411991b374a8,:1.96/org.gnome.Shell.NetworkAgent/1000]: agent registered
+Jul 13 16:36:28 srvTAPOS NetworkManager[1724]: <info>  [1783971388.2963] dhcp4 (ens33): state changed new lease, address=192.168.191.133
+
+======================================================
+SYSTEMD-NETWORKD
+======================================================
+Jul 13 16:20:01 srvTAPOS systemd[1]: Starting systemd-networkd.service - Network Management...
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: lo: Link UP
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: lo: Gained carrier
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: ens33: Link UP
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: ens33: Gained carrier
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: docker0: Link UP
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: br-8625d1970a3a: Link UP
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: br-8625d1970a3a: Gained carrier
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: br-fcf22af35a17: Link UP
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: br-fcf22af35a17: Gained carrier
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: veth1bb8455: Link UP
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: veth1bb8455: Gained carrier
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: vethf9390fc: Link UP
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: vethf9390fc: Gained carrier
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: veth016420c: Link UP
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: veth016420c: Gained carrier
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: vethf249d75: Link UP
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: vethf249d75: Gained carrier
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: veth589c41e: Link UP
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: veth589c41e: Gained carrier
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: veth91704c7: Link UP
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: veth91704c7: Gained carrier
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: veth9fa3577: Link UP
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: veth9fa3577: Gained carrier
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: vethc32ee9a: Link UP
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: vethc32ee9a: Gained carrier
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: ens33: Gained IPv6LL
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: br-8625d1970a3a: Gained IPv6LL
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: br-fcf22af35a17: Gained IPv6LL
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: veth1bb8455: Gained IPv6LL
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: vethf9390fc: Gained IPv6LL
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: veth016420c: Gained IPv6LL
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: vethf249d75: Gained IPv6LL
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: veth589c41e: Gained IPv6LL
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: veth91704c7: Gained IPv6LL
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: veth9fa3577: Gained IPv6LL
+Jul 13 16:20:01 srvTAPOS systemd-networkd[193349]: vethc32ee9a: Gained IPv6LL
+Jul 13 16:20:01 srvTAPOS systemd[1]: Started systemd-networkd.service - Network Management.
+Jul 13 16:20:54 srvTAPOS systemd-networkd[193349]: veth9fa3577: Lost carrier
+Jul 13 16:20:54 srvTAPOS systemd-networkd[193349]: veth9fa3577: Link DOWN
+Jul 13 16:20:54 srvTAPOS systemd-networkd[193349]: veth91704c7: Lost carrier
+Jul 13 16:20:54 srvTAPOS systemd-networkd[193349]: veth91704c7: Link DOWN
+Jul 13 16:20:54 srvTAPOS systemd-networkd[193349]: veth016420c: Lost carrier
+Jul 13 16:20:54 srvTAPOS systemd-networkd[193349]: veth016420c: Link DOWN
+Jul 13 16:20:54 srvTAPOS systemd-networkd[193349]: veth589c41e: Lost carrier
+Jul 13 16:20:54 srvTAPOS systemd-networkd[193349]: veth589c41e: Link DOWN
+Jul 13 16:20:54 srvTAPOS systemd-networkd[193349]: vethc32ee9a: Lost carrier
+Jul 13 16:20:54 srvTAPOS systemd-networkd[193349]: vethc32ee9a: Link DOWN
+Jul 13 16:20:54 srvTAPOS systemd-networkd[193349]: vethf9390fc: Lost carrier
+Jul 13 16:20:54 srvTAPOS systemd-networkd[193349]: vethf9390fc: Link DOWN
+Jul 13 16:20:54 srvTAPOS systemd-networkd[193349]: veth1bb8455: Lost carrier
+Jul 13 16:20:54 srvTAPOS systemd-networkd[193349]: br-8625d1970a3a: Lost carrier
+Jul 13 16:20:54 srvTAPOS systemd-networkd[193349]: veth1bb8455: Link DOWN
+Jul 13 16:20:56 srvTAPOS systemd-networkd[193349]: vethf249d75: Lost carrier
+Jul 13 16:20:56 srvTAPOS systemd-networkd[193349]: br-fcf22af35a17: Lost carrier
+Jul 13 16:20:56 srvTAPOS systemd-networkd[193349]: vethf249d75: Link DOWN
+Jul 13 16:21:01 srvTAPOS systemd[1]: Stopping systemd-networkd.service - Network Management...
+Jul 13 16:21:01 srvTAPOS systemd[1]: systemd-networkd.service: Deactivated successfully.
+Jul 13 16:21:01 srvTAPOS systemd[1]: Stopped systemd-networkd.service - Network Management.
+
+======================================================
+KERNEL LOG
+======================================================
+
+======================================================
+FIREWALL
+======================================================
+
+======================================================
+IPTABLES
+======================================================
+
+======================================================
+NAT
+======================================================
+
+======================================================
+NFTABLES
+======================================================
+
+======================================================
+PROXY
+======================================================
+
+======================================================
+DNS LOOKUP
+======================================================
+Server:		127.0.0.53
+Address:	127.0.0.53#53
+
+Non-authoritative answer:
+Name:	api.anthropic.com
+Address: 160.79.104.10
+Name:	api.anthropic.com
+Address: 2607:6bc0::10
+
+
+Server:		127.0.0.53
+Address:	127.0.0.53#53
+
+Non-authoritative answer:
+Name:	api.openai.com
+Address: 172.66.0.243
+Name:	api.openai.com
+Address: 162.159.140.245
+Name:	api.openai.com
+Address: 64:ff9b::a29f:8cf5
+Name:	api.openai.com
+Address: 64:ff9b::ac42:f3
+
+
+======================================================
+PING
+======================================================
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=128 time=32.1 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=128 time=42.3 ms
+64 bytes from 8.8.8.8: icmp_seq=3 ttl=128 time=29.2 ms
+64 bytes from 8.8.8.8: icmp_seq=4 ttl=128 time=47.2 ms
+
+--- 8.8.8.8 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3006ms
+rtt min/avg/max/mdev = 29.163/37.678/47.166/7.335 ms
+
+======================================================
+GOOGLE
+======================================================
+HTTP/2 200 
+content-type: text/html; charset=ISO-8859-1
+content-security-policy-report-only: object-src 'none';base-uri 'self';script-src 'nonce-lXm7jrzRgKAWW9GmTdPWqg' 'strict-dynamic' 'report-sample' 'unsafe-eval' 'unsafe-inline' https: http:;report-uri https://csp.withgoogle.com/csp/gws/other-hp
+accept-ch: Sec-CH-Prefers-Color-Scheme
+p3p: CP="This is not a P3P policy! See g.co/p3phelp for more info."
+date: Mon, 13 Jul 2026 19:40:05 GMT
+server: gws
+x-xss-protection: 0
+x-frame-options: SAMEORIGIN
+expires: Mon, 13 Jul 2026 19:40:05 GMT
+cache-control: private
+set-cookie: __Secure-STRP=ANmZwa3z5LIAZPu_tpOmaNAgtC1024ldqbBl8wUPRnJxAZXStj_XcocTNNvnvP5V2QSuOB-q_wnG8XbTU2qLOPUpR4cNQTVEbVKV; expires=Mon, 13-Jul-2026 19:45:05 GMT; path=/; domain=.google.com; Secure; SameSite=strict
+set-cookie: AEC=AdJVEatKeQ9ZBuTpnb3qveMZ67T2E0Vb1NeYMh-nyMKO91eG156b5zPHI_4; expires=Sat, 09-Jan-2027 19:40:05 GMT; path=/; domain=.google.com; Secure; HttpOnly; SameSite=lax
+set-cookie: NID=533=ID9eXYL_Q-7lV9IaVcEhADmDdd9mI0g9d5kURBzDY-hW-KkBxVGlW248I-tdZp05s7SLu63LnZSyU4xmSY5_Kpqw7AVj2nXWkXlPs0xTdMb2HFSRfhSIxk6G0GbuAtyGEjEfbmq8sZ_En-Ld4VxIfheKIX8rMNj2rQQYoRnZyS_gDE3cDWug-W890W_h3abKYG6iK3GRQ2SZUnRzsH0; expires=Tue, 12-Jan-2027 19:40:05 GMT; path=/; domain=.google.com; HttpOnly
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+
+
+======================================================
+OPENAI
+======================================================
+
+======================================================
+ANTHROPIC
+======================================================
+
+======================================================
+OPENSSL OPENAI
+======================================================
+CONNECTED(00000003)
+---
+no peer certificate available
+---
+No client certificate CA names sent
+Negotiated TLS1.3 group: <NULL>
+---
+SSL handshake has read 0 bytes and written 1556 bytes
+Verification: OK
+---
+New, (NONE), Cipher is (NONE)
+Protocol: TLSv1.3
+This TLS version forbids renegotiation.
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify return code: 0 (ok)
+---
+
+======================================================
+OPENSSL ANTHROPIC
+======================================================
+CONNECTED(00000003)
+---
+no peer certificate available
+---
+No client certificate CA names sent
+Negotiated TLS1.3 group: <NULL>
+---
+SSL handshake has read 0 bytes and written 1559 bytes
+Verification: OK
+---
+New, (NONE), Cipher is (NONE)
+Protocol: TLSv1.3
+This TLS version forbids renegotiation.
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify return code: 0 (ok)
+---
+
+======================================================
+CLAUDE
+======================================================
+Claude Code doctor
+
+Running: native (2.1.207)
+Commit: bc512d563325
+Platform: linux-x64
+Path: /home/tecle/.local/share/claude/versions/2.1.207
+Config install method: native
+Search: OK (bundled)
+Auto-updates: enabled
+Auto-update channel: latest
+Last update attempt: failed (no_permissions) — 2026-07-12
+
+Remote Control
+Control this session from claude.ai/code or the Claude mobile app
+
+No installation issues found.
+
+For a full setup checkup that can also fix issues, run /doctor in a Claude Code session.
+
+======================================================
+MCP
+======================================================
+Checking MCP server health…
+
+claude.ai Gmail: https://gmailmcp.googleapis.com/mcp/v1 - ✔ Connected
+claude.ai Google Drive: https://drivemcp.googleapis.com/mcp/v1 - ✔ Connected
+
+======================================================
+PROCESSOS
+======================================================
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+tecle       7021  3.1  1.2 73634848 394472 pts/1 Sl+  16:23   0:30 claude
+tecle       8854  3.0  0.7 2780816 237416 ?      Sl   16:35   0:09 /usr/bin/ptyxis --gapplication-service
+dnsmasq     2712  2.0  0.7 3699796 241684 ?      Ssl  16:21   0:22 /opt/erlang/lib/erlang/erts-14.2.5.12/bin/beam.smp -W w -MBas ageffcbf -MHas ageffcbf -MBlmbcs 512 -MHlmbcs 512 -MMmcs 30 -pc unicode -P 1048576 -t 5000000 -stbt db -zdbbl 128000 -sbwt none -sbwtdcpu none -sbwtdio none -- -root /opt/erlang/lib/erlang -bindir /opt/erlang/lib/erlang/erts-14.2.5.12/bin -progname erl -- -home /var/lib/rabbitmq -- -pa  -noshell -noinput -s rabbit boot -boot start_sasl -syslog logger [] -syslog syslog_error_logger false -kernel prevent_overlapping_partitions false
+root        2775  1.9  2.7 3290428 877484 ?      Ssl  16:21   0:21 /usr/local/bin/python3 -m uvicorn open_webui.main:app --host 0.0.0.0 --port 8080 --forwarded-allow-ips * --workers 1
+tecle       6686  1.5  2.3 28008952 736076 ?     Sl   16:23   0:15 /home/tecle/.vscode-server/cli/servers/Stable-fc3def6774c76082adf699d366f31a557ce5573f/server/node --dns-result-order=ipv4first /home/tecle/.vscode-server/cli/servers/Stable-fc3def6774c76082adf699d366f31a557ce5573f/server/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=false
+tecle       5288  1.2  1.2 5097476 385392 ?      Ssl  16:22   0:13 /usr/bin/gnome-shell --mode=ubuntu
+dnsmasq     2783  0.9  0.0  39388  9040 ?        Ssl  16:21   0:10 redis-server *:6379
+root        9473  0.6  0.0  17580  8388 ?        Ss   16:39   0:00 /usr/lib/systemd/systemd-hostnamed
+tecle       6584  0.5  0.5 1807344 171248 ?      Sl   16:23   0:05 /home/tecle/.vscode-server/cli/servers/Stable-fc3def6774c76082adf699d366f31a557ce5573f/server/node /home/tecle/.vscode-server/cli/servers/Stable-fc3def6774c76082adf699d366f31a557ce5573f/server/out/server-main.js --connection-token=remotessh --accept-server-license-terms --agent-host-bridge-port=35559 --agent-host-bridge-host=127.0.0.1 --agent-host-bridge-connection-token=112afd88-78b6-4753-8637-7fe48e990fd2 --start-server --enable-remote-auto-shutdown --socket-path=/tmp/code-ca38d3fd-70ce-4937-b9b5-2ff0d30e9eb3
+root           1  0.3  0.0  26452 17536 ?        Ss   16:21   0:04 /usr/lib/systemd/systemd --switched-root --system --deserialize=52 splash
+tecle       6692  0.3  0.2 1558412 82136 ?       Sl   16:23   0:03 /home/tecle/.vscode-server/cli/servers/Stable-fc3def6774c76082adf699d366f31a557ce5573f/server/node /home/tecle/.vscode-server/cli/servers/Stable-fc3def6774c76082adf699d366f31a557ce5573f/server/out/bootstrap-fork --type=ptyHost --logsPath /home/tecle/.vscode-server/data/logs/20260713T162330
+root        2019  0.3  0.3 3644324 101756 ?      Ssl  16:21   0:03 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+tecle       5454  0.3  0.3 574424 100768 ?       Sl   16:22   0:03 /usr/bin/vmtoolsd -n vmusr --blockFd 3 --uinputFd 4
+root        1413  0.3  0.0 125424 11092 ?        Ssl  16:21   0:03 /usr/bin/vmtoolsd
+root        1911  0.2  0.2 2239804 65044 ?       Ssl  16:21   0:03 /usr/bin/containerd
+tecle       6539  0.2  0.0  47152 22604 ?        Sl   16:23   0:02 /home/tecle/.vscode-server/code-fc3def6774c76082adf699d366f31a557ce5573f command-shell --cli-data-dir /home/tecle/.vscode-server/cli --parent-process-id 6521 --on-host=127.0.0.1 --on-port
+root        2713  0.1  0.4 1533972 130848 ?      Ssl  16:21   0:02 minio server /data --console-address :9001
+tecle       5616  0.1  0.1 511312 37400 ?        Sl   16:22   0:01 /usr/libexec/ibus-extension-gtk3
+root        1724  0.1  0.0 348448 22764 ?        Ssl  16:21   0:01 /usr/sbin/NetworkManager --no-daemon
+root        3334  0.1  0.1 233008 47348 ?        Sl   16:21   0:01 ./qdrant
+root        1653  0.1  0.1 2033396 44916 ?       Ssl  16:21   0:01 /usr/lib/snapd/snapd
+tecle       6520  0.1  0.0  19300  8416 ?        S    16:23   0:01 sshd-session: tecle@notty
+tecle       8769  0.1  0.2 3212844 73104 ?       Sl   16:35   0:00 gjs /usr/share/gnome-shell/extensions/ding@rastersoft.com/app/ding.js -E -P /usr/share/gnome-shell/extensions/ding@rastersoft.com/app
+tecle       6645  0.1  0.2 1660476 68984 ?       Sl   16:23   0:01 /home/tecle/.vscode-server/cli/servers/Stable-fc3def6774c76082adf699d366f31a557ce5573f/server/node /home/tecle/.vscode-server/cli/servers/Stable-fc3def6774c76082adf699d366f31a557ce5573f/server/out/bootstrap-fork --type=fileWatcher
+root         804  0.0  0.0  45764 19176 ?        Ss   16:21   0:01 /usr/lib/systemd/systemd-udevd
+tecle       9469  0.0  0.0  18824  3904 pts/2    S+   16:39   0:00 bash ./diagnostico-claude.sh
+tecle       4654  0.0  0.0  24496 15812 ?        Ss   16:21   0:00 /usr/lib/systemd/systemd --user
+root        2757  0.0  0.2 1324432 75384 ?       Ssl  16:21   0:00 /portainer
+tecle       4677  0.0  0.0 114360 12792 ?        Ssl  16:22   0:00 /usr/bin/pipewire
+root        8234  0.0  0.1 376880 45684 ?        Ssl  16:28   0:00 /usr/libexec/fwupd/fwupd
+message+    1636  0.0  0.0  11936  9020 ?        Ss   16:21   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+avahi       1634  0.0  0.0   6892  5012 ?        Ss   16:21   0:00 avahi-daemon: running [srvTAPOS.local]
+systemd+     927  0.0  0.0  16808  7812 ?        Ss   16:21   0:00 /usr/lib/systemd/systemd-oomd
+tecle       4676  0.0  0.0  10144  7308 ?        Ss   16:22   0:00 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         794  0.0  0.0      0     0 ?        I    16:21   0:00 [kworker/0:5-events]
+root        8578  0.0  0.0      0     0 ?        I    16:33   0:00 [kworker/2:0-mm_percpu_wq]
+root        8817  0.0  0.0      0     0 ?        I    16:35   0:00 [kworker/1:0-events]
+root          75  0.0  0.0      0     0 ?        I    16:21   0:00 [kworker/3:1-events]
+root        1497  0.0  0.0      0     0 ?        I    16:21   0:00 [kworker/u515:4-flush-8:0]
+
+======================================================
+MEMORIA
+======================================================
+               total        used        free      shared  buff/cache   available
+Mem:            30Gi       3.8Gi        21Gi        90Mi       5.1Gi        26Gi
+Swap:          7.5Gi          0B       7.5Gi
+
+======================================================
+DISCO
+======================================================
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           6.1G  3.3M  6.1G   1% /run
+/dev/sda5        92G   41G   46G  48% /
+tmpfs            16G  8.0K   16G   1% /dev/shm
+none            1.0M     0  1.0M   0% /run/credentials/systemd-journald.service
+none            1.0M     0  1.0M   0% /run/credentials/systemd-resolved.service
+tmpfs            16G   16K   16G   1% /tmp
+/dev/sda3       7.3G   74M  6.8G   2% /boot
+/dev/sda6       137G  4.3G  126G   4% /data
+/dev/sda1       1.9G  4.0K  1.9G   1% /boot/efi
+tmpfs           3.1G   88K  3.1G   1% /run/user/1000
+/dev/sr0        6.1G  6.1G     0 100% /run/media/tecle/Ubuntu 26.04 amd64
+
+======================================================
+ULTIMOS LOGS DO SISTEMA
+======================================================
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Reached target org.gnome.SettingsDaemon.Sound.target - GNOME sound sample caching target.
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Starting evolution-source-registry.service - Evolution source registry...
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Started org.gnome.SettingsDaemon.Color.service - GNOME color management service.
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Reached target org.gnome.SettingsDaemon.Color.target - GNOME color management target.
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Started org.gnome.SettingsDaemon.Wwan.service - GNOME WWan support service.
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Reached target org.gnome.SettingsDaemon.Wwan.target - GNOME WWan support target.
+Jul 13 16:22:15 srvTAPOS systemd[1]: Started systemd-hostnamed.service - Hostname Service.
+Jul 13 16:22:15 srvTAPOS dbus-daemon[1636]: [system] Successfully activated service 'org.freedesktop.hostname1'
+Jul 13 16:22:15 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating service name='org.freedesktop.portal.IBus' requested by ':1.42' (uid=1000 pid=5381 comm="/usr/bin/ibus-daemon --panel disable" label="unconfined")
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Started org.freedesktop.IBus.session.GNOME.service - IBus Daemon for GNOME.
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Started org.gnome.SettingsDaemon.UsbProtection.service - GNOME USB protection service.
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Reached target org.gnome.SettingsDaemon.UsbProtection.target - GNOME USB protection target.
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Started org.gnome.SettingsDaemon.Sharing.service - GNOME file sharing service.
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Reached target org.gnome.SettingsDaemon.Sharing.target - GNOME file sharing target.
+Jul 13 16:22:15 srvTAPOS systemd[1]: Started systemd-localed.service - Locale Service.
+Jul 13 16:22:15 srvTAPOS dbus-daemon[1636]: [system] Successfully activated service 'org.freedesktop.locale1'
+Jul 13 16:22:15 srvTAPOS kernel: rfkill: input handler disabled
+Jul 13 16:22:15 srvTAPOS gsd-keyboard[5390]: g_variant_unref: assertion 'value != NULL' failed
+Jul 13 16:22:15 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating service name='org.gnome.OnlineAccounts' requested by ':1.53' (uid=1000 pid=5591 comm="/usr/libexec/evolution-source-registry" label="unconfined")
+Jul 13 16:22:15 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating service name='org.gnome.ScreenSaver' requested by ':1.54' (uid=1000 pid=5409 comm="/usr/libexec/gsd-usb-protection" label="unconfined")
+Jul 13 16:22:15 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.freedesktop.portal.IBus'
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Started org.gnome.SettingsDaemon.MediaKeys.service - GNOME keyboard shortcuts service.
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Reached target org.gnome.SettingsDaemon.MediaKeys.target - GNOME keyboard shortcuts target.
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Reached target gnome-session.target - GNOME Session.
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Reached target graphical-session.target - Current graphical user session.
+Jul 13 16:22:15 srvTAPOS systemd[4654]: gnome-initial-setup-first-login.service - GNOME Initial Setup skipped, unmet condition check ConditionPathExists=!/home/tecle/.config/gnome-initial-setup-done
+Jul 13 16:22:15 srvTAPOS systemd[4654]: gnome-initial-setup-upgrade-login.service - GNOME Initial Setup skipped, unmet condition check ConditionPathExists=!/home/tecle/.config/gnome-initial-setup/upgrade-26.04-done
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Starting localsearch-3.service - LocalSearch indexer...
+Jul 13 16:22:15 srvTAPOS systemd[4654]: spice-vdagent.service - Spice guest session agent skipped, unmet condition check ConditionPathExists=/run/spice-vdagentd/spice-vdagent-sock
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Started user-dirs-update-gtk.service - User folders update.
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Starting xdg-desktop-portal.service - Portal service...
+Jul 13 16:22:15 srvTAPOS gsd-sharing[5400]: Failed to stop gnome-user-share-webdav.service: GDBus.Error:org.freedesktop.systemd1.NoSuchUnit: Unit gnome-user-share-webdav.service not loaded.
+Jul 13 16:22:15 srvTAPOS goa-daemon[5649]: goa-daemon version 3.58.0 starting
+Jul 13 16:22:15 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gnome.evolution.dataserver.Sources5'
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Started evolution-source-registry.service - Evolution source registry.
+Jul 13 16:22:15 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating service name='org.gnome.Identity' requested by ':1.61' (uid=1000 pid=5649 comm="/usr/libexec/goa-daemon" label="unconfined")
+Jul 13 16:22:15 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gnome.OnlineAccounts'
+Jul 13 16:22:15 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating via systemd: service name='org.gnome.evolution.dataserver.Calendar8' unit='evolution-calendar-factory.service' requested by ':1.45' (uid=1000 pid=5364 comm="/usr/libexec/gnome-shell-calendar-server" label="unconfined")
+Jul 13 16:22:15 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gnome.Shell.CalendarServer'
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Starting evolution-calendar-factory.service - Evolution calendar service...
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Started localsearch-3.service - LocalSearch indexer.
+Jul 13 16:22:15 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gnome.Identity'
+Jul 13 16:22:15 srvTAPOS gnome-shell[5288]: Will monitor session 4
+Jul 13 16:22:15 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating via systemd: service name='org.freedesktop.impl.portal.desktop.gnome' unit='xdg-desktop-portal-gnome.service' requested by ':1.62' (uid=1000 pid=5679 comm="/usr/libexec/xdg-desktop-portal" label="unconfined")
+Jul 13 16:22:15 srvTAPOS systemd[4654]: Starting xdg-desktop-portal-gnome.service - Portal service (GNOME implementation)...
+Jul 13 16:22:16 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gnome.ScreenSaver'
+Jul 13 16:22:16 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating via systemd: service name='org.gtk.vfs.UDisks2VolumeMonitor' unit='gvfs-udisks2-volume-monitor.service' requested by ':1.25' (uid=1000 pid=5288 comm="/usr/bin/gnome-shell --mode=ubuntu" label="unconfined")
+Jul 13 16:22:16 srvTAPOS systemd[4654]: Starting gvfs-udisks2-volume-monitor.service - Virtual filesystem service - disk device monitor...
+Jul 13 16:22:16 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gtk.vfs.UDisks2VolumeMonitor'
+Jul 13 16:22:16 srvTAPOS systemd[4654]: Started gvfs-udisks2-volume-monitor.service - Virtual filesystem service - disk device monitor.
+Jul 13 16:22:16 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating via systemd: service name='org.gtk.vfs.GPhoto2VolumeMonitor' unit='gvfs-gphoto2-volume-monitor.service' requested by ':1.25' (uid=1000 pid=5288 comm="/usr/bin/gnome-shell --mode=ubuntu" label="unconfined")
+Jul 13 16:22:16 srvTAPOS systemd[4654]: Starting gvfs-gphoto2-volume-monitor.service - Virtual filesystem service - digital camera monitor...
+Jul 13 16:22:16 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gnome.evolution.dataserver.Calendar8'
+Jul 13 16:22:16 srvTAPOS systemd[4654]: Started evolution-calendar-factory.service - Evolution calendar service.
+Jul 13 16:22:16 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating via systemd: service name='org.gnome.evolution.dataserver.AddressBook10' unit='evolution-addressbook-factory.service' requested by ':1.65' (uid=1000 pid=5723 comm="/usr/libexec/evolution-calendar-factory" label="unconfined")
+Jul 13 16:22:16 srvTAPOS systemd[4654]: Starting evolution-addressbook-factory.service - Evolution address book service...
+Jul 13 16:22:16 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gtk.vfs.GPhoto2VolumeMonitor'
+Jul 13 16:22:16 srvTAPOS systemd[4654]: Started gvfs-gphoto2-volume-monitor.service - Virtual filesystem service - digital camera monitor.
+Jul 13 16:22:16 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating via systemd: service name='org.gtk.vfs.GoaVolumeMonitor' unit='gvfs-goa-volume-monitor.service' requested by ':1.25' (uid=1000 pid=5288 comm="/usr/bin/gnome-shell --mode=ubuntu" label="unconfined")
+Jul 13 16:22:16 srvTAPOS systemd[4654]: Starting gvfs-goa-volume-monitor.service - Virtual filesystem service - GNOME Online Accounts monitor...
+Jul 13 16:22:16 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gtk.vfs.GoaVolumeMonitor'
+Jul 13 16:22:16 srvTAPOS systemd[4654]: Started gvfs-goa-volume-monitor.service - Virtual filesystem service - GNOME Online Accounts monitor.
+Jul 13 16:22:16 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating via systemd: service name='org.gtk.vfs.AfcVolumeMonitor' unit='gvfs-afc-volume-monitor.service' requested by ':1.63' (uid=1000 pid=5673 comm="/usr/libexec/localsearch-3" label="unconfined")
+Jul 13 16:22:16 srvTAPOS systemd[4654]: Starting gvfs-afc-volume-monitor.service - Virtual filesystem service - Apple File Conduit monitor...
+Jul 13 16:22:16 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gnome.evolution.dataserver.AddressBook10'
+Jul 13 16:22:16 srvTAPOS systemd[4654]: Started evolution-addressbook-factory.service - Evolution address book service.
+Jul 13 16:22:16 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gtk.vfs.AfcVolumeMonitor'
+Jul 13 16:22:16 srvTAPOS systemd[4654]: Started gvfs-afc-volume-monitor.service - Virtual filesystem service - Apple File Conduit monitor.
+Jul 13 16:22:16 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating via systemd: service name='org.gtk.vfs.MTPVolumeMonitor' unit='gvfs-mtp-volume-monitor.service' requested by ':1.25' (uid=1000 pid=5288 comm="/usr/bin/gnome-shell --mode=ubuntu" label="unconfined")
+Jul 13 16:22:16 srvTAPOS systemd[4654]: Starting gvfs-mtp-volume-monitor.service - Virtual filesystem service - Media Transfer Protocol monitor...
+Jul 13 16:22:16 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gtk.vfs.MTPVolumeMonitor'
+Jul 13 16:22:16 srvTAPOS systemd[4654]: Started gvfs-mtp-volume-monitor.service - Virtual filesystem service - Media Transfer Protocol monitor.
+Jul 13 16:22:16 srvTAPOS gsd-usb-protection[5409]: Failed to fetch USBGuard parameters: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.usbguard1 was not provided by any .service files
+Jul 13 16:22:16 srvTAPOS gnome-shell[5288]: Error looking up permission: GDBus.Error:org.freedesktop.portal.Error.NotFound: No entry for geolocation
+Jul 13 16:22:16 srvTAPOS gsd-media-keys[5392]: Failed to grab accelerator for keybinding settings:hibernate
+Jul 13 16:22:16 srvTAPOS gsd-media-keys[5392]: Failed to grab accelerator for keybinding settings:playback-repeat
+Jul 13 16:22:16 srvTAPOS gnome-shell[5288]: GNOME Shell started at Mon Jul 13 2026 16:22:15 GMT-0300 (Brasilia Standard Time)
+Jul 13 16:22:16 srvTAPOS gnome-shell[5288]: Registering display with GDM
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped target gnome-session@gnome-login.target - GNOME Session (session: gnome-login).
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopping at-spi-dbus-bus.service - Accessibility services bus...
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopping xdg-desktop-portal-gnome.service - Portal service (GNOME implementation)...
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopping xdg-desktop-portal-gtk.service - Portal service (GTK/GNOME implementation)...
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopping xdg-desktop-portal.service - Portal service...
+Jul 13 16:22:16 srvTAPOS systemd[1939]: xdg-document-portal.service: Failed to kill control group /user.slice/user-60578.slice/user@60578.service/session.slice/xdg-document-portal.service, ignoring: Operation not permitted
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopping xdg-document-portal.service - flatpak document portal service...
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopping xdg-permission-store.service - sandboxed app permission store...
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped at-spi-dbus-bus.service - Accessibility services bus.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: update-notifier-release.service: Main process exited, code=killed, status=15/TERM
+Jul 13 16:22:16 srvTAPOS systemd[1939]: update-notifier-release.service: Failed with result 'signal'.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped update-notifier-release.service - Notification regarding a new release of Ubuntu.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped xdg-desktop-portal-gtk.service - Portal service (GTK/GNOME implementation).
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped gnome-session-monitor.service - Monitor Session leader for GNOME Session.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped xdg-desktop-portal-gnome.service - Portal service (GNOME implementation).
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped xdg-permission-store.service - sandboxed app permission store.
+Jul 13 16:22:16 srvTAPOS kernel: /dev/sr0: Can't open blockdev
+Jul 13 16:22:16 srvTAPOS kernel: ISO 9660 Extensions: Microsoft Joliet Level 3
+Jul 13 16:22:16 srvTAPOS kernel: ISO 9660 Extensions: RRIP_1991A
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped xdg-desktop-portal.service - Portal service.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped target graphical-session.target - Current graphical user session.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped update-notifier-crash.path - Path trigger for Apport crash notifications.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped update-notifier-release.path - Path trigger for new release of Ubuntu notifications.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped target gnome-session.target - GNOME Session.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped target gnome-session-basic-services.target - GNOME basic session services.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped target org.gnome.SettingsDaemon.A11ySettings.target - GNOME accessibility target.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped target org.gnome.SettingsDaemon.Keyboard.target - GNOME keyboard configuration target.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped target org.gnome.SettingsDaemon.MediaKeys.target - GNOME keyboard shortcuts target.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped target org.gnome.SettingsDaemon.Power.target - GNOME power management target.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped target org.gnome.SettingsDaemon.Rfkill.target - GNOME RFKill support target.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped target org.gnome.SettingsDaemon.Sharing.target - GNOME file sharing target.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped target org.gnome.SettingsDaemon.Smartcard.target - GNOME smartcard target.
+Jul 13 16:22:16 srvTAPOS kernel: audit: type=1400 audit(1783970536.500:282): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=5824 comm="fusermount3" capability=1  capname="dac_override"
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped target org.gnome.SettingsDaemon.UsbProtection.target - GNOME USB protection target.
+Jul 13 16:22:16 srvTAPOS kernel: audit: type=1400 audit(1783970536.500:283): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=5824 comm="fusermount3" capability=7  capname="setuid"
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopping org.freedesktop.IBus.session.GNOME.service - IBus Daemon for GNOME...
+Jul 13 16:22:16 srvTAPOS kernel: audit: type=1400 audit(1783970536.500:284): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=5831 comm="fusermount3" capability=7  capname="setuid"
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopping org.gnome.SettingsDaemon.A11ySettings.service - GNOME accessibility service...
+Jul 13 16:22:16 srvTAPOS kernel: audit: type=1400 audit(1783970536.509:285): apparmor="DENIED" operation="mount" class="mount" info="failed mntpnt match" error=-13 profile="fusermount3" name="/" pid=5839 comm="fusermount3" flags="rw, rprivate"
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopping org.gnome.SettingsDaemon.Keyboard.service - GNOME keyboard configuration service...
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopping org.gnome.SettingsDaemon.MediaKeys.service - GNOME keyboard shortcuts service...
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopping org.gnome.SettingsDaemon.Power.service - GNOME power management service...
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopping org.gnome.SettingsDaemon.Rfkill.service - GNOME RFKill support service...
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopping org.gnome.SettingsDaemon.Sharing.service - GNOME file sharing service...
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopping org.gnome.SettingsDaemon.Smartcard.service - GNOME smartcard service...
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopping org.gnome.SettingsDaemon.UsbProtection.service - GNOME USB protection service...
+Jul 13 16:22:16 srvTAPOS systemd[1]: run-user-60578-doc.mount: Deactivated successfully.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: xdg-document-portal.service: Failed to kill control group /user.slice/user-60578.slice/user@60578.service/session.slice/xdg-document-portal.service, ignoring: Operation not permitted
+Jul 13 16:22:16 srvTAPOS systemd[1939]: xdg-document-portal.service: Killing process 2142 (fusermount3) with signal SIGKILL.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: xdg-document-portal.service: Failed to kill control group /user.slice/user-60578.slice/user@60578.service/session.slice/xdg-document-portal.service, ignoring: Operation not permitted
+Jul 13 16:22:16 srvTAPOS systemd[1939]: xdg-document-portal.service: Unit process 2142 (fusermount3) remains running after unit stopped.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped xdg-document-portal.service - flatpak document portal service.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped org.freedesktop.IBus.session.GNOME.service - IBus Daemon for GNOME.
+Jul 13 16:22:16 srvTAPOS NetworkManager[1724]: <info>  [1783970536.5375] agent-manager: agent[5834411991b374a8,:1.96/org.gnome.Shell.NetworkAgent/1000]: agent registered
+Jul 13 16:22:16 srvTAPOS gnome-shell[5288]: Launching DING process
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped org.gnome.SettingsDaemon.Keyboard.service - GNOME keyboard configuration service.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped org.gnome.SettingsDaemon.MediaKeys.service - GNOME keyboard shortcuts service.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped org.gnome.SettingsDaemon.Power.service - GNOME power management service.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped org.gnome.SettingsDaemon.Rfkill.service - GNOME RFKill support service.
+Jul 13 16:22:16 srvTAPOS gnome-shell[5795]: Xwayland glamor: GBM Wayland interfaces not available
+Jul 13 16:22:16 srvTAPOS gnome-shell[5795]: Failed to initialize glamor, falling back to sw
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped org.gnome.SettingsDaemon.A11ySettings.service - GNOME accessibility service.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped org.gnome.SettingsDaemon.Sharing.service - GNOME file sharing service.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped org.gnome.SettingsDaemon.Smartcard.service - GNOME smartcard service.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped org.gnome.SettingsDaemon.UsbProtection.service - GNOME USB protection service.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped target gnome-session-initialized.target - GNOME Session is initialized.
+Jul 13 16:22:16 srvTAPOS gnome-shell[2263]: Shutting down GNOME Shell
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopping org.gnome.Shell@gdm.service - GNOME Shell...
+Jul 13 16:22:16 srvTAPOS gnome-control-center-global-shortcuts-provider[4294]: Lost connection to Wayland compositor.
+Jul 13 16:22:16 srvTAPOS gnome-shell[5795]: VMware: No 3D enabled (0, Success).
+Jul 13 16:22:16 srvTAPOS gnome-shell[5795]: VMware: No 3D enabled (0, Success).
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped org.gnome.Shell@gdm.service - GNOME Shell.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: org.gnome.Shell@gdm.service: Consumed 3.561s CPU time over 46.942s wall clock time, 379.2M memory peak.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopped target gnome-session-manager.target - GNOME Session Manager is ready.
+Jul 13 16:22:16 srvTAPOS systemd[1939]: Stopping gnome-session-manager@gnome-login.service - GNOME Session Manager (session: gnome-login)...
+Jul 13 16:22:16 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating via systemd: service name='org.gtk.vfs.Metadata' unit='gvfs-metadata.service' requested by ':1.25' (uid=1000 pid=5288 comm="/usr/bin/gnome-shell --mode=ubuntu" label="unconfined")
+Jul 13 16:22:16 srvTAPOS systemd[4654]: Starting gvfs-metadata.service - Virtual filesystem metadata service...
+Jul 13 16:22:16 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gtk.vfs.Metadata'
+Jul 13 16:22:16 srvTAPOS systemd[4654]: Started gvfs-metadata.service - Virtual filesystem metadata service.
+Jul 13 16:22:17 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating via systemd: service name='ca.desrt.dconf' unit='dconf.service' requested by ':1.25' (uid=1000 pid=5288 comm="/usr/bin/gnome-shell --mode=ubuntu" label="unconfined")
+Jul 13 16:22:17 srvTAPOS systemd[4654]: Starting dconf.service - User preferences database...
+Jul 13 16:22:17 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'ca.desrt.dconf'
+Jul 13 16:22:17 srvTAPOS systemd[4654]: Started dconf.service - User preferences database.
+Jul 13 16:22:17 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating service name='org.gnome.Settings.GlobalShortcutsProvider' requested by ':1.66' (uid=1000 pid=5732 comm="/usr/libexec/xdg-desktop-portal-gnome" label="unconfined")
+Jul 13 16:22:17 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating service name='org.gnome.Nautilus' requested by ':1.74' (uid=1000 pid=5868 comm="gjs /usr/share/gnome-shell/extensions/ding@rasters" label="desktop-icons-ng (unconfined)")
+Jul 13 16:22:17 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating service name='org.freedesktop.FileManager1' requested by ':1.25' (uid=1000 pid=5288 comm="/usr/bin/gnome-shell --mode=ubuntu" label="unconfined")
+Jul 13 16:22:17 srvTAPOS org.gnome.Nautilus[6024]: Connecting to org.freedesktop.Tracker3.Miner.Files
+Jul 13 16:22:17 srvTAPOS org.gnome.Nautilus[6022]: Connecting to org.freedesktop.Tracker3.Miner.Files
+Jul 13 16:22:17 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.freedesktop.FileManager1'
+Jul 13 16:22:17 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gnome.Nautilus'
+Jul 13 16:22:17 srvTAPOS org.gnome.Nautilus[6022]: Failed to register: Unable to acquire bus name 'org.gnome.Nautilus'
+Jul 13 16:22:17 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating service name='org.gnome.ArchiveManager1' requested by ':1.74' (uid=1000 pid=5868 comm="gjs /usr/share/gnome-shell/extensions/ding@rasters" label="desktop-icons-ng (unconfined)")
+Jul 13 16:22:17 srvTAPOS gnome-shell[5288]: DING: Detected async api for thumbnails
+Jul 13 16:22:17 srvTAPOS systemd[4654]: Reached target gnome-session-x11-services.target - GNOME session X11 services.
+Jul 13 16:22:17 srvTAPOS systemd[4654]: Starting org.gnome.SettingsDaemon.XSettings.service - GNOME XSettings service...
+Jul 13 16:22:17 srvTAPOS gnome-shell[6098]: The XKEYBOARD keymap compiler (xkbcomp) reports:
+Jul 13 16:22:17 srvTAPOS gnome-shell[6098]: > Warning:          Unsupported maximum keycode 708, clipping.
+Jul 13 16:22:17 srvTAPOS gnome-shell[6098]: >                   X11 cannot support keycodes above 255.
+Jul 13 16:22:17 srvTAPOS gnome-shell[6098]: > Warning:          Virtual modifier Hyper multiply defined
+Jul 13 16:22:17 srvTAPOS gnome-shell[6098]: >                   Using 0, ignoring 0
+Jul 13 16:22:17 srvTAPOS gnome-shell[6098]: > Warning:          Virtual modifier ScrollLock multiply defined
+Jul 13 16:22:17 srvTAPOS gnome-shell[6098]: >                   Using 0, ignoring 0
+Jul 13 16:22:17 srvTAPOS gnome-shell[6098]: Errors from xkbcomp are not fatal to the X server
+Jul 13 16:22:17 srvTAPOS systemd[4654]: Started org.gnome.SettingsDaemon.XSettings.service - GNOME XSettings service.
+Jul 13 16:22:17 srvTAPOS systemd[4654]: Reached target gnome-session-x11-services-ready.target - GNOME session X11 services.
+Jul 13 16:22:17 srvTAPOS systemd[4654]: org.gnome.SettingsDaemon.XSettings.target - GNOME XSettings target is inactive.
+Jul 13 16:22:17 srvTAPOS gsd-xsettings[6097]: Failed to get current UI scaling factor: GDBus.Error:org.freedesktop.DBus.Error.NameHasNoOwner: Name "org.gnome.Mutter.X11" does not exist
+Jul 13 16:22:17 srvTAPOS vmware-user[5454]: gtk_disable_setlocale() must be called before gtk_init()
+Jul 13 16:22:17 srvTAPOS gnome-shell[5288]: DING: DBus interface for Switcheroo control (net.hadess.SwitcherooControl) is now available.
+Jul 13 16:22:17 srvTAPOS gnome-shell[5288]: DING: DBus interface for Gvfs daemon (org.gtk.vfs.Metadata) is now available.
+Jul 13 16:22:17 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gnome.Settings.GlobalShortcutsProvider'
+Jul 13 16:22:17 srvTAPOS gnome-shell[5288]: DING: ** Message: 16:22:17.429: Connecting to org.freedesktop.Tracker3.Miner.Files
+Jul 13 16:22:17 srvTAPOS gnome-shell[6112]: libEGL warning: DRI3 error: Could not get DRI3 device
+Jul 13 16:22:17 srvTAPOS gnome-shell[6112]: libEGL warning: Ensure your X server supports DRI3 to get accelerated rendering
+Jul 13 16:22:17 srvTAPOS kernel: input: VMware DnD UInput pointer as /devices/virtual/input/input6
+Jul 13 16:22:17 srvTAPOS gnome-shell[5288]: Received notification for window. 0 notifications remaining.
+Jul 13 16:22:17 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.freedesktop.impl.portal.desktop.gnome'
+Jul 13 16:22:17 srvTAPOS systemd[4654]: Started xdg-desktop-portal-gnome.service - Portal service (GNOME implementation).
+Jul 13 16:22:17 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating via systemd: service name='org.freedesktop.impl.portal.desktop.gtk' unit='xdg-desktop-portal-gtk.service' requested by ':1.62' (uid=1000 pid=5679 comm="/usr/libexec/xdg-desktop-portal" label="unconfined")
+Jul 13 16:22:17 srvTAPOS systemd[4654]: Starting xdg-desktop-portal-gtk.service - Portal service (GTK/GNOME implementation)...
+Jul 13 16:22:17 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.freedesktop.impl.portal.desktop.gtk'
+Jul 13 16:22:17 srvTAPOS systemd[4654]: Started xdg-desktop-portal-gtk.service - Portal service (GTK/GNOME implementation).
+Jul 13 16:22:18 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.freedesktop.portal.Desktop'
+Jul 13 16:22:18 srvTAPOS systemd[4654]: Started xdg-desktop-portal.service - Portal service.
+Jul 13 16:22:18 srvTAPOS systemd[4654]: snap.snapd-desktop-integration.snapd-desktop-integration.service: Main process exited, code=exited, status=2/INVALIDARGUMENT
+Jul 13 16:22:18 srvTAPOS systemd[4654]: snap.snapd-desktop-integration.snapd-desktop-integration.service: Failed with result 'exit-code'.
+Jul 13 16:22:18 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gnome.Shell.Screencast'
+Jul 13 16:22:18 srvTAPOS gnome-shell[5288]: DING: DBus interface for Nautilus (org.gnome.Nautilus.FileOperations2) is now available.
+Jul 13 16:22:18 srvTAPOS gnome-shell[5288]: DING: DBus interface for Nautilus (org.freedesktop.FileManager1) is now available.
+Jul 13 16:22:18 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gnome.ArchiveManager1'
+Jul 13 16:22:18 srvTAPOS gnome-shell[5288]: DING: DBus interface for File-roller (org.gnome.ArchiveManager1) is now available.
+Jul 13 16:22:18 srvTAPOS gnome-shell[5288]: DING: GNOME nautilus 50.0
+Jul 13 16:22:18 srvTAPOS update-notifier[5422]: libayatana-appindicator is deprecated. Please use libayatana-appindicator-glib in newly written code.
+Jul 13 16:22:18 srvTAPOS systemd[1939]: Stopped gnome-session-manager@gnome-login.service - GNOME Session Manager (session: gnome-login).
+Jul 13 16:22:18 srvTAPOS systemd[1939]: Stopped target gnome-session-pre.target - Tasks to be run before GNOME Session starts.
+Jul 13 16:22:18 srvTAPOS systemd[1939]: Stopped target graphical-session-pre.target - Session services which should run early before the graphical session is brought up.
+Jul 13 16:22:18 srvTAPOS systemd[1939]: Reached target gnome-session-shutdown.target - Shutdown running GNOME Session.
+Jul 13 16:22:18 srvTAPOS systemd[1939]: Starting gnome-session-restart-dbus.service - Restart DBus after GNOME Session shutdown...
+Jul 13 16:22:18 srvTAPOS systemd[1939]: Stopped target gnome-session-shutdown.target - Shutdown running GNOME Session.
+Jul 13 16:22:18 srvTAPOS systemd[1939]: Started gnome-session-restart-dbus.service - Restart DBus after GNOME Session shutdown.
+Jul 13 16:22:18 srvTAPOS systemd[1939]: Stopping filter-chain.service - PipeWire filter chain daemon...
+Jul 13 16:22:18 srvTAPOS systemd[1939]: Stopping pipewire-pulse.service - PipeWire PulseAudio...
+Jul 13 16:22:18 srvTAPOS systemd[1939]: Stopped filter-chain.service - PipeWire filter chain daemon.
+Jul 13 16:22:18 srvTAPOS systemd[1939]: Stopped pipewire-pulse.service - PipeWire PulseAudio.
+Jul 13 16:22:18 srvTAPOS systemd[1939]: Stopping wireplumber.service - Multimedia Service Session Manager...
+Jul 13 16:22:18 srvTAPOS systemd[1939]: Stopped wireplumber.service - Multimedia Service Session Manager.
+Jul 13 16:22:18 srvTAPOS systemd[1939]: Stopping dbus.service - D-Bus User Message Bus...
+Jul 13 16:22:18 srvTAPOS systemd[1939]: Stopping pipewire.service - PipeWire Multimedia Service...
+Jul 13 16:22:18 srvTAPOS systemd[1939]: mpris-proxy.service: Main process exited, code=exited, status=1/FAILURE
+Jul 13 16:22:18 srvTAPOS systemd[1939]: mpris-proxy.service: Failed with result 'exit-code'.
+Jul 13 16:22:18 srvTAPOS systemd[1939]: Stopped pipewire.service - PipeWire Multimedia Service.
+Jul 13 16:22:18 srvTAPOS gdm-launch-environment][1924]: pam_unix(gdm-launch-environment:session): session closed for user gdm-greeter
+Jul 13 16:22:18 srvTAPOS systemd[1939]: Stopped dbus.service - D-Bus User Message Bus.
+Jul 13 16:22:18 srvTAPOS systemd[1939]: dbus.service: Consumed 1.833s CPU time over 49.428s wall clock time, 247.9M memory peak.
+Jul 13 16:22:18 srvTAPOS systemd-logind[1659]: Session c1 logged out. Waiting for processes to exit.
+Jul 13 16:22:18 srvTAPOS systemd[1]: session-c1.scope: Deactivated successfully.
+Jul 13 16:22:18 srvTAPOS systemd-logind[1659]: Removed session c1.
+Jul 13 16:22:18 srvTAPOS gdm3[1916]: Gdm: Child process -2049 was already dead.
+Jul 13 16:22:20 srvTAPOS systemd[4654]: snap.snapd-desktop-integration.snapd-desktop-integration.service: Scheduled restart job, restart counter is at 1.
+Jul 13 16:22:20 srvTAPOS systemd[4654]: Started snap.snapd-desktop-integration.snapd-desktop-integration.service - Service for snap application snapd-desktop-integration.snapd-desktop-integration.
+Jul 13 16:22:20 srvTAPOS pkexec[6270]: pam_unix(polkit-1:session): session opened for user root(uid=0) by tecle(uid=1000)
+Jul 13 16:22:20 srvTAPOS pkexec[6270]: tecle: Executing command [USER=root] [TTY=unknown] [CWD=/home/tecle] [COMMAND=/usr/lib/update-notifier/package-system-locked]
+Jul 13 16:22:20 srvTAPOS kernel: audit: type=1400 audit(1783970540.110:286): apparmor="DENIED" operation="open" class="file" profile="snap.snapd-desktop-integration.snapd-desktop-integration" name="/proc/6264/mountinfo" pid=6264 comm="snap-exec" requested_mask="r" denied_mask="r" fsuid=1000 ouid=1000
+Jul 13 16:22:20 srvTAPOS kernel: audit: type=1400 audit(1783970540.143:287): apparmor="DENIED" operation="open" class="file" profile="snap.snapd-desktop-integration.snapd-desktop-integration" name="/proc/6311/mountinfo" pid=6311 comm="snapctl" requested_mask="r" denied_mask="r" fsuid=1000 ouid=1000
+Jul 13 16:22:20 srvTAPOS kernel: audit: type=1400 audit(1783970540.157:288): apparmor="DENIED" operation="open" class="file" profile="snap.snapd-desktop-integration.snapd-desktop-integration" name="/proc/6316/mountinfo" pid=6316 comm="snapctl" requested_mask="r" denied_mask="r" fsuid=1000 ouid=1000
+Jul 13 16:22:20 srvTAPOS user-session-he[6264]: g_atomic_ref_count_dec: assertion 'old_value > 0' failed
+Jul 13 16:22:20 srvTAPOS update-notifier[5422]: libayatana-appindicator is deprecated. Please use libayatana-appindicator-glib in newly written code.
+Jul 13 16:22:20 srvTAPOS update-notifier[5422]: libayatana-appindicator is deprecated. Please use libayatana-appindicator-glib in newly written code.
+Jul 13 16:22:20 srvTAPOS dbus-daemon[4676]: apparmor="DENIED" operation="dbus_method_call"  bus="session" path="/org/freedesktop/portal/desktop" interface="org.freedesktop.host.portal.Registry" member="Register" mask="send" name="org.freedesktop.portal.Desktop" pid=6332 label="snap.snapd-desktop-integration.snapd-desktop-integration" peer_pid=5679 peer_label="unconfined"
+Jul 13 16:22:20 srvTAPOS kernel: audit: type=1400 audit(1783970540.907:289): apparmor="DENIED" operation="open" class="file" profile="snap.snapd-desktop-integration.snapd-desktop-integration" name="/proc/6364/mountinfo" pid=6364 comm="snapctl" requested_mask="r" denied_mask="r" fsuid=1000 ouid=1000
+Jul 13 16:22:20 srvTAPOS kernel: audit: type=1400 audit(1783970540.922:290): apparmor="DENIED" operation="open" class="file" profile="snap.snapd-desktop-integration.snapd-desktop-integration" name="/proc/6369/mountinfo" pid=6369 comm="snapctl" requested_mask="r" denied_mask="r" fsuid=1000 ouid=1000
+Jul 13 16:22:20 srvTAPOS snapd-desktop-i[6332]: New theme: gtk=Yaru-wartybrown icon=Yaru-wartybrown cursor=Yaru, sound=Yaru
+Jul 13 16:22:22 srvTAPOS gnome-shell[5288]: invalid (NULL) pointer instance
+Jul 13 16:22:22 srvTAPOS gnome-shell[5288]: g_signal_connect_data: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+Jul 13 16:22:22 srvTAPOS gnome-shell[5288]: invalid (NULL) pointer instance
+Jul 13 16:22:22 srvTAPOS gnome-shell[5288]: g_signal_connect_data: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+Jul 13 16:22:22 srvTAPOS gnome-shell[5288]: st_adjustment_get_values: assertion 'ST_IS_ADJUSTMENT (adjustment)' failed
+Jul 13 16:22:22 srvTAPOS gnome-shell[5288]: st_adjustment_get_values: assertion 'ST_IS_ADJUSTMENT (adjustment)' failed
+Jul 13 16:22:25 srvTAPOS snapd-desktop-i[6332]: All available theme snaps installed
+Jul 13 16:22:28 srvTAPOS systemd[1]: Stopping user@60578.service - User Manager for UID 60578...
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Activating special unit exit.target...
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Removed slice app-gnome\x2dsession\x2dmanager.slice - Slice /app/gnome-session-manager.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Removed slice session.slice - User Core Session Slice.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: session.slice: Consumed 6.549s CPU time over 59.527s wall clock time, 696M memory peak.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Stopped target default.target - Main User Target.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Stopped target sound.target - Sound Card.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Stopping gcr-ssh-agent.service - GCR ssh-agent wrapper...
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Stopping ssh-agent.service - OpenSSH Agent...
+Jul 13 16:22:28 srvTAPOS ssh-agent[2111]: exiting on signal 15
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Stopped gcr-ssh-agent.service - GCR ssh-agent wrapper.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Stopped ssh-agent.service - OpenSSH Agent.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Stopped target basic.target - Basic System.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Stopped target paths.target - Paths.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Stopped ubuntu-report.path - Pending report trigger for Ubuntu Report.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Stopped target sockets.target - Sockets.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Stopped target timers.target - Timers.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Stopped launchpadlib-cache-clean.timer - Clean up old files in the Launchpadlib cache.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Stopped snap.firmware-updater.firmware-notifier.timer - Timer firmware-notifier for snap application firmware-updater.firmware-notifier.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Stopped ubuntu-insights-collect.timer - "Run Ubuntu-Insights collect 5 mins after boot and every month relative to the activation time".
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Stopped ubuntu-insights-upload.timer - "Run Ubuntu-Insights upload 8 mins after boot and every week relative to the activation time".
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Closed dbus.socket - D-Bus User Message Bus Socket.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Closed dirmngr.socket - GnuPG network certificate management daemon.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Closed gnome-keyring-daemon.socket - GNOME Keyring daemon.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Closed gpg-agent-browser.socket - GnuPG cryptographic agent and passphrase cache (access for web browsers).
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Closed gpg-agent-extra.socket - GnuPG cryptographic agent and passphrase cache (restricted).
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Stopping gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation)...
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Stopping gpg-agent.socket - GnuPG cryptographic agent and passphrase cache...
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Closed keyboxd.socket - GnuPG public key management service.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Closed pipewire-pulse.socket - PipeWire PulseAudio.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Closed pipewire.socket - PipeWire Multimedia System Sockets.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Closed pk-debconf-helper.socket - debconf communication socket.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Closed speech-dispatcher.socket - Speech Dispatcher Socket.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Closed systemd-ask-password.socket - Query the User Interactively for a Password.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Closed gpg-agent.socket - GnuPG cryptographic agent and passphrase cache.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Closed gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation).
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Closed gcr-ssh-agent.socket - GCR ssh-agent wrapper.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Stopping ssh-agent.socket - OpenSSH Agent socket...
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Closed ssh-agent.socket - OpenSSH Agent socket.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Removed slice app.slice - User Application Slice.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: app.slice: Consumed 1.889s CPU time over 59.596s wall clock time, 118.7M memory peak.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Reached target shutdown.target - Shutdown.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Finished systemd-exit.service - Exit the Session.
+Jul 13 16:22:28 srvTAPOS systemd[1939]: Reached target exit.target - Exit the Session.
+Jul 13 16:22:28 srvTAPOS systemd-logind[1659]: Removed session 1.
+Jul 13 16:22:28 srvTAPOS systemd[1]: user@60578.service: Deactivated successfully.
+Jul 13 16:22:28 srvTAPOS systemd[1]: Stopped user@60578.service - User Manager for UID 60578.
+Jul 13 16:22:28 srvTAPOS systemd[1]: user@60578.service: Consumed 8.987s CPU time over 1min 369ms wall clock time, 787.6M memory peak.
+Jul 13 16:22:28 srvTAPOS systemd[1]: Stopping user-runtime-dir@60578.service - User Runtime Directory /run/user/60578...
+Jul 13 16:22:28 srvTAPOS systemd[1]: run-user-60578.mount: Deactivated successfully.
+Jul 13 16:22:28 srvTAPOS systemd[1]: user-runtime-dir@60578.service: Deactivated successfully.
+Jul 13 16:22:28 srvTAPOS systemd[1]: Stopped user-runtime-dir@60578.service - User Runtime Directory /run/user/60578.
+Jul 13 16:22:28 srvTAPOS systemd[1]: Removed slice user-60578.slice - User Slice of UID 60578.
+Jul 13 16:22:28 srvTAPOS systemd[1]: user-60578.slice: Consumed 9.059s CPU time over 1min 449ms wall clock time, 795.2M memory peak.
+Jul 13 16:22:36 srvTAPOS geoclue[4202]: Service not used for 60 seconds. Shutting down..
+Jul 13 16:22:36 srvTAPOS systemd[1]: geoclue.service: Deactivated successfully.
+Jul 13 16:22:40 srvTAPOS chronyd[1728]: Selected source 185.125.190.123 (2.ntp.ubuntu.com)
+Jul 13 16:22:45 srvTAPOS systemd[1]: systemd-hostnamed.service: Deactivated successfully.
+Jul 13 16:22:46 srvTAPOS systemd[1]: systemd-localed.service: Deactivated successfully.
+Jul 13 16:23:27 srvTAPOS sshd-session[6485]: Accepted password for tecle from 192.168.191.1 port 65422 ssh2
+Jul 13 16:23:27 srvTAPOS sshd-session[6485]: pam_unix(sshd:session): session opened for user tecle(uid=1000) by tecle(uid=0)
+Jul 13 16:23:27 srvTAPOS systemd-logind[1659]: New session '5' of user 'tecle' with class 'user' and type 'tty'.
+Jul 13 16:23:27 srvTAPOS systemd[1]: Started session-5.scope - Session 5 of User tecle.
+Jul 13 16:23:30 srvTAPOS im-config[6661]: @ IM_CONFIG_ENTRY='profile' XDG_SESSION_TYPE ='tty' UID=1000 PID=6596 PPID=6584
+Jul 13 16:23:30 srvTAPOS im-config[6662]:   GTK_IM_MODULE='' QT_IM_MODULE='' CLUTTER_IM_MODULE='' SDL_IM_MODULE='' XMODIFIERS=''
+Jul 13 16:23:30 srvTAPOS im-config[6665]:   Set IM_CONFIG_CURRENT_DESKTOP <- 'UNDEFINED'
+Jul 13 16:23:33 srvTAPOS im-config[6846]: @ IM_CONFIG_ENTRY='profile' XDG_SESSION_TYPE ='tty' UID=1000 PID=6771 PPID=6539
+Jul 13 16:23:33 srvTAPOS im-config[6847]:   GTK_IM_MODULE='' QT_IM_MODULE='' CLUTTER_IM_MODULE='' SDL_IM_MODULE='' XMODIFIERS=''
+Jul 13 16:23:33 srvTAPOS im-config[6850]:   Set IM_CONFIG_CURRENT_DESKTOP <- 'UNDEFINED'
+Jul 13 16:24:16 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating service name='org.gnome.DejaDup' requested by ':1.38' (uid=1000 pid=5435 comm="/usr/libexec/deja-dup/deja-dup-monitor" label="unconfined")
+Jul 13 16:24:16 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gnome.DejaDup'
+Jul 13 16:26:27 srvTAPOS systemd[1]: Starting update-notifier-download.service - Download data for packages that failed at package install time...
+Jul 13 16:26:28 srvTAPOS systemd[1]: update-notifier-download.service: Deactivated successfully.
+Jul 13 16:26:28 srvTAPOS systemd[1]: Finished update-notifier-download.service - Download data for packages that failed at package install time.
+Jul 13 16:27:05 srvTAPOS systemd[4654]: launchpadlib-cache-clean.service - Clean up old files in the Launchpadlib cache skipped, unmet condition check ConditionPathExists=/home/tecle/.launchpadlib/api.launchpad.net/cache
+Jul 13 16:27:05 srvTAPOS systemd[4654]: ubuntu-insights-collect.service: unit configures an IP firewall, but not running as root.
+Jul 13 16:27:05 srvTAPOS systemd[4654]: ubuntu-insights-collect.service: (This warning is only shown for the first unit using IP firewalling.)
+Jul 13 16:27:05 srvTAPOS systemd[4654]: Starting ubuntu-insights-collect.service - "Collect platform report using Ubuntu Insights while respecting consent"...
+Jul 13 16:27:05 srvTAPOS kernel: audit: type=1400 audit(1783970825.937:291): apparmor="AUDIT" operation="userns_create" class="namespace" info="Userns create - transitioning profile" profile="unconfined" pid=7928 comm="(ubuntu-insigh)" requested="userns_create" target="unprivileged_userns" execpath="/usr/lib/systemd/systemd-executor"
+Jul 13 16:27:05 srvTAPOS kernel: audit: type=1400 audit(1783970825.938:292): apparmor="DENIED" operation="capable" class="cap" profile="unprivileged_userns" pid=7928 comm="(ubuntu-insigh)" capability=21  capname="sys_admin"
+Jul 13 16:27:05 srvTAPOS kernel: audit: type=1400 audit(1783970825.976:293): apparmor="DENIED" operation="getattr" class="file" info="Failed name lookup - disconnected path" error=-13 profile="unprivileged_userns" name="" pid=7936 comm="systemd-detect-" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]: {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:   "insightsVersion": "0.9.3ubuntu",
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:   "collectionTime": 1783970825,
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:   "systemInfo": {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:     "hardware": {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       "product": {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "family": "",
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "name": "VMware Virtual Platform",
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "vendor": "VMware, Inc."
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       },
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       "cpu": {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "name": "11th Gen Intel(R) Core(TM) i7-11850H @ 2.50GHz",
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "vendor": "GenuineIntel",
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "architecture": "x86_64",
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "cpus": 4,
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "sockets": 4,
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "coresPerSocket": 1,
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "threadsPerCore": 1
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       },
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       "gpus": [
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:           "device": "0x0405",
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:           "vendor": "0x15ad",
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:           "driver": "vmwgfx"
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         }
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       ],
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       "memory": {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "size": 31020
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       },
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       "disks": [
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:           "size": 256000,
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:           "type": "disk",
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:           "children": [
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:             {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:               "size": 1945,
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:               "type": "part"
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:             },
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:             {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:               "size": 1,
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:               "type": "part"
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:             },
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:             {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:               "size": 7680,
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:               "type": "part"
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:             },
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:             {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:               "size": 7680,
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:               "type": "part"
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:             },
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:             {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:               "size": 95334,
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:               "type": "part"
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:             },
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:             {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:               "size": 143462,
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:               "type": "part"
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:             }
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:           ]
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         }
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       ],
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       "screens": [
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:           "physicalResolution": "1600x900",
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:           "refreshRate": "60.00"
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         }
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       ]
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:     },
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:     "software": {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       "os": {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "family": "linux",
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "distribution": "Ubuntu",
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "version": "26.04"
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       },
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       "timezone": "-03",
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       "language": "en_US",
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       "bios": {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "vendor": "Phoenix Technologies LTD",
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "version": "6.00"
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       }
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:     },
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:     "platform": {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       "desktop": {
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "desktopEnvironment": "ubuntu:GNOME",
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "sessionName": "ubuntu",
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:         "sessionType": "wayland"
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:       }
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:     }
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]:   }
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]: }
+Jul 13 16:27:06 srvTAPOS ubuntu-insights[7928]: 2026/07/13 16:27:06 ERROR failed to collect insights: insights write failed: report already exists for this period
+Jul 13 16:27:06 srvTAPOS systemd[4654]: Finished ubuntu-insights-collect.service - "Collect platform report using Ubuntu Insights while respecting consent".
+Jul 13 16:27:25 srvTAPOS update-notifier[5422]: gtk_widget_get_scale_factor: assertion 'GTK_IS_WIDGET (widget)' failed
+Jul 13 16:27:25 srvTAPOS update-notifier[5422]: gtk_widget_get_scale_factor: assertion 'GTK_IS_WIDGET (widget)' failed
+Jul 13 16:27:25 srvTAPOS update-notifier[5422]: gtk_widget_get_scale_factor: assertion 'GTK_IS_WIDGET (widget)' failed
+Jul 13 16:27:25 srvTAPOS gnome-shell[5288]: Cursor update failed: drmModeAtomicCommit: Invalid argument
+Jul 13 16:28:05 srvTAPOS systemd[1]: Starting fwupd-refresh.service - Refresh fwupd metadata and update motd...
+Jul 13 16:28:05 srvTAPOS dbus-daemon[1636]: [system] Activating via systemd: service name='org.freedesktop.fwupd' unit='fwupd.service' requested by ':1.134' (uid=982 pid=8225 comm="/usr/bin/fwupdmgr refresh" label="unconfined")
+Jul 13 16:28:05 srvTAPOS systemd[1]: Starting modprobe@sd_mod.service - Load Kernel Module sd_mod...
+Jul 13 16:28:05 srvTAPOS systemd[1]: modprobe@sd_mod.service: Deactivated successfully.
+Jul 13 16:28:05 srvTAPOS systemd[1]: Finished modprobe@sd_mod.service - Load Kernel Module sd_mod.
+Jul 13 16:28:05 srvTAPOS systemd[1]: Starting fwupd.service - Firmware update daemon...
+Jul 13 16:28:06 srvTAPOS dbus-daemon[1636]: [system] Activating via systemd: service name='org.bluez' unit='dbus-org.bluez.service' requested by ':1.136' (uid=0 pid=8234 comm="/usr/libexec/fwupd/fwupd" label="unconfined")
+Jul 13 16:28:06 srvTAPOS systemd[1]: bluetooth.service - Bluetooth service skipped, unmet condition check ConditionPathIsDirectory=/sys/class/bluetooth
+Jul 13 16:28:07 srvTAPOS fwupd[8234]: 19:28:07.902 FuMain               fwupd 2.1.1 ready for requests (locale en_US.UTF-8)
+Jul 13 16:28:07 srvTAPOS dbus-daemon[1636]: [system] Successfully activated service 'org.freedesktop.fwupd'
+Jul 13 16:28:07 srvTAPOS systemd[1]: Started fwupd.service - Firmware update daemon.
+Jul 13 16:28:07 srvTAPOS systemd[1]: fwupd-refresh.service: Deactivated successfully.
+Jul 13 16:28:07 srvTAPOS systemd[1]: Finished fwupd-refresh.service - Refresh fwupd metadata and update motd.
+Jul 13 16:28:31 srvTAPOS dbus-daemon[1636]: [system] Failed to activate service 'org.bluez': timed out (service_start_timeout=25000ms)
+Jul 13 16:30:01 srvTAPOS CRON[8338]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+Jul 13 16:30:01 srvTAPOS CRON[8340]: (root) CMD (if [ -x /etc/init.d/anacron ] && ! [ -d /run/systemd/system ]; then exec /usr/sbin/invoke-rc.d anacron start >/dev/null; fi)
+Jul 13 16:30:01 srvTAPOS CRON[8338]: pam_unix(cron:session): session closed for user root
+Jul 13 16:30:05 srvTAPOS systemd[4654]: Starting ubuntu-insights-upload.service - "Upload collected and matured platform reports using Ubuntu Insights while respecting consent"...
+Jul 13 16:30:05 srvTAPOS kernel: audit: type=1400 audit(1783971005.946:294): apparmor="AUDIT" operation="userns_create" class="namespace" info="Userns create - transitioning profile" profile="unconfined" pid=8364 comm="(ubuntu-insigh)" requested="userns_create" target="unprivileged_userns" execpath="/usr/lib/systemd/systemd-executor"
+Jul 13 16:30:05 srvTAPOS kernel: audit: type=1400 audit(1783971005.946:295): apparmor="DENIED" operation="capable" class="cap" profile="unprivileged_userns" pid=8364 comm="(ubuntu-insigh)" capability=21  capname="sys_admin"
+Jul 13 16:30:05 srvTAPOS systemd[1]: Starting sysstat-collect.service - system activity accounting tool...
+Jul 13 16:30:05 srvTAPOS systemd[1]: sysstat-collect.service: Deactivated successfully.
+Jul 13 16:30:05 srvTAPOS systemd[1]: Finished sysstat-collect.service - system activity accounting tool.
+Jul 13 16:30:05 srvTAPOS systemd[4654]: Finished ubuntu-insights-upload.service - "Upload collected and matured platform reports using Ubuntu Insights while respecting consent".
+Jul 13 16:33:37 srvTAPOS systemd[1]: Started anacron.service - Run anacron jobs.
+Jul 13 16:33:37 srvTAPOS anacron[8576]: Anacron 2.3 started on 2026-07-13
+Jul 13 16:33:37 srvTAPOS anacron[8576]: Normal exit (0 jobs run)
+Jul 13 16:33:37 srvTAPOS systemd[1]: anacron.service: Deactivated successfully.
+Jul 13 16:35:13 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating service name='org.freedesktop.FileManager1' requested by ':1.25' (uid=1000 pid=5288 comm="/usr/bin/gnome-shell --mode=ubuntu" label="unconfined")
+Jul 13 16:35:13 srvTAPOS org.gnome.Nautilus[8748]: Connecting to org.freedesktop.Tracker3.Miner.Files
+Jul 13 16:35:13 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.freedesktop.FileManager1'
+Jul 13 16:35:13 srvTAPOS gnome-shell[5288]: Launching DING process
+Jul 13 16:35:13 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating service name='org.gnome.ArchiveManager1' requested by ':1.109' (uid=1000 pid=8769 comm="gjs /usr/share/gnome-shell/extensions/ding@rasters" label="desktop-icons-ng (unconfined)")
+Jul 13 16:35:13 srvTAPOS gnome-shell[5288]: DING: Detected async api for thumbnails
+Jul 13 16:35:13 srvTAPOS gnome-shell[5288]: DING: ** Message: 16:35:13.745: Connecting to org.freedesktop.Tracker3.Miner.Files
+Jul 13 16:35:13 srvTAPOS gnome-shell[5288]: DING: GNOME nautilus 50.0
+Jul 13 16:35:13 srvTAPOS gnome-shell[5288]: DING: DBus interface for Switcheroo control (net.hadess.SwitcherooControl) is now available.
+Jul 13 16:35:13 srvTAPOS gnome-shell[5288]: DING: DBus interface for Nautilus (org.gnome.Nautilus.FileOperations2) is now available.
+Jul 13 16:35:13 srvTAPOS gnome-shell[5288]: DING: DBus interface for Nautilus (org.freedesktop.FileManager1) is now available.
+Jul 13 16:35:13 srvTAPOS gnome-shell[5288]: DING: DBus interface for Gvfs daemon (org.gtk.vfs.Metadata) is now available.
+Jul 13 16:35:13 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gnome.ArchiveManager1'
+Jul 13 16:35:13 srvTAPOS gnome-shell[5288]: Received notification for window. 0 notifications remaining.
+Jul 13 16:35:13 srvTAPOS gnome-shell[5288]: DING: DBus interface for File-roller (org.gnome.ArchiveManager1) is now available.
+Jul 13 16:35:15 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Activating service name='org.gnome.Ptyxis' requested by ':1.25' (uid=1000 pid=5288 comm="/usr/bin/gnome-shell --mode=ubuntu" label="unconfined")
+Jul 13 16:35:15 srvTAPOS dbus-daemon[4676]: [session uid=1000 pid=4676 pidfd=5] Successfully activated service 'org.gnome.Ptyxis'
+Jul 13 16:35:15 srvTAPOS org.gnome.Ptyxis[8854]: libEGL warning: failed to get driver name for fd -1
+Jul 13 16:35:15 srvTAPOS org.gnome.Ptyxis[8854]: libEGL warning: MESA-LOADER: failed to retrieve device information
+Jul 13 16:35:15 srvTAPOS org.gnome.Ptyxis[8854]: libEGL warning: failed to get driver name for fd -1
+Jul 13 16:35:15 srvTAPOS org.gnome.Ptyxis[8854]: MESA: error: ZINK: failed to choose pdev
+Jul 13 16:35:15 srvTAPOS org.gnome.Ptyxis[8854]: libEGL warning: egl: failed to create dri2 screen
+Jul 13 16:35:15 srvTAPOS systemd[4654]: Started ptyxis-spawn-6f34a53f-0a67-4b68-b8eb-556ab91e5103.scope - [systemd-run] /usr/bin/bash.
+Jul 13 16:35:16 srvTAPOS gnome-shell[5288]: Invalid sequence for VSYNC frame info
+Jul 13 16:36:25 srvTAPOS systemd[1]: Starting systemd-tmpfiles-clean.service - Cleanup of Temporary Directories...
+Jul 13 16:36:25 srvTAPOS systemd[1]: systemd-tmpfiles-clean.service: Deactivated successfully.
+Jul 13 16:36:25 srvTAPOS systemd[1]: Finished systemd-tmpfiles-clean.service - Cleanup of Temporary Directories.
+Jul 13 16:36:28 srvTAPOS NetworkManager[1724]: <info>  [1783971388.2963] dhcp4 (ens33): state changed new lease, address=192.168.191.133
+Jul 13 16:36:28 srvTAPOS dbus-daemon[1636]: [system] Activating via systemd: service name='org.freedesktop.nm_dispatcher' unit='dbus-org.freedesktop.nm-dispatcher.service' requested by ':1.10' (uid=0 pid=1724 comm="/usr/sbin/NetworkManager --no-daemon" label="unconfined")
+Jul 13 16:36:28 srvTAPOS systemd[1]: Starting NetworkManager-dispatcher.service - Network Manager Script Dispatcher Service...
+Jul 13 16:36:28 srvTAPOS dbus-daemon[1636]: [system] Successfully activated service 'org.freedesktop.nm_dispatcher'
+Jul 13 16:36:28 srvTAPOS systemd[1]: Started NetworkManager-dispatcher.service - Network Manager Script Dispatcher Service.
+Jul 13 16:36:38 srvTAPOS systemd[1]: NetworkManager-dispatcher.service: Deactivated successfully.
+Jul 13 16:37:45 srvTAPOS chronyd[1728]: Selected source 91.189.91.113 (4.ntp.ubuntu.com)
+Jul 13 16:39:59 srvTAPOS dbus-daemon[1636]: [system] Activating via systemd: service name='org.freedesktop.hostname1' unit='dbus-org.freedesktop.hostname1.service' requested by ':1.143' (uid=1000 pid=9472 comm="hostnamectl" label="unconfined")
+Jul 13 16:39:59 srvTAPOS systemd[1]: Starting systemd-hostnamed.service - Hostname Service...
+Jul 13 16:39:59 srvTAPOS systemd[1]: Started systemd-hostnamed.service - Hostname Service.
+Jul 13 16:39:59 srvTAPOS dbus-daemon[1636]: [system] Successfully activated service 'org.freedesktop.hostname1'
+
+
+======================================================
+FIM DO DIAGNOSTICO
+======================================================

@@ -1,0 +1,581 @@
+/* ============================================================
+   Speech AI Documentation - Main Stylesheet
+   ============================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #1e3a8a;
+    --secondary-color: #3b82f6;
+    --accent-color: #f59e0b;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --dark-bg: #0f172a;
+    --light-bg: #f8fafc;
+    --text-dark: #1e293b;
+    --text-light: #64748b;
+    --border-color: #e2e8f0;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* ============================================================
+   Header & Navigation
+   ============================================================ */
+
+header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 1.5rem 0;
+    box-shadow: var(--shadow-lg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: white;
+}
+
+.logo:hover {
+    opacity: 0.9;
+}
+
+.nav-main {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-main a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+.nav-main a:hover {
+    opacity: 0.8;
+}
+
+.search-box {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: white;
+    width: 250px;
+}
+
+.search-box::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ============================================================
+   Main Layout
+   ============================================================ */
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* ============================================================
+   Sidebar Navigation
+   ============================================================ */
+
+.sidebar {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.sidebar h3 {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+}
+
+.sidebar h3:first-child {
+    margin-top: 0;
+}
+
+.sidebar-nav {
+    list-style: none;
+}
+
+.sidebar-nav li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+}
+
+.sidebar-nav a:hover {
+    background-color: var(--light-bg);
+    color: var(--secondary-color);
+    padding-left: 1.25rem;
+}
+
+.sidebar-nav a.active {
+    background-color: var(--secondary-color);
+    color: white;
+    font-weight: 600;
+}
+
+/* ============================================================
+   Main Content
+   ============================================================ */
+
+.main-content {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.breadcrumb a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb span {
+    color: var(--text-light);
+}
+
+/* ============================================================
+   Content Sections
+   ============================================================ */
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+h2 {
+    font-size: 1.875rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-dark);
+}
+
+h4 {
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+p {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    line-height: 1.8;
+}
+
+/* ============================================================
+   Tables
+   ============================================================ */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+thead {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+tbody tr:hover {
+    background-color: var(--light-bg);
+}
+
+/* ============================================================
+   Code Blocks
+   ============================================================ */
+
+code {
+    background-color: var(--light-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: var(--danger-color);
+}
+
+pre {
+    background-color: var(--dark-bg);
+    color: #e2e8f0;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+pre code {
+    background: none;
+    color: #e2e8f0;
+    padding: 0;
+}
+
+/* ============================================================
+   Lists
+   ============================================================ */
+
+ul, ol {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+/* ============================================================
+   Cards & Boxes
+   ============================================================ */
+
+.card {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--secondary-color);
+}
+
+.card.info {
+    border-left-color: var(--secondary-color);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, transparent 100%);
+}
+
+.card.success {
+    border-left-color: var(--success-color);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, transparent 100%);
+}
+
+.card.warning {
+    border-left-color: var(--accent-color);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, transparent 100%);
+}
+
+.card.danger {
+    border-left-color: var(--danger-color);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, transparent 100%);
+}
+
+.card h4 {
+    margin-top: 0;
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+    background-color: var(--text-light);
+}
+
+.btn-secondary:hover {
+    background-color: var(--text-dark);
+}
+
+/* ============================================================
+   Pack Cards
+   ============================================================ */
+
+.packs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.pack-card {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: all 0.3s;
+    border-top: 4px solid var(--secondary-color);
+}
+
+.pack-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.pack-card h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.pack-card .icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.pack-card p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.pack-card ul {
+    list-style: none;
+    margin-left: 0;
+}
+
+.pack-card li {
+    padding-left: 1.5rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+.pack-card li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+/* ============================================================
+   Diagrams
+   ============================================================ */
+
+.diagram-container {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.diagram-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.diagram-caption {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 2rem;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* ============================================================
+   Responsive Design
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: relative;
+        top: 0;
+    }
+
+    .header-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-main {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 1.875rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .packs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 0.5rem;
+    }
+}
+
+/* ============================================================
+   Utility Classes
+   ============================================================ */
+
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: var(--text-light);
+}
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+.p-1 { padding: 0.5rem; }
+.p-2 { padding: 1rem; }
+.p-3 { padding: 1.5rem; }
+.p-4 { padding: 2rem; }
+
+.highlight {
+    background-color: #fef3c7;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+}

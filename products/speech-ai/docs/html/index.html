@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech AI - Documentação Empresarial</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                🎙️ Speech AI Docs
+            </a>
+            <nav class="nav-main">
+                <a href="index.html">Início</a>
+                <a href="#packs">Packs</a>
+                <a href="#quick-nav">Navegação Rápida</a>
+                <input type="text" id="search-input" class="search-box" placeholder="Buscar documentação...">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>📦 Packs</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="pages/foundation/index.html">Foundation</a></li>
+                    <li><a href="pages/sprint/index.html">Sprint</a></li>
+                    <li><a href="pages/developer/index.html">Developer</a></li>
+                    <li><a href="pages/operations/index.html">Operations</a></li>
+                </ul>
+
+                <h3>🔗 Recursos</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="#overview">Visão Geral</a></li>
+                    <li><a href="#packs">Todos os Packs</a></li>
+                    <li><a href="diagrams/index.html">Diagramas</a></li>
+                    <li><a href="#quick-nav">Navegação Rápida</a></li>
+                </ul>
+
+                <h3>📊 Info</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="#stats">Estatísticas</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <span>Home</span>
+                </div>
+
+                <!-- Hero Section -->
+                <h1>🎙️ Speech AI - Documentação Empresarial Completa</h1>
+                <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2rem;">
+                    Plataforma modular de Text-to-Audio com arquitetura escalável, suporte multilíngue e integração com múltiplos provedores TTS.
+                </p>
+
+                <!-- Overview Section -->
+                <section id="overview">
+                    <h2>📋 Visão Geral</h2>
+                    <div class="card info">
+                        <p>
+                            Speech AI é uma solução empresarial de ponta para transformar scripts em áudio de alta qualidade. 
+                            Desenvolvida com princípios de engenharia de software moderno, oferece uma arquitetura modular, 
+                            extensível e pronta para produção.
+                        </p>
+                    </div>
+
+                    <h3>✨ Características Principais</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                        <div class="card success">
+                            <h4>🌍 Multi-Idioma</h4>
+                            <p>Suporte nativo para Inglês, Português e Espanhol com detecção automática.</p>
+                        </div>
+                        <div class="card success">
+                            <h4>🧠 Inteligência</h4>
+                            <p>Motor de análise que otimiza ritmo, tom e complexidade da narração.</p>
+                        </div>
+                        <div class="card success">
+                            <h4>🔌 Extensível</h4>
+                            <p>Arquitetura de providers permite integração com múltiplos TTS.</p>
+                        </div>
+                        <div class="card success">
+                            <h4>📦 Modular</h4>
+                            <p>Pipeline desacoplado com responsabilidades bem definidas.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Packs Section -->
+                <section id="packs">
+                    <h2>📚 Documentação em 4 Packs</h2>
+                    <p>A documentação está organizada em packs estratégicos, cada um servindo a um público específico:</p>
+
+                    <div class="packs-grid">
+                        <!-- Foundation Pack -->
+                        <div class="pack-card">
+                            <div class="icon">📖</div>
+                            <h3>Foundation Pack</h3>
+                            <p>Entenda a arquitetura e componentes do sistema</p>
+                            <ul>
+                                <li>README</li>
+                                <li>Engineering Docs</li>
+                                <li>Architecture</li>
+                                <li>Diagrams</li>
+                            </ul>
+                            <a href="pages/foundation/index.html" class="btn" style="margin-top: 1rem;">Explorar Pack</a>
+                        </div>
+
+                        <!-- Sprint Pack -->
+                        <div class="pack-card">
+                            <div class="icon">🚀</div>
+                            <h3>Sprint Pack</h3>
+                            <p>Planejamento, decisões e histórico do projeto</p>
+                            <ul>
+                                <li>Sprint Roadmap</li>
+                                <li>Architecture Decisions</li>
+                                <li>Changelog</li>
+                                <li>Product Roadmap</li>
+                            </ul>
+                            <a href="pages/sprint/index.html" class="btn" style="margin-top: 1rem;">Explorar Pack</a>
+                        </div>
+
+                        <!-- Developer Pack -->
+                        <div class="pack-card">
+                            <div class="icon">👨‍💻</div>
+                            <h3>Developer Pack</h3>
+                            <p>Guias para desenvolvimento e contribuição</p>
+                            <ul>
+                                <li>Developer Guide</li>
+                                <li>Coding Standards</li>
+                                <li>Contributing</li>
+                                <li>Testing Guide</li>
+                            </ul>
+                            <a href="pages/developer/index.html" class="btn" style="margin-top: 1rem;">Explorar Pack</a>
+                        </div>
+
+                        <!-- Operations Pack -->
+                        <div class="pack-card">
+                            <div class="icon">⚙️</div>
+                            <h3>Operations Pack</h3>
+                            <p>Deployment, segurança e operações</p>
+                            <ul>
+                                <li>Security Guide</li>
+                                <li>Operations Guide</li>
+                                <li>Project Metrics</li>
+                                <li>Release Process</li>
+                            </ul>
+                            <a href="pages/operations/index.html" class="btn" style="margin-top: 1rem;">Explorar Pack</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Navigation -->
+                <section id="quick-nav">
+                    <h2>🔍 Navegação Rápida</h2>
+                    <p>Acesso direto aos documentos mais importantes:</p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                        <a href="pages/foundation/readme.html" class="btn" style="text-align: center;">📖 README</a>
+                        <a href="pages/foundation/architecture.html" class="btn" style="text-align: center;">🏗️ Arquitetura</a>
+                        <a href="pages/developer/developer-guide.html" class="btn" style="text-align: center;">🛠️ Setup Local</a>
+                        <a href="pages/operations/operations-guide.html" class="btn" style="text-align: center;">⚙️ Deploy</a>
+                        <a href="pages/sprint/roadmap.html" class="btn" style="text-align: center;">🗺️ Roadmap</a>
+                        <a href="diagrams/index.html" class="btn" style="text-align: center;">📊 Diagramas</a>
+                    </div>
+                </section>
+
+                <!-- Statistics Section -->
+                <section id="stats">
+                    <h2>📊 Estatísticas da Documentação</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Métrica</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Total de Documentos</td>
+                                <td><strong>19 Markdown</strong> + 3 Índices</td>
+                            </tr>
+                            <tr>
+                                <td>Diagramas</td>
+                                <td><strong>3</strong> (PlantUML + Mermaid + PNG)</td>
+                            </tr>
+                            <tr>
+                                <td>Packs</td>
+                                <td><strong>4</strong> (Foundation, Sprint, Developer, Operations)</td>
+                            </tr>
+                            <tr>
+                                <td>Linhas de Código</td>
+                                <td><strong>~4.289</strong> em 44 arquivos Python</td>
+                            </tr>
+                            <tr>
+                                <td>Idiomas Suportados</td>
+                                <td><strong>3</strong> (Inglês, Português, Espanhol)</td>
+                            </tr>
+                            <tr>
+                                <td>Versão</td>
+                                <td><strong>1.0.0</strong> (Sprint 9)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- About Section -->
+                <section id="about">
+                    <h2>ℹ️ Sobre Esta Documentação</h2>
+                    <div class="card info">
+                        <h4>Gerada por Manus AI</h4>
+                        <p>
+                            Esta documentação foi gerada como parte do compromisso do Contexto Global Lab 
+                            com práticas de engenharia de software de nível empresarial. Cada documento foi 
+                            cuidadosamente estruturado para servir a públicos específicos (desenvolvedores, 
+                            arquitetos, DevOps, gerentes de produto).
+                        </p>
+                        <p>
+                            A documentação é um artefato vivo e deve ser atualizada a cada sprint para 
+                            refletir mudanças na arquitetura, roadmap e práticas operacionais.
+                        </p>
+                    </div>
+
+                    <h3>📅 Informações de Entrega</h3>
+                    <ul>
+                        <li><strong>Data de Geração:</strong> 2 de Julho de 2026</li>
+                        <li><strong>Versão da Documentação:</strong> 1.0.0</li>
+                        <li><strong>Versão do Projeto:</strong> 1.0.0 (Sprint 9)</li>
+                        <li><strong>Gerado por:</strong> Manus AI - Contexto Global Lab</li>
+                    </ul>
+                </section>
+
+                <!-- Footer CTA -->
+                <div class="card warning" style="margin-top: 2rem;">
+                    <h4>🚀 Comece Agora</h4>
+                    <p>Escolha seu ponto de partida baseado no seu papel:</p>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="pages/developer/developer-guide.html" class="btn">👨‍💻 Sou Desenvolvedor</a>
+                        <a href="pages/operations/operations-guide.html" class="btn">⚙️ Sou DevOps</a>
+                        <a href="pages/foundation/architecture.html" class="btn">🏗️ Sou Arquiteto</a>
+                        <a href="pages/sprint/roadmap.html" class="btn">📊 Sou PM</a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Speech AI Project. Documentação gerada por <a href="#">Manus AI</a> | Contexto Global Lab</p>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Versão 1.0.0 | Sprint 9 Release</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Standards - Speech AI Docs</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                🎙️ Speech AI Docs
+            </a>
+            <nav class="nav-main">
+                <a href="../../index.html">Início</a>
+                <a href="../../index.html#packs">Packs</a>
+                <a href="index.html">Pack: Developer</a>
+                <input type="text" id="search-input" class="search-box" placeholder="Buscar documentação...">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>📦 Developer Pack</h3>
+                <ul class="sidebar-nav"><li><a href="developer-guide.html">Developer Guide</a></li><li><a href="coding-standards.html">Coding Standards</a></li><li><a href="contributing.html">Contributing</a></li><li><a href="testing-guide.html">Testing Guide</a></li></ul>
+                
+                <h3>🔗 Geral</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="../../index.html">Voltar ao Início</a></li>
+                    <li><a href="index.html">Índice do Pack</a></li>
+                    <li><a href="../../diagrams/index.html">Diagramas</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="index.html">Developer</a>
+                    <span>/</span>
+                    <span>Coding Standards</span>
+                </div>
+
+                <!-- Content -->
+                <h1>Coding Standards</h1>
+<h2>1. Philosophy</h2>
+<p>The Speech AI project adheres to strict coding standards to ensure readability, maintainability, and consistency across the codebase. We prioritize clear, self-documenting code over clever, terse solutions.</p>
+<h2>2. Python Style Guide</h2>
+<p>We generally follow <strong>PEP 8</strong>, with some specific adaptations for this project.</p>
+<h3>2.1. Formatting</h3>
+<ul>
+<li><strong>Indentation</strong>: Use 4 spaces per indentation level. Never use tabs.</li>
+<li><strong>Line Length</strong>: Limit all lines to a maximum of 79 characters for code, and 72 for docstrings.</li>
+<li><strong>Blank Lines</strong>: Use blank lines to separate logical sections of code within functions to improve readability.</li>
+<li><strong>Imports</strong>: Imports should be grouped in the following order:<ol>
+<li>Standard library imports.</li>
+<li>Related third-party imports.</li>
+<li>Local application/library specific imports.</li>
+</ol>
+</li>
+</ul>
+<h3>2.2. Naming Conventions</h3>
+<ul>
+<li><strong>Classes</strong>: Use <code>CamelCase</code> (e.g., <code>SpeechIntelligenceEngine</code>).</li>
+<li><strong>Functions and Variables</strong>: Use <code>snake_case</code> (e.g., <code>calculate_statistics</code>).</li>
+<li><strong>Constants</strong>: Use <code>UPPER_CASE_WITH_UNDERSCORES</code> (e.g., <code>DEFAULT_TIMEOUT</code>).</li>
+<li><strong>Private Members</strong>: Prefix internal methods and variables with a single underscore (e.g., <code>_configure_logging</code>).</li>
+</ul>
+<h2>3. Documentation and Comments</h2>
+<h3>3.1. Docstrings</h3>
+<p>Every module, class, and public function must have a docstring. We use a structured format that clearly defines the purpose, arguments, and return values.</p>
+<p>Example module header:</p>
+<pre class="codehilite"><code class="language-python">&quot;&quot;&quot;
+=========================================================
+Module Name
+---------------------------------------------------------
+Brief description of what the module does.
+
+Author: Name
+=========================================================
+&quot;&quot;&quot;
+</code></pre>
+
+<h3>3.2. Inline Comments</h3>
+<p>Use inline comments sparingly. Code should be self-explanatory. If you need a comment to explain <em>what</em> the code is doing, consider refactoring the code to be clearer. Use comments to explain <em>why</em> a particular approach was taken, especially if it is non-obvious.</p>
+<h2>4. Architecture Rules</h2>
+<ol>
+<li><strong>Dependency Injection</strong>: Components should receive their dependencies (like <code>ConfigManager</code>) via their constructors rather than instantiating them internally. This makes unit testing significantly easier.</li>
+<li><strong>Immutability</strong>: Where possible, treat domain models (like <code>Presentation</code>) as immutable after the initial parsing phase to prevent unintended side effects later in the pipeline.</li>
+<li><strong>Error Handling</strong>: Catch specific exceptions rather than using bare <code>except:</code> clauses. Log all significant errors with appropriate context before re-raising or handling them gracefully.</li>
+</ol>
+
+                <!-- Navigation -->
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border-color); display: flex; justify-content: space-between; gap: 1rem;">
+                    <a href="../../index.html" class="btn">← Voltar</a>
+                    <a href="index.html" class="btn">Índice do Pack</a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Speech AI Project. Documentação gerada por <a href="#">Manus AI</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

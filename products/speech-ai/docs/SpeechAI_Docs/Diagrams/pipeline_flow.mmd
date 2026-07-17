@@ -1,0 +1,40 @@
+graph TD
+    A["Input: script.txt"] -->|Read| B["TextAnalyzer"]
+    B -->|Normalize| C["Whitespace & Format Cleanup"]
+    C -->|Parse| D["Detect Slides"]
+    D -->|Extract| E["Presentation Model"]
+    E -->|Calculate| F["Statistics<br/>Words, Chars, Duration"]
+    
+    E -->|Extract Text| G["SpeechIntelligenceEngine"]
+    G -->|Detect| H["LanguageDetector<br/>Identify Language"]
+    H -->|Language Code| I["VoiceSelector<br/>Choose Voice Profile"]
+    I -->|Voice Profile| J["SpeechAnalyzer<br/>Analyze Complexity"]
+    J -->|Analysis| K["TimingCalculator<br/>Calculate Pacing"]
+    K -->|Timing Data| L["SpeechOptimizer<br/>Optimize Parameters"]
+    L -->|SpeechProfile| M["Voice, Rate, Pitch, Volume"]
+    
+    E -->|Format for Narration| N["NarrationBuilder"]
+    N -->|Add Breaks| O["narration.txt"]
+    
+    E -->|Format for Speech| P["SpeechBuilder"]
+    P -->|Add SSML Tags| Q["speech.txt"]
+    
+    Q -->|Text + Profile| R["SpeechService"]
+    M -->|Configuration| R
+    R -->|Request Provider| S["ProviderFactory"]
+    S -->|Instantiate| T["ProviderRegistry"]
+    T -->|Return| U["EdgeProvider<br/>or Azure or OpenAI"]
+    
+    U -->|API Call| V["External TTS Engine"]
+    V -->|Stream Audio| W["Audio Synthesis"]
+    W -->|Save| X["Output: audio.mp3"]
+    
+    R -->|Log| Y["app.log"]
+    B -->|Log| Y
+    G -->|Log| Y
+    
+    style A fill:#e1f5ff
+    style X fill:#c8e6c9
+    style E fill:#fff9c4
+    style M fill:#fff9c4
+    style Y fill:#f8bbd0

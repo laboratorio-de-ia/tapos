@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TAPOS — Painel de Teste</title>
+<style>
+  :root {
+    --navy: #0f2942;
+    --navy-2: #163a5c;
+    --blue: #2f6fb8;
+    --blue-light: #eaf2fb;
+    --blue-mid: #d6e7f8;
+    --bg: #eef3f8;
+    --card: #ffffff;
+    --border: #dbe6f2;
+    --text: #1a2b3c;
+    --text-soft: #5a6b7d;
+    --ok-bg: #e8f7ef;
+    --ok: #16794f;
+    --err-bg: #fdeceb;
+    --err: #b3261e;
+    --warn-bg: #fff6e0;
+    --warn: #93670a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0 0 60px;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header.top {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+    color: #fff;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 10px rgba(15, 41, 66, 0.25);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  header.top .logo {
+    width: 42px; height: 42px;
+    border-radius: 11px;
+    background: rgba(255,255,255,0.12);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  header.top h1 { margin: 0; font-size: 1.25rem; letter-spacing: 0.5px; }
+  header.top p { margin: 2px 0 0; font-size: 0.82rem; color: #b9cbe0; }
+  header.top .spacer { flex: 1; }
+
+  .session-info {
+    display: flex; align-items: center; gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  #session-user {
+    font-size: 0.8rem; color: #d6e7f8;
+  }
+  #token-status {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.78rem; font-weight: 600;
+    padding: 6px 12px; border-radius: 999px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+  }
+  #token-status.ok { background: var(--ok-bg); color: var(--ok); border-color: #bfe6d2; }
+  #token-status.err { background: rgba(255,255,255,0.1); color: #fff; }
+  #token-status .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+  #logout-btn {
+    display: none;
+    margin: 0; padding: 6px 14px;
+    font-size: 0.78rem; font-weight: 600;
+    background: rgba(255,255,255,0.12); color: #fff;
+    border: 1px solid rgba(255,255,255,0.3); border-radius: 999px;
+    cursor: pointer;
+  }
+  #logout-btn:hover { background: rgba(255,255,255,0.22); }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+
+  /* ===== Tabs ===== */
+  .tab-bar {
+    display: flex; gap: 4px; flex-wrap: wrap;
+    margin-top: 20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 6px;
+    box-shadow: 0 4px 14px rgba(15, 41, 66, 0.06);
+  }
+  .tab-btn {
+    flex: 1; min-width: 120px;
+    padding: 10px 12px;
+    border: none; border-radius: 9px;
+    background: transparent; color: var(--text-soft);
+    font-size: 0.85rem; font-weight: 600;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    box-shadow: none;
+    margin: 0;
+  }
+  .tab-btn:hover { background: var(--blue-light); color: var(--navy); }
+  .tab-btn.active { background: var(--blue); color: #fff; box-shadow: 0 2px 6px rgba(47,111,184,0.35); }
+  .tab-btn .count {
+    background: rgba(0,0,0,0.12); border-radius: 999px;
+    font-size: 0.7rem; padding: 1px 7px;
+  }
+  .tab-btn.active .count { background: rgba(255,255,255,0.25); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-top: 16px;
+    box-shadow: 0 4px 14px rgba(15, 41, 66, 0.06);
+    overflow: hidden;
+  }
+  .card-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 20px;
+    background: var(--blue-light);
+    border-bottom: 1px solid var(--border);
+  }
+  .card-header .badge {
+    width: 28px; height: 28px; border-radius: 9px;
+    background: var(--blue); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; flex-shrink: 0;
+  }
+  .card-header h2 {
+    margin: 0; font-size: 0.95rem; color: var(--navy); font-weight: 700;
+  }
+  .card-header .hint {
+    margin-left: auto; font-size: 0.75rem; color: var(--text-soft); font-weight: 500;
+  }
+  .card-body { padding: 18px 20px 20px; }
+
+  .two-col {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  @media (max-width: 720px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+  label { display: block; font-size: 0.82rem; color: var(--text-soft); margin-top: 12px; font-weight: 600; }
+  label:first-child { margin-top: 0; }
+  input[type=text], input[type=email], input[type=password], select {
+    width: 100%; padding: 9px 10px; margin-top: 5px;
+    border: 1px solid var(--border); border-radius: 8px;
+    font-size: 0.9rem; color: var(--text);
+    background: #fbfdff;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    font-family: inherit;
+  }
+  input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, select:focus {
+    outline: none; border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(47,111,184,0.15);
+  }
+  input[type=file] { margin-top: 6px; font-size: 0.85rem; color: var(--text-soft); }
+  input[type=file]::file-selector-button,
+  input[type=file]::-webkit-file-upload-button {
+    margin-right: 12px; padding: 8px 16px; cursor: pointer;
+    border: none; border-radius: 8px;
+    background: var(--navy); color: #fff;
+    font-size: 0.82rem; font-weight: 600;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+  input[type=file]::file-selector-button:hover,
+  input[type=file]::-webkit-file-upload-button:hover {
+    background: var(--navy-2);
+  }
+
+  button {
+    margin-top: 14px; margin-right: 8px;
+    padding: 9px 18px; cursor: pointer;
+    border: none; border-radius: 8px;
+    background: var(--blue); color: #fff;
+    font-size: 0.85rem; font-weight: 600;
+    box-shadow: 0 3px 8px rgba(47,111,184,0.3);
+    transition: transform 0.1s, background 0.15s;
+  }
+  button:hover { background: var(--navy-2); }
+  button:active { transform: translateY(1px); }
+  button:disabled { background: #b7c4d4; box-shadow: none; cursor: not-allowed; }
+  button.secondary {
+    background: #fff; color: var(--blue);
+    border: 1px solid var(--blue);
+    box-shadow: none;
+  }
+  button.secondary:hover { background: var(--blue-light); }
+  button.ghost {
+    background: transparent; color: var(--text-soft);
+    border: 1px solid var(--border); box-shadow: none;
+  }
+  button.ghost:hover { background: var(--blue-light); color: var(--navy); }
+
+  .inline-feedback {
+    margin-top: 10px; font-size: 0.82rem; font-weight: 600;
+    padding: 8px 12px; border-radius: 8px;
+    display: none;
+  }
+  .inline-feedback.show { display: block; }
+  .inline-feedback.ok { background: var(--ok-bg); color: var(--ok); }
+  .inline-feedback.err { background: var(--err-bg); color: var(--err); }
+  .inline-feedback.warn { background: var(--warn-bg); color: var(--warn); }
+  .inline-feedback.processing { animation: pulse-alive 1.4s ease-in-out infinite; }
+  @keyframes pulse-alive {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.55; }
+  }
+
+  pre {
+    background: #0f2942; color: #dfeaf6;
+    padding: 14px; border-radius: 10px;
+    overflow-x: auto; font-size: 0.78rem;
+    white-space: pre-wrap; word-break: break-word;
+    margin: 0;
+  }
+
+  .log-list, .job-list {
+    list-style: none; margin: 0; padding: 0;
+    max-height: 320px; overflow-y: auto;
+  }
+  .log-list li {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 0.8rem; padding: 8px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .log-list li:last-child { border-bottom: none; }
+  .log-time { color: var(--text-soft); flex-shrink: 0; font-variant-numeric: tabular-nums; }
+  .log-tag {
+    flex-shrink: 0; font-weight: 700; padding: 1px 8px;
+    border-radius: 999px; font-size: 0.7rem;
+  }
+  .log-tag.ok { background: var(--ok-bg); color: var(--ok); }
+  .log-tag.err { background: var(--err-bg); color: var(--err); }
+  .log-tag.info { background: var(--blue-mid); color: var(--navy-2); }
+  .log-msg { color: var(--text); }
+  .log-empty, .job-empty, .product-empty { color: var(--text-soft); font-size: 0.85rem; padding: 6px 0; }
+
+  /* ===== Product cards (aba Produtos) ===== */
+  .product-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  @media (max-width: 720px) {
+    .product-grid { grid-template-columns: 1fr; }
+  }
+  .product-card {
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 14px; background: #fbfdff;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .product-card .p-name { font-weight: 700; color: var(--navy); font-size: 0.92rem; }
+  .product-card .p-slug { font-size: 0.75rem; color: var(--text-soft); font-family: monospace; }
+  .product-status {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 0.72rem; font-weight: 700; padding: 3px 9px;
+    border-radius: 999px; width: fit-content;
+  }
+  .product-status.subscribed { background: var(--ok-bg); color: var(--ok); }
+  .product-status.not-subscribed { background: var(--blue-mid); color: var(--navy-2); }
+  .product-status.unimplemented { background: var(--warn-bg); color: var(--warn); }
+
+  /* ===== Job history (aba Jobs) ===== */
+  .job-list li {
+    display: flex; gap: 10px; align-items: center; justify-content: space-between;
+    font-size: 0.82rem; padding: 10px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .job-list li:last-child { border-bottom: none; }
+  .job-meta { display: flex; flex-direction: column; gap: 2px; }
+  .job-id { font-family: monospace; font-size: 0.78rem; }
+  .job-product { font-size: 0.72rem; color: var(--text-soft); }
+  .job-status-pill {
+    font-size: 0.7rem; font-weight: 700; padding: 2px 9px; border-radius: 999px;
+    background: var(--blue-mid); color: var(--navy-2);
+  }
+  .job-status-pill.completed { background: var(--ok-bg); color: var(--ok); }
+  .job-status-pill.failed { background: var(--err-bg); color: var(--err); }
+
+  .executor-disabled {
+    background: var(--warn-bg); color: var(--warn);
+    border-radius: 10px; padding: 14px; font-size: 0.85rem; font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="logo">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="9" y="2" width="6" height="12" rx="3" fill="#fff"/>
+      <path d="M5 11a7 7 0 0 0 14 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 18v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div>
+    <h1>TAPOS</h1>
+    <p>Painel de Teste — SaaS Backend</p>
+  </div>
+  <div class="spacer"></div>
+  <div class="session-info">
+    <span id="session-user"></span>
+    <span id="token-status"><span class="dot"></span><span id="token-status-text">Sem token.</span></span>
+    <button id="logout-btn" onclick="logout()">Sair</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <nav class="tab-bar">
+    <button class="tab-btn active" data-tab="conta" onclick="showTab('conta')">1 · Conta</button>
+    <button class="tab-btn" data-tab="produtos" onclick="showTab('produtos')">2 · Produtos</button>
+    <button class="tab-btn" data-tab="executar" onclick="showTab('executar')">3 · Executar</button>
+    <button class="tab-btn" data-tab="jobs" onclick="showTab('jobs')">4 · Jobs <span class="count" id="job-count">0</span></button>
+    <button class="tab-btn" data-tab="logs" onclick="showTab('logs')">5 · Logs <span class="count" id="log-count">0</span></button>
+  </nav>
+
+  <!-- ===================== ABA 1: CONTA ===================== -->
+  <div class="tab-panel active" id="tab-conta">
+    <div class="two-col">
+      <div class="card">
+        <div class="card-header"><span class="badge">✎</span><h2>Cadastro</h2></div>
+        <div class="card-body">
+          <label>Email <input type="email" id="reg-email" value="teste@tecle.com"></label>
+          <label>Senha <input type="password" id="reg-password" value="123456"></label>
+          <button onclick="register()">Cadastrar</button>
+          <div id="reg-feedback" class="inline-feedback"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><span class="badge">➜</span><h2>Login</h2></div>
+        <div class="card-body">
+          <label>Email <input type="email" id="login-email" value="teste@tecle.com"></label>
+          <label>Senha <input type="password" id="login-password" value="123456"></label>
+          <button onclick="login()">Entrar</button>
+          <div id="login-feedback" class="inline-feedback"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== ABA 2: PRODUTOS ===================== -->
+  <div class="tab-panel" id="tab-produtos">
+    <div class="card">
+      <div class="card-header">
+        <span class="badge">▤</span><h2>Catálogo de produtos</h2>
+        <span class="hint">clique em "Assinar" para liberar acesso</span>
+      </div>
+      <div class="card-body">
+        <button class="secondary" onclick="loadProductsTab()">Atualizar lista</button>
+        <div class="product-grid" id="product-grid" style="margin-top: 14px;">
+          <div class="product-empty">Faça login e clique em "Atualizar lista".</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== ABA 3: EXECUTAR ===================== -->
+  <div class="tab-panel" id="tab-executar">
+    <div class="card">
+      <div class="card-header"><span class="badge">▶</span><h2>Escolher produto</h2></div>
+      <div class="card-body">
+        <label>Produto assinado
+          <select id="executor-select" onchange="renderExecutor()">
+            <option value="">— selecione —</option>
+          </select>
+        </label>
+        <div id="executor-body" style="margin-top: 14px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== ABA 4: JOBS ===================== -->
+  <div class="tab-panel" id="tab-jobs">
+    <div class="card">
+      <div class="card-header"><span class="badge">⏱</span><h2>Consultar job</h2></div>
+      <div class="card-body">
+        <label>Job ID <input type="text" id="manual-job-id" placeholder="uuid retornado por um submit"></label>
+        <button onclick="checkManualJob()">Consultar job</button>
+        <div id="manual-job-feedback" class="inline-feedback"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="badge">≣</span><h2>Histórico de jobs desta sessão</h2>
+        <span class="hint">salvo no navegador (localStorage)</span>
+      </div>
+      <div class="card-body">
+        <button class="ghost" onclick="clearJobHistory()">Limpar histórico</button>
+        <ul class="job-list" id="job-history-list" style="margin-top: 10px;">
+          <li class="job-empty">Nenhum job submetido ainda nesta sessão.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== ABA 5: LOGS ===================== -->
+  <div class="tab-panel" id="tab-logs">
+    <div class="card">
+      <div class="card-header">
+        <span class="badge">≡</span><h2>Log de atividades</h2>
+        <span class="hint">persistido no navegador</span>
+      </div>
+      <div class="card-body">
+        <button class="ghost" onclick="clearLog()">Limpar log</button>
+        <ul class="log-list" id="activity-log" style="margin-top: 10px;">
+          <li class="log-empty">Nenhuma ação registrada ainda.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== RESULTADO (sempre visível) ===================== -->
+  <div class="card">
+    <div class="card-header"><span class="badge">✓</span><h2>Resultado da última chamada</h2></div>
+    <div class="card-body">
+      <pre id="output">—</pre>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ===================== Config de produtos conhecidos pelo painel =====================
+   O backend não expõe metadados de capacidade por produto; este mapa é só de UI,
+   usado para decidir quais ações mostrar e quais extensões aceitar no upload. */
+const PRODUCT_UI_CONFIG = {
+  "speech-ai": {
+    label: "Speech-AI — texto → áudio",
+    implemented: true,
+    accept: ".txt",
+    uploadHint: "Arquivo de texto (.txt)",
+  },
+  "code-ai": {
+    label: "Code-AI — documento → Markdown",
+    implemented: true,
+    accept: ".pdf,.docx,.doc,.xlsx,.xls,.csv,.pptx,.ppt,.png,.jpg,.jpeg,.txt,.md",
+    uploadHint: "Documento (.pdf, .docx, .xlsx, .csv, .pptx, .png, .jpg, .txt, .md)",
+  },
+  "edital-ai": {
+    label: "Edital-AI — análise de licitações",
+    implemented: true,
+    accept: ".pdf,.docx,.doc,.txt,.md",
+    uploadHint: "Edital (.pdf, .docx, .txt, .md)",
+    hasHistorico: true,
+  },
+};
+
+let token = localStorage.getItem("tapos_token") || "";
+let currentUserEmail = localStorage.getItem("tapos_user_email") || "";
+let subscribedProducts = []; // [{product_slug, is_active}]
+
+updateSessionUI();
+renderLog();
+renderJobHistory();
+
+/* ===================== Sessão / tabs ===================== */
+
+function updateSessionUI() {
+  const tokenEl = document.getElementById("token-status");
+  const tokenText = document.getElementById("token-status-text");
+  const userEl = document.getElementById("session-user");
+  const logoutBtn = document.getElementById("logout-btn");
+
+  tokenText.textContent = token ? "Token ativo" : "Sem token.";
+  tokenEl.className = token ? "ok" : "err";
+  userEl.textContent = token && currentUserEmail ? currentUserEmail : "";
+  logoutBtn.style.display = token ? "inline-block" : "none";
+}
+
+function logout() {
+  token = "";
+  currentUserEmail = "";
+  localStorage.removeItem("tapos_token");
+  localStorage.removeItem("tapos_user_email");
+  subscribedProducts = [];
+  updateSessionUI();
+  document.getElementById("product-grid").innerHTML =
+    '<div class="product-empty">Faça login e clique em "Atualizar lista".</div>';
+  document.getElementById("executor-select").innerHTML = '<option value="">— selecione —</option>';
+  document.getElementById("executor-body").innerHTML = "";
+  addLog("Sessão encerrada (logout).", "info");
+  show("—");
+}
+
+function showTab(name) {
+  document.querySelectorAll(".tab-btn").forEach((b) => b.classList.toggle("active", b.dataset.tab === name));
+  document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("active", p.id === "tab-" + name));
+
+  if (name === "produtos") loadProductsTab();
+  if (name === "executar") loadExecutorTab();
+}
+
+/* ===================== Helpers ===================== */
+
+function show(data) {
+  document.getElementById("output").textContent =
+    typeof data === "string" ? data : JSON.stringify(data, null, 2);
+}
+
+function nowLabel() {
+  const d = new Date();
+  return d.toLocaleTimeString("pt-BR", { hour12: false });
+}
+
+function setInlineFeedback(elId, message, type) {
+  const el = document.getElementById(elId);
+  el.textContent = message;
+  el.className = "inline-feedback show " + type;
+}
+
+/* ===================== Log persistido ===================== */
+
+function loadLogEntries() {
+  try {
+    return JSON.parse(localStorage.getItem("tapos_activity_log") || "[]");
+  } catch {
+    return [];
+  }
+}
+
+function saveLogEntries(entries) {
+  localStorage.setItem("tapos_activity_log", JSON.stringify(entries.slice(0, 200)));
+}
+
+function addLog(message, type = "info") {
+  const entries = loadLogEntries();
+  entries.unshift({ time: nowLabel(), message, type });
+  saveLogEntries(entries);
+  renderLog();
+}
+
+function renderLog() {
+  const entries = loadLogEntries();
+  const list = document.getElementById("activity-log");
+  document.getElementById("log-count").textContent = entries.length;
+
+  if (!entries.length) {
+    list.innerHTML = '<li class="log-empty">Nenhuma ação registrada ainda.</li>';
+    return;
+  }
+
+  list.innerHTML = entries
+    .map((e) => {
+      const tagText = e.type === "ok" ? "sucesso" : e.type === "err" ? "erro" : "info";
+      return (
+        '<li><span class="log-time">' + e.time + '</span>' +
+        '<span class="log-tag ' + e.type + '">' + tagText + '</span>' +
+        '<span class="log-msg"></span></li>'
+      );
+    })
+    .join("");
+
+  // texto via textContent para evitar qualquer injeção de HTML vindo de mensagens dinâmicas
+  const items = list.querySelectorAll(".log-msg");
+  entries.forEach((e, i) => { items[i].textContent = e.message; });
+}
+
+function clearLog() {
+  saveLogEntries([]);
+  renderLog();
+}
+
+/* ===================== Histórico de jobs (client-side) ===================== */
+
+function loadJobHistory() {
+  try {
+    return JSON.parse(localStorage.getItem("tapos_job_history") || "[]");
+  } catch {
+    return [];
+  }
+}
+
+function saveJobHistory(entries) {
+  localStorage.setItem("tapos_job_history", JSON.stringify(entries.slice(0, 100)));
+}
+
+function addJobToHistory(jobId, productSlug, status) {
+  const entries = loadJobHistory();
+  entries.unshift({ jobId, productSlug, status, time: nowLabel() });
+  saveJobHistory(entries);
+  renderJobHistory();
+}
+
+function updateJobInHistory(jobId, status) {
+  const entries = loadJobHistory();
+  const entry = entries.find((e) => e.jobId === jobId);
+  if (entry) {
+    entry.status = status;
+    saveJobHistory(entries);
+    renderJobHistory();
+  }
+}
+
+function renderJobHistory() {
+  const entries = loadJobHistory();
+  const list = document.getElementById("job-history-list");
+  document.getElementById("job-count").textContent = entries.length;
+
+  if (!entries.length) {
+    list.innerHTML = '<li class="job-empty">Nenhum job submetido ainda nesta sessão.</li>';
+    return;
+  }
+
+  list.innerHTML = "";
+  entries.forEach((e) => {
+    const li = document.createElement("li");
+
+    const meta = document.createElement("div");
+    meta.className = "job-meta";
+    const idSpan = document.createElement("span");
+    idSpan.className = "job-id";
+    idSpan.textContent = e.jobId;
+    const prodSpan = document.createElement("span");
+    prodSpan.className = "job-product";
+    prodSpan.textContent = e.productSlug + " · " + e.time;
+    meta.appendChild(idSpan);
+    meta.appendChild(prodSpan);
+
+    const right = document.createElement("div");
+    right.style.display = "flex";
+    right.style.alignItems = "center";
+    right.style.gap = "8px";
+
+    const pill = document.createElement("span");
+    pill.className = "job-status-pill " + e.status;
+    pill.textContent = e.status;
+
+    const btn = document.createElement("button");
+    btn.className = "secondary";
+    btn.style.margin = "0";
+    btn.style.padding = "5px 10px";
+    btn.style.fontSize = "0.72rem";
+    btn.textContent = "Consultar";
+    btn.onclick = () => refreshJobHistoryEntry(e.jobId);
+
+    right.appendChild(pill);
+    right.appendChild(btn);
+
+    li.appendChild(meta);
+    li.appendChild(right);
+    list.appendChild(li);
+  });
+}
+
+async function refreshJobHistoryEntry(jobId) {
+  try {
+    const data = await api("/jobs/" + jobId);
+    updateJobInHistory(jobId, data.status);
+    addLog("Consulta de job " + jobId + ": " + data.status, "ok");
+  } catch {
+    addLog("Falha ao consultar job: " + jobId, "err");
+  }
+}
+
+function clearJobHistory() {
+  saveJobHistory([]);
+  renderJobHistory();
+}
+
+/* ===================== API wrapper ===================== */
+
+async function api(path, options = {}) {
+  const headers = options.headers || {};
+  if (token) headers["Authorization"] = "Bearer " + token;
+  const res = await fetch(path, { ...options, headers });
+  let body;
+  try { body = await res.json(); } catch { body = await res.text(); }
+  if (!res.ok) {
+    show({ status: res.status, error: body });
+    throw new Error("request failed");
+  }
+  show(body);
+  return body;
+}
+
+/* ===================== Aba 1: Conta ===================== */
+
+async function register() {
+  const email = document.getElementById("reg-email").value;
+  const password = document.getElementById("reg-password").value;
+  try {
+    await api("/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    setInlineFeedback("reg-feedback", "Usuário " + email + " cadastrado com sucesso.", "ok");
+    addLog("Usuário cadastrado: " + email, "ok");
+    document.getElementById("login-email").value = email;
+    document.getElementById("login-password").value = password;
+  } catch {
+    setInlineFeedback("reg-feedback", "Falha ao cadastrar " + email + ". Veja o resultado abaixo.", "err");
+    addLog("Falha ao cadastrar: " + email, "err");
+  }
+}
+
+async function login() {
+  const email = document.getElementById("login-email").value;
+  const password = document.getElementById("login-password").value;
+  try {
+    const data = await api("/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    token = data.access_token;
+    currentUserEmail = email;
+    localStorage.setItem("tapos_token", token);
+    localStorage.setItem("tapos_user_email", email);
+    updateSessionUI();
+    setInlineFeedback("login-feedback", "Login efetuado como " + email + ".", "ok");
+    addLog("Login efetuado: " + email, "ok");
+    showTab("produtos");
+  } catch {
+    setInlineFeedback("login-feedback", "Falha no login de " + email + ".", "err");
+    addLog("Falha no login: " + email, "err");
+  }
+}
+
+/* ===================== Aba 2: Produtos ===================== */
+
+async function loadProductsTab() {
+  const grid = document.getElementById("product-grid");
+
+  if (!token) {
+    grid.innerHTML = '<div class="product-empty">Faça login primeiro (aba 1).</div>';
+    return;
+  }
+
+  grid.innerHTML = '<div class="product-empty">Carregando...</div>';
+
+  let products = [];
+  let subscriptions = [];
+  try {
+    products = await api("/products");
+    addLog("Produtos listados.", "ok");
+  } catch {
+    addLog("Falha ao listar produtos.", "err");
+    grid.innerHTML = '<div class="product-empty">Falha ao carregar produtos.</div>';
+    return;
+  }
+
+  try {
+    subscriptions = await api("/subscriptions");
+  } catch {
+    subscriptions = [];
+  }
+
+  subscribedProducts = subscriptions.filter((s) => s.is_active);
+  const subscribedSlugs = new Set(subscribedProducts.map((s) => s.product_slug));
+
+  grid.innerHTML = "";
+  products.forEach((p) => {
+    const isSubscribed = subscribedSlugs.has(p.slug);
+    const isImplemented = !!PRODUCT_UI_CONFIG[p.slug];
+
+    const card = document.createElement("div");
+    card.className = "product-card";
+
+    const name = document.createElement("div");
+    name.className = "p-name";
+    name.textContent = p.name;
+
+    const slug = document.createElement("div");
+    slug.className = "p-slug";
+    slug.textContent = p.slug;
+
+    const status = document.createElement("span");
+    if (!isImplemented) {
+      status.className = "product-status unimplemented";
+      status.textContent = "backend não implementado";
+    } else if (isSubscribed) {
+      status.className = "product-status subscribed";
+      status.textContent = "✓ assinado";
+    } else {
+      status.className = "product-status not-subscribed";
+      status.textContent = "não assinado";
+    }
+
+    card.appendChild(name);
+    card.appendChild(slug);
+    card.appendChild(status);
+
+    if (!isSubscribed) {
+      const btn = document.createElement("button");
+      btn.className = "secondary";
+      btn.textContent = "Assinar";
+      btn.onclick = () => subscribeToProduct(p.slug);
+      card.appendChild(btn);
+    }
+
+    grid.appendChild(card);
+  });
+
+  // mantém o seletor da aba Executar em sincronia
+  populateExecutorSelect();
+}
+
+async function subscribeToProduct(slug) {
+  try {
+    await api("/subscriptions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ product_slug: slug }),
+    });
+    addLog("Assinatura criada para: " + slug, "ok");
+    loadProductsTab();
+  } catch {
+    addLog("Falha ao assinar: " + slug, "err");
+  }
+}
+
+/* ===================== Aba 3: Executar ===================== */
+
+function loadExecutorTab() {
+  if (!subscribedProducts.length && token) {
+    // garante que temos a lista de assinaturas mesmo sem passar pela aba Produtos
+    loadProductsTab();
+    return;
+  }
+  populateExecutorSelect();
+}
+
+function populateExecutorSelect() {
+  const select = document.getElementById("executor-select");
+  const previous = select.value;
+  select.innerHTML = '<option value="">— selecione —</option>';
+
+  subscribedProducts.forEach((s) => {
+    const cfg = PRODUCT_UI_CONFIG[s.product_slug];
+    const opt = document.createElement("option");
+    opt.value = s.product_slug;
+    opt.textContent = cfg ? cfg.label : s.product_slug + " (sem backend)";
+    select.appendChild(opt);
+  });
+
+  if (previous && subscribedProducts.some((s) => s.product_slug === previous)) {
+    select.value = previous;
+  }
+  renderExecutor();
+}
+
+function renderExecutor() {
+  const slug = document.getElementById("executor-select").value;
+  const body = document.getElementById("executor-body");
+
+  if (!slug) {
+    body.innerHTML = '<div class="product-empty">Assine um produto na aba "Produtos" e selecione-o aqui.</div>';
+    return;
+  }
+
+  const cfg = PRODUCT_UI_CONFIG[slug];
+
+  if (!cfg || !cfg.implemented) {
+    body.innerHTML =
+      '<div class="executor-disabled">⚠ O produto <strong>' + slug + '</strong> ainda não tem backend ' +
+      'implementado na TAPOS (sem rota de execução). A assinatura funciona, mas não há o que executar ainda.</div>';
+    return;
+  }
+
+  body.innerHTML =
+    '<label>' + cfg.uploadHint + '<input type="file" id="exec-file" accept="' + cfg.accept + '" onchange="onExecFileChange()"></label>' +
+    '<button id="exec-upload-btn" disabled onclick="execUpload(\'' + slug + '\')">Enviar e processar</button>' +
+    '<button class="secondary" id="exec-run-btn" onclick="execRun(\'' + slug + '\')">Rodar novamente (sem novo arquivo)</button>' +
+    '<div id="exec-sync-feedback" class="inline-feedback"></div>' +
+    '<hr style="margin: 18px 0; border: none; border-top: 1px solid var(--border);">' +
+    '<label style="margin-top:0;">Execução assíncrona (fila)</label>' +
+    '<button onclick="execSubmitAsync(\'' + slug + '\')">Executar assíncrono</button>' +
+    '<div id="exec-async-feedback" class="inline-feedback"></div>';
+
+  if (cfg.hasHistorico) {
+    body.innerHTML +=
+      '<hr style="margin: 18px 0; border: none; border-top: 1px solid var(--border);">' +
+      '<label style="margin-top:0;">Histórico de análises</label>' +
+      '<button class="secondary" onclick="loadEditalHistorico()">Atualizar histórico</button>' +
+      '<div id="edital-historico-list" style="margin-top: 10px;">' +
+      '<div class="product-empty">Clique em "Atualizar histórico" para carregar.</div></div>';
+  }
+}
+
+function onExecFileChange() {
+  const fileInput = document.getElementById("exec-file");
+  const uploadBtn = document.getElementById("exec-upload-btn");
+  uploadBtn.disabled = !fileInput.files.length;
+}
+
+/* Sinaliza visualmente que uma chamada síncrona longa (upload/execução, que
+   pode levar minutos com produtos baseados em IA) está de fato em
+   andamento — desabilita o botão, mostra o tempo decorrido pulsando
+   (prova de que não travou) e sinaliza claramente ao concluir. */
+function startProcessingIndicator(feedbackElId, buttonEl, label) {
+  const startedAt = Date.now();
+  const originalText = buttonEl ? buttonEl.textContent : null;
+
+  if (buttonEl) {
+    buttonEl.disabled = true;
+    buttonEl.textContent = "Processando...";
+  }
+
+  const feedbackEl = document.getElementById(feedbackElId);
+  feedbackEl.classList.add("processing");
+
+  const tick = () => {
+    const elapsed = Math.round((Date.now() - startedAt) / 1000);
+    setInlineFeedback(feedbackElId, label + " — em andamento há " + elapsed + "s (processo ativo)...", "warn");
+    feedbackEl.classList.add("processing");
+  };
+  tick();
+  const intervalId = setInterval(tick, 1000);
+
+  return function finish(success, message) {
+    clearInterval(intervalId);
+    feedbackEl.classList.remove("processing");
+    const elapsed = Math.round((Date.now() - startedAt) / 1000);
+    if (buttonEl) {
+      buttonEl.disabled = false;
+      buttonEl.textContent = originalText;
+    }
+    setInlineFeedback(feedbackElId, message + " (levou " + elapsed + "s)", success ? "ok" : "err");
+  };
+}
+
+async function execUpload(slug) {
+  const fileInput = document.getElementById("exec-file");
+  if (!fileInput.files.length) {
+    setInlineFeedback("exec-sync-feedback", "Selecione um arquivo primeiro.", "err");
+    addLog("Upload cancelado (" + slug + "): nenhum arquivo selecionado.", "err");
+    return;
+  }
+  const fileName = fileInput.files[0].name;
+  const formData = new FormData();
+  formData.append("file", fileInput.files[0]);
+
+  addLog("[" + slug + "] Processando " + fileName + "... (pode levar alguns minutos, aguarde)", "info");
+  const finish = startProcessingIndicator(
+    "exec-sync-feedback",
+    document.getElementById("exec-upload-btn"),
+    "Enviando e processando " + fileName
+  );
+
+  try {
+    await api("/products/" + slug + "/upload", { method: "POST", body: formData });
+    finish(true, "✓ Concluído: " + fileName + " processado com sucesso");
+    addLog("[" + slug + "] Arquivo enviado e processado: " + fileName, "ok");
+  } catch {
+    finish(false, "✗ Falha ao processar: " + fileName);
+    addLog("[" + slug + "] Falha ao enviar/processar: " + fileName, "err");
+  }
+}
+
+async function execRun(slug) {
+  addLog("[" + slug + "] Processando (execução síncrona)... (pode levar alguns minutos, aguarde)", "info");
+  const finish = startProcessingIndicator(
+    "exec-sync-feedback",
+    document.getElementById("exec-run-btn"),
+    "Executando novamente"
+  );
+
+  try {
+    await api("/products/" + slug + "/run", { method: "POST" });
+    finish(true, "✓ Concluído: execução síncrona finalizada");
+    addLog("[" + slug + "] Executado novamente (síncrono).", "ok");
+  } catch {
+    finish(false, "✗ Falha na execução síncrona");
+    addLog("[" + slug + "] Falha ao executar novamente.", "err");
+  }
+}
+
+async function execSubmitAsync(slug) {
+  try {
+    const data = await api("/products/" + slug + "/submit", { method: "POST" });
+    setInlineFeedback("exec-async-feedback", "Job submetido: " + data.job_id + " (status: " + data.status + ")", "ok");
+    addLog("[" + slug + "] Job assíncrono submetido: " + data.job_id, "ok");
+    addJobToHistory(data.job_id, slug, data.status);
+    document.getElementById("manual-job-id").value = data.job_id;
+  } catch {
+    setInlineFeedback("exec-async-feedback", "Falha ao submeter job assíncrono.", "err");
+    addLog("[" + slug + "] Falha ao submeter job assíncrono.", "err");
+  }
+}
+
+/* ===================== Histórico/download (edital-ai) ===================== */
+
+async function loadEditalHistorico() {
+  const container = document.getElementById("edital-historico-list");
+  if (!container) return;
+  container.innerHTML = '<div class="product-empty">Carregando...</div>';
+
+  let analises;
+  try {
+    analises = await api("/products/edital-ai/historico");
+    addLog("Histórico do edital-ai carregado.", "ok");
+  } catch {
+    container.innerHTML = '<div class="product-empty">Falha ao carregar histórico.</div>';
+    addLog("Falha ao carregar histórico do edital-ai.", "err");
+    return;
+  }
+
+  if (!analises.length) {
+    container.innerHTML = '<div class="product-empty">Nenhuma análise ainda.</div>';
+    return;
+  }
+
+  container.innerHTML = "";
+  analises.forEach((a) => {
+    const row = document.createElement("div");
+    row.style.cssText = "padding:10px 0;border-bottom:1px dashed var(--border);";
+
+    const info = document.createElement("div");
+    info.innerHTML =
+      "<strong></strong> — <span></span> · score <span></span>";
+    info.querySelector("strong").textContent = a.numero_edital || "(sem número)";
+    info.querySelectorAll("span")[0].textContent = a.orgao || "-";
+    info.querySelectorAll("span")[1].textContent =
+      a.score_conformidade != null ? a.score_conformidade + "%" : "-";
+
+    const idLine = document.createElement("div");
+    idLine.style.cssText = "font-size:0.72rem;color:var(--text-soft);font-family:monospace;margin-top:2px;";
+    idLine.textContent = a.analise_id;
+
+    const btnRow = document.createElement("div");
+    btnRow.style.marginTop = "8px";
+    ["excel", "pdf", "word", "email"].forEach((formato) => {
+      const btn = document.createElement("button");
+      btn.className = "secondary";
+      btn.style.cssText = "margin:0 6px 0 0;padding:4px 10px;font-size:0.72rem;";
+      btn.textContent = formato;
+      btn.onclick = () => downloadEditalArtefato(a.analise_id, formato);
+      btnRow.appendChild(btn);
+    });
+
+    row.appendChild(info);
+    row.appendChild(idLine);
+    row.appendChild(btnRow);
+    container.appendChild(row);
+  });
+}
+
+async function downloadEditalArtefato(analiseId, formato) {
+  try {
+    const headers = {};
+    if (token) headers["Authorization"] = "Bearer " + token;
+
+    const res = await fetch(
+      "/products/edital-ai/download/" + analiseId + "?formato=" + formato,
+      { headers }
+    );
+    if (!res.ok) throw new Error("download failed");
+
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+
+    const cd = res.headers.get("Content-Disposition") || "";
+    const match = cd.match(/filename="?([^"]+)"?/);
+    const filename = match ? match[1] : "edital_" + analiseId + "_" + formato;
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+
+    addLog("Download iniciado: " + filename, "ok");
+  } catch {
+    addLog("Falha ao baixar artefato (" + formato + ") de " + analiseId, "err");
+  }
+}
+
+/* ===================== Aba 4: Jobs ===================== */
+
+async function checkManualJob() {
+  const jobId = document.getElementById("manual-job-id").value.trim();
+  if (!jobId) {
+    setInlineFeedback("manual-job-feedback", "Informe um job_id.", "err");
+    return;
+  }
+  try {
+    const data = await api("/jobs/" + jobId);
+    setInlineFeedback("manual-job-feedback", "Status do job " + jobId + ": " + data.status, "ok");
+    addLog("Consulta de job " + jobId + ": " + data.status, "ok");
+    updateJobInHistory(jobId, data.status);
+  } catch {
+    setInlineFeedback("manual-job-feedback", "Falha ao consultar job " + jobId + ".", "err");
+    addLog("Falha ao consultar job: " + jobId, "err");
+  }
+}
+</script>
+
+</body>
+</html>

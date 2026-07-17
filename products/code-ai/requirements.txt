@@ -1,0 +1,18 @@
+# Core dependencies - Conversor Universal Python -> Markdown
+# Based on README.md project instructions.
+
+pandas
+openpyxl
+python-docx
+python-pptx
+pdf2image
+pytesseract
+pdfplumber
+Pillow
+
+# Optional / recommended for better PDF performance
+# marker-pdf
+
+# System dependencies required outside pip:
+# - Tesseract OCR: required by pytesseract for OCR on images/PDFs.
+# - Poppler: required by pdf2image to render PDF pages as images.

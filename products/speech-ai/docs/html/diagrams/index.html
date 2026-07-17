@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagramas - Speech AI Docs</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                🎙️ Speech AI Docs
+            </a>
+            <nav class="nav-main">
+                <a href="../index.html">Início</a>
+                <a href="../index.html#packs">Packs</a>
+                <a href="index.html">Diagramas</a>
+                <input type="text" id="search-input" class="search-box" placeholder="Buscar documentação...">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>📊 Diagramas</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="#architecture">Arquitetura</a></li>
+                    <li><a href="#pipeline">Pipeline</a></li>
+                    <li><a href="#models">Modelos</a></li>
+                    <li><a href="#deployment">Deployment</a></li>
+                    <li><a href="#dataflow">Data Flow</a></li>
+                    <li><a href="#api">API</a></li>
+                    <li><a href="#download">Download</a></li>
+                </ul>
+
+                <h3>📦 Packs</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="../pages/foundation/index.html">Foundation</a></li>
+                    <li><a href="../pages/sprint/index.html">Sprint</a></li>
+                    <li><a href="../pages/developer/index.html">Developer</a></li>
+                    <li><a href="../pages/operations/index.html">Operations</a></li>
+                </ul>
+
+                <h3>🔗 Geral</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="../index.html">Voltar ao Início</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span>/</span>
+                    <span>Diagramas</span>
+                </div>
+
+                <h1>📊 Diagramas Arquiteturais - Versão Melhorada</h1>
+                <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2rem;">
+                    Visualizações profissionais e detalhadas da arquitetura, fluxo de dados e componentes do Speech AI.
+                </p>
+
+                <div class="card info">
+                    <h4>✨ Diagramas Aprimorados</h4>
+                    <p>
+                        Esta coleção inclui 9 diagramas profissionais criados com PlantUML e Mermaid, 
+                        oferecendo visualizações detalhadas de cada aspecto do sistema Speech AI.
+                    </p>
+                </div>
+
+                <!-- System Architecture -->
+                <section id="architecture">
+                    <h2>🏗️ System Architecture (Enhanced)</h2>
+                    <p>
+                        Diagrama completo de componentes mostrando todas as 5 camadas do sistema: API & Orchestration, 
+                        Pipeline Processing, Services & Intelligence, Infrastructure & Providers, e Data & Storage.
+                    </p>
+                    
+                    <div class="diagram-container">
+                        <img src="../assets/images/system_architecture_enhanced.png" alt="System Architecture Enhanced">
+                        <p class="diagram-caption">Arquitetura completa com todas as camadas, componentes e relacionamentos</p>
+                    </div>
+
+                    <div class="card">
+                        <h4>📋 Características</h4>
+                        <ul>
+                            <li><strong>5 Camadas</strong>: API, Pipeline, Services, Providers, Storage</li>
+                            <li><strong>15+ Componentes</strong>: Cada um com responsabilidade clara</li>
+                            <li><strong>Fluxo de Dados</strong>: Mostrado com setas direcionadas</li>
+                            <li><strong>Notas Detalhadas</strong>: Cada componente tem descrição</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Pipeline Flow Enhanced -->
+                <section id="pipeline">
+                    <h2>🔄 Pipeline Data Flow (Enhanced)</h2>
+                    <p>
+                        Diagrama detalhado do fluxo de transformação de dados através de toda a pipeline. 
+                        Inclui pontos de decisão, tratamento de erros, retry logic e validações.
+                    </p>
+                    
+                    <div class="diagram-container">
+                        <img src="../assets/images/pipeline_flow_enhanced.png" alt="Pipeline Flow Enhanced">
+                        <p class="diagram-caption">Fluxo completo com 20+ estágios, decisões e tratamento de erros</p>
+                    </div>
+
+                    <div class="card">
+                        <h4>📋 Características</h4>
+                        <ul>
+                            <li><strong>20+ Estágios</strong>: Desde input até output final</li>
+                            <li><strong>7 Pontos de Decisão</strong>: Language, Voice, Complexity, Provider, etc</li>
+                            <li><strong>Retry Logic</strong>: Tratamento de falhas com backoff exponencial</li>
+                            <li><strong>Cores Semânticas</strong>: Verde (sucesso), Amarelo (decisão), Vermelho (erro)</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Domain Models Enhanced -->
+                <section id="models">
+                    <h2>📦 Domain Models (Enhanced)</h2>
+                    <p>
+                        Diagrama UML mostrando estrutura de classes, atributos, métodos e relacionamentos 
+                        entre as entidades principais do domínio.
+                    </p>
+                    
+                    <div class="diagram-container">
+                        <img src="../assets/images/domain_models_enhanced.png" alt="Domain Models Enhanced">
+                        <p class="diagram-caption">Estrutura de classes com atributos, métodos e relacionamentos</p>
+                    </div>
+
+                    <div class="card">
+                        <h4>📋 Características</h4>
+                        <ul>
+                            <li><strong>8 Classes</strong>: Entities e Value Objects</li>
+                            <li><strong>Atributos Tipados</strong>: Cada atributo com tipo de dados</li>
+                            <li><strong>Métodos</strong>: Operações principais de cada classe</li>
+                            <li><strong>Relacionamentos</strong>: Composição, Associação, Multiplicidade</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Deployment Architecture -->
+                <section id="deployment">
+                    <h2>🚀 Deployment Architecture</h2>
+                    <p>
+                        Arquitetura de deployment mostrando ambientes de desenvolvimento, staging e produção, 
+                        incluindo CI/CD pipeline, monitoramento e backup.
+                    </p>
+                    
+                    <div class="diagram-container">
+                        <img src="../assets/images/deployment_architecture.png" alt="Deployment Architecture">
+                        <p class="diagram-caption">Fluxo de deployment com CI/CD, ambientes e monitoramento</p>
+                    </div>
+
+                    <div class="card">
+                        <h4>📋 Características</h4>
+                        <ul>
+                            <li><strong>3 Ambientes</strong>: Development, Staging, Production</li>
+                            <li><strong>CI/CD Pipeline</strong>: GitHub Actions com testes e build</li>
+                            <li><strong>Monitoramento</strong>: CloudWatch, Logs, Alertas</li>
+                            <li><strong>Backup & DR</strong>: Estratégia de disaster recovery</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Data Flow Detailed -->
+                <section id="dataflow">
+                    <h2>📊 Data Flow Detailed</h2>
+                    <p>
+                        Diagrama detalhado do fluxo de dados através de cada estágio do processamento, 
+                        mostrando transformações, validações e monitoramento contínuo.
+                    </p>
+                    
+                    <div class="diagram-container">
+                        <img src="../assets/images/data_flow_detailed.png" alt="Data Flow Detailed">
+                        <p class="diagram-caption">Fluxo de dados com 9 estágios principais e monitoramento</p>
+                    </div>
+
+                    <div class="card">
+                        <h4>📋 Características</h4>
+                        <ul>
+                            <li><strong>9 Estágios</strong>: Input, Processing, Analysis, Intelligence, Building, Synthesis, Storage, Output</li>
+                            <li><strong>Monitoramento Contínuo</strong>: Logging em cada etapa</li>
+                            <li><strong>Métricas</strong>: Coleta de performance e qualidade</li>
+                            <li><strong>Alertas</strong>: Sistema de notificação de erros</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- API Interactions -->
+                <section id="api">
+                    <h2>🔌 API Interaction Sequence</h2>
+                    <p>
+                        Diagrama de sequência mostrando a interação entre cliente, API e componentes internos 
+                        durante o processamento de uma requisição completa.
+                    </p>
+                    
+                    <div class="diagram-container">
+                        <img src="../assets/images/api_interactions.png" alt="API Interactions">
+                        <p class="diagram-caption">Sequência completa de uma requisição API do início ao fim</p>
+                    </div>
+
+                    <div class="card">
+                        <h4>📋 Características</h4>
+                        <ul>
+                            <li><strong>Sequência Numerada</strong>: 14 passos de processamento</li>
+                            <li><strong>Atores</strong>: Client, API, Orchestrator, Pipeline, TTS, Storage</li>
+                            <li><strong>Validações</strong>: Checks em cada etapa</li>
+                            <li><strong>Tratamento de Erros</strong>: Fluxo de recuperação</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Download Section -->
+                <section id="download">
+                    <h2>📥 Download de Diagramas</h2>
+                    <p>
+                        Todos os diagramas estão disponíveis em formatos editáveis (PlantUML/Mermaid) 
+                        e renderizados (PNG) para máxima flexibilidade.
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1.5rem 0;">
+                        <div class="card">
+                            <h4>🏗️ System Architecture</h4>
+                            <p>Arquitetura completa em 5 camadas</p>
+                            <ul style="margin-left: 0; list-style: none;">
+                                <li style="margin-bottom: 0.5rem;">
+                                    <a href="#" class="btn" style="width: 100%; text-align: center; display: block;">📄 .puml</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn" style="width: 100%; text-align: center; display: block;">🖼️ .png</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="card">
+                            <h4>🔄 Pipeline Flow</h4>
+                            <p>Fluxo com 20+ estágios</p>
+                            <ul style="margin-left: 0; list-style: none;">
+                                <li style="margin-bottom: 0.5rem;">
+                                    <a href="#" class="btn" style="width: 100%; text-align: center; display: block;">📄 .mmd</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn" style="width: 100%; text-align: center; display: block;">🖼️ .png</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="card">
+                            <h4>📦 Domain Models</h4>
+                            <p>8 classes com relacionamentos</p>
+                            <ul style="margin-left: 0; list-style: none;">
+                                <li style="margin-bottom: 0.5rem;">
+                                    <a href="#" class="btn" style="width: 100%; text-align: center; display: block;">📄 .puml</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn" style="width: 100%; text-align: center; display: block;">🖼️ .png</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="card">
+                            <h4>🚀 Deployment</h4>
+                            <p>CI/CD e ambientes</p>
+                            <ul style="margin-left: 0; list-style: none;">
+                                <li style="margin-bottom: 0.5rem;">
+                                    <a href="#" class="btn" style="width: 100%; text-align: center; display: block;">📄 .puml</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn" style="width: 100%; text-align: center; display: block;">🖼️ .png</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="card">
+                            <h4>📊 Data Flow</h4>
+                            <p>9 estágios com monitoramento</p>
+                            <ul style="margin-left: 0; list-style: none;">
+                                <li style="margin-bottom: 0.5rem;">
+                                    <a href="#" class="btn" style="width: 100%; text-align: center; display: block;">📄 .mmd</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn" style="width: 100%; text-align: center; display: block;">🖼️ .png</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="card">
+                            <h4>🔌 API Sequence</h4>
+                            <p>14 passos de processamento</p>
+                            <ul style="margin-left: 0; list-style: none;">
+                                <li style="margin-bottom: 0.5rem;">
+                                    <a href="#" class="btn" style="width: 100%; text-align: center; display: block;">📄 .puml</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn" style="width: 100%; text-align: center; display: block;">🖼️ .png</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card warning">
+                        <h4>💡 Como Usar os Diagramas</h4>
+                        <ul>
+                            <li><strong>PlantUML (.puml)</strong>: Use com <a href="https://www.plantuml.com/" target="_blank">PlantUML</a> ou editores online</li>
+                            <li><strong>Mermaid (.mmd)</strong>: Use com <a href="https://mermaid.live/" target="_blank">Mermaid Live Editor</a></li>
+                            <li><strong>PNG</strong>: Use diretamente em apresentações ou documentos</li>
+                            <li><strong>Editar</strong>: Modifique os arquivos source e regenere os PNGs</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Comparison Table -->
+                <section>
+                    <h2>📊 Comparação de Diagramas</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Diagrama</th>
+                                <th>Tipo</th>
+                                <th>Componentes</th>
+                                <th>Foco</th>
+                                <th>Público</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>System Architecture</strong></td>
+                                <td>Component</td>
+                                <td>15+</td>
+                                <td>Estrutura geral</td>
+                                <td>Arquitetos, Devs</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pipeline Flow</strong></td>
+                                <td>Flowchart</td>
+                                <td>20+</td>
+                                <td>Processamento</td>
+                                <td>Todos</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Domain Models</strong></td>
+                                <td>UML Class</td>
+                                <td>8</td>
+                                <td>Estrutura de dados</td>
+                                <td>Devs, Arquitetos</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Deployment</strong></td>
+                                <td>Component</td>
+                                <td>12+</td>
+                                <td>Infraestrutura</td>
+                                <td>DevOps, SRE</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Data Flow</strong></td>
+                                <td>Flowchart</td>
+                                <td>9</td>
+                                <td>Transformações</td>
+                                <td>Todos</td>
+                            </tr>
+                            <tr>
+                                <td><strong>API Sequence</strong></td>
+                                <td>Sequence</td>
+                                <td>6</td>
+                                <td>Interações</td>
+                                <td>Devs, Clientes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Navigation -->
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border-color); display: flex; justify-content: space-between; gap: 1rem;">
+                    <a href="../index.html" class="btn">← Voltar ao Início</a>
+                    <a href="../pages/foundation/diagrams.html" class="btn">Ver Documentação de Diagramas →</a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Speech AI Project. Documentação gerada por <a href="#">Manus AI</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

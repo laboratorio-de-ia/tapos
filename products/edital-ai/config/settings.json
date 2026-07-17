@@ -1,0 +1,23 @@
+{
+    "input": {
+        "diretorio": "input",
+        "formatos_suportados": ["pdf", "docx", "txt", "md"]
+    },
+    "output": {
+        "diretorio": "output",
+        "formatos": ["excel", "pdf", "word", "email"]
+    },
+    "ollama": {
+        "base_url": "http://localhost:11434",
+        "model": "mistral",
+        "timeout": 300
+    },
+    "processamento": {
+        "max_tamanho_mb": 50,
+        "timeout_segundos": 300
+    },
+    "projeto": {
+        "nome": "Edital AI",
+        "versao": "1.0.0"
+    }
+}

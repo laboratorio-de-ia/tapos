@@ -1,0 +1,102 @@
+Vamos criar uma documentação modular, que depois poderá ser consolidada automaticamente.
+
+Estrutura dos entregáveis (/workspace/tecle/docs
+knowledge-base/
+
+├── README.md
+├── SUMMARY.md
+│
+├── 00-tecle/
+│   ├── company.md
+│   ├── vision.md
+│   └── competencies.md
+│
+├── 01-tapos/
+│   ├── overview.md
+│   ├── architecture.md
+│   ├── principles.md
+│   ├── roadmap.md
+│   └── technologies.md
+│
+├── 02-speech-ai/
+│   ├── overview.md
+│   ├── architecture.md
+│   ├── pipeline.md
+│   ├── components.md
+│   ├── providers.md
+│   ├── local-ai.md
+│   ├── execution-engine.md
+│   ├── models.md
+│   ├── outputs.md
+│   ├── configuration.md
+│   └── roadmap.md
+│
+├── 03-products/
+│   ├── edital-ai.md
+│   ├── educa-ai.md
+│   └── code-ai.md
+│
+├── 04-platform/
+│   ├── runtime.md
+│   ├── storage.md
+│   ├── security.md
+│   ├── observability.md
+│   ├── api.md
+│   └── gateway.md
+│
+├── 05-development/
+│   ├── workspace.md
+│   ├── constitution.md
+│   ├── coding-standards.md
+│   ├── claude-code.md
+│   └── development-flow.md
+│
+└── assets/
+    ├── architecture/
+    ├── diagrams/
+    └── images/
+	
+	
+Entregáveis
+
+Vamos produzir, nesta ordem:
+
+Fase 1 — Base Institucional
+README.md
+SUMMARY.md
+company.md
+vision.md
+competencies.md
+Fase 2 — TAPOS
+
+Toda a documentação da plataforma.
+
+Fase 3 — Speech-AI
+
+Toda a documentação do produto.
+
+Fase 4 — Produtos
+
+Edital-AI, Educa-AI e Code-AI.
+
+Fase 5 — Desenvolvimento
+
+Workspace, Claude Code, padrões, governança e fluxo de desenvolvimento.
+
+Resultado final
+
+Ao término teremos:
+
+Knowledge Base completa em Markdown.
+Base para geração de:
+documentação técnica;
+apresentações;
+vídeos;
+treinamentos;
+RAG;
+agentes de IA;
+documentação de sistema.
+
+Esse formato é escalável, facilita manutenção e permite gerar um documento único posteriormente (PDF, DOCX ou site) sem perder a organização.
+
+Gere também um arquivo PDF com a documentação da plataforma

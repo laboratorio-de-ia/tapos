@@ -1,0 +1,423 @@
+{
+  "schema": "tapos.copilot.recovery/v2",
+  "purpose": "Arquivo de recuperacao de contexto da plataforma TAPOS para reimportar em um assistente (Microsoft Copilot / Claude) e retomar o desenvolvimento a partir do estado atual (Task 015 concluida + integracao ad-hoc do produto code-ai + reforma do painel /ui). Todo o conteudo foi extraido diretamente do repositorio /workspace/tecle em 2026-07-13, sem invencao. Este arquivo substitui/atualiza TAPOS_COPILOT_RECOVERY.json (gerado em 2026-07-12, anterior a Task 015 e ao code-ai).",
+  "generated_at": "2026-07-13",
+  "generated_from": "/workspace/tecle",
+  "supersedes": "TAPOS_COPILOT_RECOVERY.json (2026-07-12)",
+  "source_of_truth": {
+    "context_files": [
+      ".claude/workspace.md",
+      ".claude/constitution.md",
+      ".claude/current-phase.md",
+      "readme.md",
+      "architecture.md",
+      "changelog.md",
+      "VERSION",
+      "task15_teste_integrado.md"
+    ],
+    "task_files": "tasks/saas/*/{task.md,notes.md,acceptance.md}",
+    "existing_exports": [
+      "TAPOS_COPILOT_RECOVERY.json",
+      "TAPOS_FORENSIC_EXPORT.json",
+      "TAPOS_FORENSIC_FULL.json",
+      "TECLE_FULL_KNOWLEDGE_EXPORT.json"
+    ],
+    "note": "Os exports acima sao dumps forenses (conteudo bruto de arquivos) ou snapshots anteriores. Este arquivo e um resumo estruturado de contexto/orientacao, focado no estado atual e em como retomar o trabalho."
+  },
+
+  "platform": {
+    "name": "TAPOS",
+    "long_name": "Tecle AI Platform Operating System",
+    "version_file": "1.0.0 (VERSION nao foi incrementado apesar do trabalho novo; considerar bump para 1.1.0 ao formalizar)",
+    "description": "Plataforma de engenharia para construcao e operacao de produtos SaaS baseados em IA. Organiza desenvolvimento, runtime e infraestrutura de forma modular, desacoplada e escalavel, com evolucao incremental.",
+    "goals": [
+      "Suportar multiplos produtos SaaS independentes",
+      "Centralizar autenticacao e controle de acesso",
+      "Padronizar desenvolvimento e operacao",
+      "Reduzir custo e dependencia de fornecedores externos",
+      "Utilizar IA local (Ollama) e arquitetura hibrida",
+      "Garantir reprodutibilidade do ambiente"
+    ],
+    "core_principles": [
+      "Modularidade: componentes independentes (backend, produtos, infraestrutura nao dependem diretamente entre si)",
+      "Desacoplamento: produtos NUNCA acessam banco diretamente; comunicacao sempre via API/adapter/fila",
+      "Simplicidade: implementar apenas o necessario, sem antecipar problemas futuros",
+      "Incrementalidade: 1 modulo por vez, testar antes de avancar, commit constante",
+      "Testabilidade: todo codigo executavel e validavel isoladamente",
+      "Reprodutibilidade: ambiente recriavel do zero, infraestrutura declarativa",
+      "Persistencia correta: dados nunca dentro de containers, sempre em /data/platform/storage"
+    ],
+    "forbidden_practices": [
+      "Acesso direto ao banco por produtos",
+      "Logica de negocio dentro da infraestrutura",
+      "Hardcode de configuracoes criticas",
+      "Implementar multiplas features sem validacao"
+    ]
+  },
+
+  "infrastructure_observed": {
+    "docker_containers_running": [
+      "postgres (5432)",
+      "redis (6379)",
+      "rabbitmq:3-management (5672 amqp, 15672 management UI)",
+      "minio (9000-9001)",
+      "qdrant (6333)",
+      "ollama (11434)",
+      "open-webui (3000->8080)",
+      "portainer (9443)"
+    ],
+    "rabbitmq_credentials": "admin/admin (usado pelo publisher e pelos workers via RABBITMQ_URL default)",
+    "rabbitmq_management_ui": "http://localhost:15672",
+    "postgres_db": "platform, usuario admin/admin, DATABASE_URL default postgresql://admin:admin@localhost:5432/platform"
+  },
+
+  "architecture": {
+    "layers": [
+      "User",
+      "SaaS Backend (platform) - FastAPI",
+      "Products (speech-ai implementado, code-ai implementado, edital-ai e educa-ai apenas cadastrados no catalogo, sem backend)",
+      "Filas RabbitMQ por produto + Workers dedicados",
+      "Infrastructure (/data/platform)"
+    ],
+    "logical_stack": {
+      "api_layer": "FastAPI",
+      "auth_layer": "JWT (HS256) + bcrypt",
+      "business_layer": "Products + Subscriptions + Authorization + Jobs (execucao assincrona)",
+      "data_layer": "PostgreSQL (users, products, subscriptions, jobs)",
+      "queue_layer": "RabbitMQ, uma fila durável por produto (speech_ai_jobs, code_ai_jobs)",
+      "infrastructure_layer": "Docker + IA local (Ollama)"
+    },
+    "backend_stack": ["FastAPI", "SQLAlchemy", "passlib/bcrypt", "python-jose (JWT)", "PostgreSQL (psycopg2)", "pika (RabbitMQ)"],
+    "workspace_structure": {
+      "root": "/workspace/tecle",
+      "directories": {
+        "platform/": "Base da plataforma e servicos centrais (saas-backend, tap-runtime com os workers)",
+        "products/": "Produtos SaaS independentes (speech-ai, code-ai, edital-ai, educa-ai). Consomem APIs da camada SaaS, nao acessam infra direto",
+        "shared/": "Componentes reutilizaveis (SDKs, bibliotecas, templates, prompts, agentes)",
+        "governance/": "Padroes e regras (arquitetura, politicas, roadmap, ADRs)",
+        "developers/": "Config do ambiente de dev (VSCode, Claude Code, scripts)",
+        "automation/": "IaC e automacao (Terraform, Ansible, scripts)",
+        "playground/": "Experimentacao",
+        "tests/": "Testes",
+        ".claude/": "Contexto persistente do assistente",
+        "tasks/": "Tarefas documentadas formalmente (tasks/kernel, tasks/saas)"
+      }
+    }
+  },
+
+  "application": {
+    "name": "saas-backend",
+    "path": "platform/saas-backend",
+    "framework": "FastAPI",
+    "entrypoint": "app.main:app",
+    "run_command": "uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload (a partir de platform/saas-backend, com .venv ativado)",
+    "env_vars": {
+      "DATABASE_URL": "postgresql+psycopg2://admin:admin@localhost:5432/platform (default no app); workers usam postgresql://admin:admin@localhost:5432/platform",
+      "JWT_SECRET_KEY": "dev-secret-key (default). OBSERVACAO AINDA VALIDA: testes.sh exporta SECRET_KEY, mas o codigo le JWT_SECRET_KEY - inconsistencia nao corrigida",
+      "JWT_ALGORITHM": "HS256 (fixo no codigo)",
+      "JWT_EXPIRE_MINUTES": "60 (default)",
+      "RABBITMQ_URL": "amqp://admin:admin@localhost:5672/ (default, usado por publisher.py e pelos dois workers)"
+    },
+    "modules": {
+      "app/main.py": "App FastAPI. Registra routers auth, subscriptions, products, jobs. Endpoint /health. Monta static em /ui (StaticFiles em app/static, html=True)",
+      "app/db.py": "Engine SQLAlchemy, SessionLocal, Base declarativa, dependencia get_db()",
+      "app/models.py": "Modelos User, Product, Subscription, Job (SQLAlchemy ORM)",
+      "app/security.py": "hash_password, verify_password (bcrypt), create_access_token (JWT HS256)",
+      "app/deps.py": "get_current_user (valida JWT Bearer)",
+      "app/routes/auth.py": "POST /auth/register, POST /auth/login",
+      "app/routes/users.py": "GET /users/me - OBSERVACAO AINDA VALIDA: router existe mas NAO esta incluido em main.py",
+      "app/routes/subscriptions.py": "POST /subscriptions, GET /subscriptions",
+      "app/routes/products.py": "GET /products, GET /products/{slug}/access, rotas de speech-ai e code-ai (run/upload/submit). Refatorado nesta sessao: helpers _require_active_subscription() e _submit_job() extraidos para eliminar duplicacao entre os dois produtos (antes cada rota reimplementava a checagem de subscription inline)",
+      "app/products/speech_ai_adapter.py": "Adapter TAPOS -> speech-ai. Executa integration/cli.py no .venv do produto via subprocess e faz json.loads do stdout",
+      "app/products/code_ai_adapter.py": "NOVO. Adapter TAPOS -> code-ai. Mesmo padrao do speech_ai_adapter: subprocess chamando .venv/bin/python + integration/cli.py, aceita input_file opcional como argv[1]",
+      "app/jobs/models.py": "(campos vivem em app/models.py:Job, nao ha jobs/models.py separado)",
+      "app/jobs/schemas.py": "JobSubmitResponse, JobStatusResponse (pydantic)",
+      "app/jobs/publisher.py": "publish_job(job_id, product_slug). ALTERADO nesta sessao: antes tinha JOBS_QUEUE_NAME fixo em 'speech_ai_jobs'; agora usa dict QUEUE_NAMES = {'speech-ai': 'speech_ai_jobs', 'code-ai': 'code_ai_jobs'} e escolhe a fila pelo product_slug",
+      "app/jobs/routes.py": "GET /jobs/{job_id} - retorna apenas jobs do usuario autenticado (filtro por user_id)"
+    },
+    "data_models": {
+      "User": {
+        "table": "users",
+        "fields": ["id (PK)", "email (unique, not null)", "password (hash bcrypt, not null)", "created_at (tz)", "is_active (bool, default true)"],
+        "relationships": ["subscriptions -> Subscription"]
+      },
+      "Product": {
+        "table": "products",
+        "fields": ["id (PK)", "name (not null)", "slug (unique, not null)", "is_active (bool, default true)", "created_at (tz)"],
+        "relationships": ["subscriptions -> Subscription"],
+        "current_rows": [
+          {"id": 1, "name": "Speech AI", "slug": "speech-ai", "is_active": true},
+          {"id": 2, "name": "Edital AI", "slug": "edital-ai", "is_active": true, "note": "cadastrado, sem backend/rota/adapter implementado"},
+          {"id": 3, "name": "Educa AI", "slug": "educa-ai", "is_active": true, "note": "cadastrado, sem backend/rota/adapter implementado"},
+          {"id": 5, "name": "Code AI", "slug": "code-ai", "is_active": true, "note": "id 5 porque id 4 foi usado e removido em um teste anterior; nao ha lacuna funcional, apenas no auto-increment"}
+        ]
+      },
+      "Subscription": {
+        "table": "subscriptions",
+        "fields": ["id (PK)", "user_id (FK users.id)", "product_id (FK products.id)", "is_active (bool, default true)", "created_at (tz)"],
+        "relationships": ["user -> User", "product -> Product"]
+      },
+      "Job": {
+        "table": "jobs",
+        "introduced_in": "Task 015",
+        "fields": ["id (PK)", "job_id (uuid, unique, not null)", "user_id (FK users.id)", "product_slug (not null)", "status (queued|running|completed|failed)", "created_at (tz)", "started_at (tz, nullable)", "finished_at (tz, nullable)", "result_json (JSON, nullable)", "error_message (nullable)"],
+        "relationships": ["user -> User"]
+      }
+    },
+    "endpoints": [
+      {"method": "GET", "path": "/health", "auth": false, "returns": "{\"status\": \"ok\"}"},
+      {"method": "POST", "path": "/auth/register", "auth": false, "body": "{email, password}", "returns": "{id, email}", "errors": "400 email ja registrado"},
+      {"method": "POST", "path": "/auth/login", "auth": false, "body": "{email, password}", "returns": "{access_token, token_type: bearer}", "errors": "401 credenciais invalidas"},
+      {"method": "GET", "path": "/users/me", "auth": "JWT", "returns": "{id, email, created_at, is_active}", "note": "router definido em app/routes/users.py mas NAO montado no main.py atual - continua assim desde o snapshot anterior"},
+      {"method": "GET", "path": "/products", "auth": false, "returns": "lista de produtos ativos (hoje: speech-ai, edital-ai, educa-ai, code-ai)"},
+      {"method": "POST", "path": "/subscriptions", "auth": "JWT", "body": "{product_slug}", "returns": "subscription serializada", "errors": "404 produto nao encontrado"},
+      {"method": "GET", "path": "/subscriptions", "auth": "JWT", "returns": "lista de subscriptions do usuario autenticado"},
+      {"method": "GET", "path": "/products/{product_slug}/access", "auth": "JWT", "returns": "{product_slug, access: true}", "errors": "404 produto / 403 sem subscription"},
+      {"method": "POST", "path": "/products/speech-ai/run", "auth": "JWT + subscription ativa", "returns": "resultado padronizado da facade (SpeechRunResult)", "errors": "401 sem token / 403 sem subscription / 404 produto"},
+      {"method": "POST", "path": "/products/speech-ai/upload", "auth": "JWT + subscription ativa", "body": "multipart file (.txt)", "action": "grava input/script.txt e executa a pipeline", "returns": "resultado padronizado da facade"},
+      {"method": "POST", "path": "/products/speech-ai/submit", "auth": "JWT + subscription ativa", "introduced_in": "Task 015", "action": "cria Job(status=queued) e publica em speech_ai_jobs", "returns": "{job_id, status: queued, product_slug}"},
+      {"method": "POST", "path": "/products/code-ai/run", "auth": "JWT + subscription ativa", "introduced_in": "integracao ad-hoc code-ai (2026-07-13)", "action": "reprocessa toda a pasta products/code-ai/input/", "returns": "CodeAIRunResult serializado"},
+      {"method": "POST", "path": "/products/code-ai/upload", "auth": "JWT + subscription ativa", "body": "multipart file (.pdf/.docx/.doc/.xlsx/.xls/.csv/.pptx/.ppt/.png/.jpg/.jpeg/.txt/.md)", "action": "salva como input/documento.<ext> (sobrescreve o anterior) e converte so esse arquivo", "returns": "CodeAIRunResult serializado", "errors": "400 extensao nao suportada, alem dos 401/403/404 padrao"},
+      {"method": "POST", "path": "/products/code-ai/submit", "auth": "JWT + subscription ativa", "action": "cria Job(status=queued) e publica em code_ai_jobs", "returns": "{job_id, status: queued, product_slug}"},
+      {"method": "GET", "path": "/jobs/{job_id}", "auth": "JWT", "introduced_in": "Task 015", "returns": "{job_id, status, product_slug, created_at, started_at, finished_at, result, error_message}", "errors": "404 se o job nao existir ou nao pertencer ao usuario autenticado"}
+    ],
+    "auth_flow": [
+      "Cliente -> POST /auth/login",
+      "Backend valida email+senha (verify_password bcrypt)",
+      "JWT gerado (sub=email, exp) com create_access_token",
+      "Cliente usa header Authorization: Bearer <token>",
+      "get_current_user decodifica JWT, busca User por email; falha => 401",
+      "_require_active_subscription() (products.py) valida produto ativo + subscription ativa; falha => 404/403"
+    ],
+    "test_panel": {
+      "path": "app/static/index.html",
+      "mounted_at": "GET /ui",
+      "status": "REFORMULADO nesta sessao (2026-07-13) - navegabilidade era o principal problema reportado pelo usuario",
+      "previous_design": "pagina unica em scroll longo, 7 cartoes numerados sequenciais (cadastro, login, produtos com slug digitado a mao, upload speech-ai, fila speech-ai, upload code-ai, fila code-ai), log de atividades em memoria (perdido ao recarregar)",
+      "new_design": {
+        "layout": "cabecalho fixo (sticky) com status de sessao (email logado, badge de token, botao Sair) + barra de 5 abas + painel de Resultado sempre visivel abaixo das abas",
+        "tabs": [
+          "1 · Conta: cadastro + login lado a lado",
+          "2 · Produtos: busca GET /products e GET /subscriptions, renderiza cards clicaveis com nome/slug/status (assinado, nao assinado, ou 'backend nao implementado' para edital-ai/educa-ai) - substitui o campo de texto onde antes era preciso digitar o slug",
+          "3 · Executar: dropdown populado dinamicamente so com os produtos que o usuario assinou; ao selecionar um produto implementado (speech-ai/code-ai) mostra upload+run+submit especifico (accept do <input type=file> muda por produto); produtos nao implementados mostram aviso em vez de botoes quebrados",
+          "4 · Jobs: consulta manual por job_id + historico client-side (localStorage) dos jobs submetidos nesta sessao/navegador, com pill de status e botao 'Consultar' por linha para atualizar sem trocar de aba",
+          "5 · Logs: log de atividades agora persistido em localStorage (sobrevive a reload), com botao 'Limpar log'"
+        ],
+        "logout": "novo botao 'Sair' no cabecalho, limpa token e email do localStorage e reseta o estado da UI (nao existia antes)",
+        "product_ui_config": "objeto JS PRODUCT_UI_CONFIG (so front-end, nao vem do backend) mapeia slug -> {label, implemented, accept, uploadHint} para speech-ai e code-ai; edital-ai/educa-ai ficam de fora do mapa e por isso caem no aviso de 'nao implementado'",
+        "backend_changes_required": "nenhuma - e puramente front-end (HTML/CSS/JS vanilla, sem build step), consumindo os mesmos endpoints ja existentes"
+      },
+      "validated_live_in_browser": true,
+      "validation_flow_tested": ["cadastro/login", "listar produtos com status por card", "selecionar code-ai no executor", "upload/run sincrono code-ai", "submit assincrono code-ai", "acompanhar job na aba Jobs ate completed", "log de atividades", "logout"]
+    }
+  },
+
+  "products": {
+    "speech-ai": {
+      "path": "products/speech-ai",
+      "status": "funcional e integrado ao SaaS, inclusive execucao assincrona (Tasks 014A, 014B e 015 concluidas)",
+      "description": "Transforma entradas de texto em narracao, speech e audio (mp3).",
+      "integration_layer": {
+        "path": "products/speech-ai/integration",
+        "files": {
+          "facade.py": "run_speech_ai() -> chama execute_current_pipeline().to_dict()",
+          "runner.py": "execute_current_pipeline(): TextAnalyzer -> SpeechIntelligenceEngine.build_profile -> NarrationBuilder -> SpeechBuilder -> SpeechService.synthesize. Retorna SpeechRunResult",
+          "schemas.py": "dataclass SpeechRunResult {status, input_file, narration_file, speech_file, audio_file, provider, voice, language, estimated_minutes}",
+          "cli.py": "chama run_speech_ai() e imprime JSON no stdout (erros vao para stderr, exit 1)"
+        }
+      },
+      "io": {
+        "input": "products/speech-ai/input/script.txt (hardcoded, path fixo conhecido desde a Task 014B - nao migrado para env var ainda)",
+        "outputs": ["output/narration.txt", "output/speech.txt", "output/audio.mp3", "output/speech.xml", "output/speech_report.json"]
+      },
+      "async": {
+        "queue": "speech_ai_jobs",
+        "worker": "platform/tap-runtime/workers/speech-ai-worker/worker.py",
+        "worker_behavior": "consome mensagem -> marca job running -> chama run_speech_ai_product() (ignora qualquer input_file, sempre reprocessa o script.txt atual) -> marca completed/failed"
+      }
+    },
+    "code-ai": {
+      "path": "products/code-ai",
+      "status": "NOVO nesta sessao (2026-07-13). Integrado ao SaaS seguindo o mesmo padrao do speech-ai (facade, adapter, rotas sync+async, fila, worker, painel /ui). Nao existe uma task formal em tasks/saas/ para esta integracao (nao foi criado tasks/saas/016-code-ai-* nem equivalente) - foi implementado diretamente a pedido do usuario dentro de uma sessao de assistente, sem o ciclo formal de task.md/notes.md/acceptance.md usado nas tasks 005-015.",
+      "description": "Converte documentos (PDF, DOCX, DOC, XLSX, XLS, CSV, PPTX, PPT, PNG, JPG, JPEG, TXT, MD) para Markdown, otimizado para reduzir tokens ao enviar para LLMs.",
+      "original_product_code": {
+        "path": "products/code-ai/src/conversor_markdown.py",
+        "core_class": "ConvertorUniversal (dict CONVERSORES mapeia extensao -> metodo estatico de conversao)",
+        "bugs_found_and_fixed_this_session": [
+          {
+            "bug": "ConversorDocx.converter importava 'from docx.enum.text import WD_PARAGRAPH_STYLE', simbolo nao existente na versao instalada de python-docx (1.2.0) e nao utilizado em nenhum lugar do metodo (a deteccao de estilo e feita comparando strings em para.style.name). Toda conversao de .docx falhava, mas o erro era capturado internamente por um try/except que devolvia o texto do erro COMO SE FOSSE o markdown convertido - ou seja, falhava silenciosamente sem lancar excecao.",
+            "fix": "removida a linha de import morta. Verificado reconvertendo um .docx de teste: titulos e paragrafos agora saem corretos no .md gerado.",
+            "file": "products/code-ai/src/conversor_markdown.py"
+          },
+          {
+            "bug": "O dict CONVERSORES nao tinha entradas para '.txt' nem '.md', apesar do readme.md do produto anunciar os dois formatos como suportados ('Conversao direta'). Upload de .txt/.md pelo endpoint /products/code-ai/upload resultava em RuntimeError na facade (arquivo/pasta sem conversor) -> HTTP 500.",
+            "fix": "adicionadas as classes ConversorTexto (le o .txt e devolve o conteudo como esta) e ConversorMarkdown (le o .md e devolve como esta, passthrough), registradas em CONVERSORES['.txt'] e CONVERSORES['.md'].",
+            "file": "products/code-ai/src/conversor_markdown.py",
+            "reported_by": "usuario, ao tentar enviar um .txt pela UI e receber erro"
+          }
+        ]
+      },
+      "venv": "products/code-ai/.venv (criado nesta sessao). Dependencias: requirements.txt (pandas, openpyxl, python-docx, python-pptx, pdf2image, pytesseract, pdfplumber, Pillow) + tabulate (adicionado manualmente - necessario para pandas.DataFrame.to_markdown, nao estava listado no requirements.txt original).",
+      "integration_layer": {
+        "path": "products/code-ai/integration",
+        "files": {
+          "schemas.py": "dataclasses ConvertedFile e CodeAIRunResult {status, files_processed, converted, errors, report_file}",
+          "runner.py": "execute_current_pipeline(input_file=None): se input_file for passado, converte so esse arquivo (converter_arquivo) e lanca RuntimeError se falhar; senao reprocessa toda a pasta input/ (converter_pasta) sem lancar em erros parciais",
+          "facade.py": "run_code_ai(input_file=None) -> execute_current_pipeline(...).to_dict()",
+          "cli.py": "PARTICULARIDADE relevante: o codigo do conversor (conversor_markdown.py) faz varios print() de progresso durante a conversao. cli.py usa contextlib.redirect_stdout para jogar esses prints num buffer descartavel durante a chamada da facade, e so imprime o JSON final no stdout real depois - sem isso, o stdout ficaria poluido e o adapter (que faz json.loads(stdout)) quebraria. Esse e o mesmo padrao problematico que o speech-ai nao tem (pipeline do speech-ai nao usa print() em nenhum lugar)."
+        }
+      },
+      "io": {
+        "input_dir": "products/code-ai/input/",
+        "upload_behavior": "cada upload salva como input/documento.<extensao original> (ex.: documento.pdf, documento.docx), sobrescrevendo o anterior da MESMA extensao. Uploads de extensoes diferentes coexistem na pasta (ex.: documento.pdf e documento.docx podem existir ao mesmo tempo) - isso significa que 'run' (que reprocessa a pasta inteira) pode processar arquivos de uploads antigos de outros usuarios/sessoes, ja que o estado e compartilhado e nao ha isolamento por usuario/tenant. Mesma limitacao conceitual que o script.txt unico do speech-ai, mas mais visivel aqui porque varias extensoes acumulam.",
+        "output_dir": "products/code-ai/output/ (arquivo .md nomeado por <stem>.md; relatorio.json com o relatorio de conversao)"
+      },
+      "async": {
+        "queue": "code_ai_jobs",
+        "worker": "platform/tap-runtime/workers/code-ai-worker/worker.py (criado nesta sessao, mesmo padrao de update de status do speech-ai-worker)",
+        "worker_behavior": "consome mensagem -> marca job running -> chama run_code_ai_product() SEM input_file (sempre reprocessa toda a pasta input/, nunca so o ultimo upload) -> marca completed/failed"
+      },
+      "known_limitation_not_fixed": "run e submit (sem upload previo) sempre reprocessam TODA a pasta input/, nao so o ultimo arquivo enviado pelo usuario da requisicao. Isso e identico ao comportamento do endpoint /run do speech-ai (que tambem reprocessa o unico script.txt compartilhado), mas para code-ai fica mais evidente porque varios arquivos de extensoes diferentes podem se acumular na pasta."
+    },
+    "edital-ai": {
+      "path": "products/edital-ai",
+      "status": "planejado (diretorio existe, cadastrado na tabela products, mas sem facade/adapter/rotas/worker). Sem alteracao nesta sessao alem de aparecer corretamente identificado como 'nao implementado' no novo painel /ui.",
+      "description": "Recebera documentos de editais; fara analise e geracao de artefatos (Excel, PDF, Word, e-mail)."
+    },
+    "educa-ai": {
+      "path": "products/educa-ai",
+      "status": "planejado (diretorio existe, cadastrado na tabela products, mas sem facade/adapter/rotas/worker). Sem alteracao nesta sessao alem de aparecer corretamente identificado como 'nao implementado' no novo painel /ui.",
+      "description": "Recebera dados/documentos financeiros; apoiara educacao financeira e acompanhamento de mercado."
+    }
+  },
+
+  "communication": {
+    "user_to_backend": "HTTP REST (JSON) via FastAPI na porta 8000. Auth por header Authorization: Bearer <JWT>.",
+    "backend_to_product_speech_ai": "Adapter local (nao HTTP). app/products/speech_ai_adapter.py executa products/speech-ai/integration/cli.py usando o Python do .venv do proprio produto via subprocess, capturando stdout (JSON) -> json.loads.",
+    "backend_to_product_code_ai": "Mesmo padrao. app/products/code_ai_adapter.py executa products/code-ai/integration/cli.py usando o Python do .venv do proprio produto via subprocess (aceita um argumento opcional de input_file), capturando stdout (JSON) -> json.loads.",
+    "async_execution": {
+      "status": "IMPLEMENTADO (Task 015 para speech-ai; extensao ad-hoc para code-ai)",
+      "flow": "Cliente -> POST /products/{slug}/submit -> Backend cria Job(status=queued) -> publish_job() escolhe a fila certa por slug (QUEUE_NAMES em app/jobs/publisher.py) -> RabbitMQ -> Worker dedicado do produto consome -> marca running -> chama o adapter do produto -> marca completed/failed com result_json ou error_message -> Cliente consulta GET /jobs/{job_id}",
+      "queues": ["speech_ai_jobs (2 workers foram deixados rodando em background ao longo da sessao)", "code_ai_jobs (1 worker deixado rodando em background)"]
+    },
+    "data_persistence": "PostgreSQL (users, products, subscriptions, jobs).",
+    "e2e_tests_available": [
+      "test_auth.sh - fluxo sincrono 014B",
+      "test_task015.sh - fluxo assincrono completo (submit -> worker -> completed) + regressao do endpoint sincrono + /ui + testes negativos, especifico de speech-ai",
+      "task15_teste_integrado.md - roteiro manual passo a passo cobrindo 014A/014B/015 + code-ai (secao 8), incluindo testes de fila explicitos"
+    ]
+  },
+
+  "test_users_seeded_this_session": {
+    "action": "banco foi limpo (TRUNCATE em users, subscriptions, jobs; tabela products preservada) a pedido do usuario para remover dados de teste acumulados",
+    "password_all_users": "tecle",
+    "users": ["marcelo@tecle.com", "adriana@tecle.com", "daisy@tecle.com", "rodrigo@tecle.com"],
+    "subscriptions": "cada um dos 4 usuarios foi assinado nos 4 produtos do catalogo (speech-ai, code-ai, edital-ai, educa-ai) - mas so speech-ai e code-ai tem execucao real por tras da assinatura",
+    "extra_user_created_during_testing": "sem_sub_codeai@tecle.com (usado so para validar o caminho 403 'sem subscription' nos testes; nao assinado a nenhum produto)"
+  },
+
+  "tasks": {
+    "convention": {
+      "location": "tasks/saas/<NNN-nome>/",
+      "files": ["task.md (contexto, objetivo, requisitos, constraints)", "notes.md (decisoes e futuro)", "acceptance.md (criterios de aceite e validacao)"],
+      "development_cycle": "Definir tarefa -> Implementar 1 modulo -> Testar -> Commit -> Proxima tarefa",
+      "rules": ["1 modulo por vez", "testar antes de avancar", "commitar apos cada etapa", "nunca gerar multiplos modulos simultaneamente"]
+    },
+    "completed": [
+      {"id": "005-password-hash", "status": "done"},
+      {"id": "006-register-hash", "status": "done"},
+      {"id": "007-login", "status": "done"},
+      {"id": "008-jwt", "status": "done"},
+      {"id": "009-protected-route", "status": "done"},
+      {"id": "010-user-profile", "status": "done"},
+      {"id": "011-products", "status": "done"},
+      {"id": "012-subscriptions", "status": "done"},
+      {"id": "013-authorization", "status": "done"},
+      {"id": "014-product-gateway", "status": "done"},
+      {"id": "014a-speech-ai-facade", "status": "done"},
+      {"id": "014b-tapos-speech-ai-integration", "status": "done"},
+      {"id": "015-async-speech-ai-execution", "title": "Execucao Assincrona com Fila para Speech-AI", "status": "done", "summary": "Job model, GET /jobs/{id}, publisher RabbitMQ, POST /products/speech-ai/submit, speech-ai-worker consumindo speech_ai_jobs e executando a facade real, painel /ui estendido com bloco de execucao assincrona. Validado com test_task015.sh."}
+    ],
+    "not_formally_tracked": [
+      {
+        "topic": "Integracao do produto code-ai",
+        "status": "implementado e testado, mas SEM diretorio tasks/saas/0xx-code-ai-*",
+        "what_was_done": "facade (integration/), venv proprio, adapter no backend, rotas run/upload/submit, fila code_ai_jobs, worker dedicado, blocos no painel /ui, 2 bugs corrigidos no conversor original (import morto quebrando DOCX; conversores faltando para TXT/MD)",
+        "recommendation": "se a equipe quiser manter o padrao de documentacao das tasks anteriores, formalizar isso retroativamente como uma ou mais tasks (ex.: 016-code-ai-facade, 017-tapos-code-ai-integration, 018-async-code-ai-execution), espelhando 014A/014B/015."
+      },
+      {
+        "topic": "Reforma do painel /ui (navegabilidade)",
+        "status": "implementado e validado no navegador",
+        "what_was_done": "layout de abas (Conta/Produtos/Executar/Jobs/Logs) substituindo a pagina unica em scroll; cards de produto clicaveis em vez de campo de texto para slug; selecao de produto no executor dirige dinamicamente qual formulario aparece; historico de jobs e log de atividades persistidos em localStorage; botao de logout novo.",
+        "recommendation": "mesma observacao acima - nao ha task formal para isso no repositorio."
+      }
+    ],
+    "next_known_intent": [
+      "Task 016 (mencionada nas notes da 015) - Upload de Arquivos mais robusto",
+      "Task 017 (mencionada nas notes da 015) - Storage de resultados em MinIO",
+      "Task 018 (mencionada nas notes da 015) - IA Local/Ollama",
+      "Task 019 (mencionada nas notes da 015) - Microservicos por produto",
+      "Formalizar edital-ai e educa-ai com o mesmo padrao facade+adapter+rotas+fila+worker usado em speech-ai/code-ai, quando esses produtos tiverem codigo real por tras"
+    ]
+  },
+
+  "current_state": {
+    "version_file": "1.0.0 (nao alterado; considerar bump)",
+    "recent_commits": [
+      "984852b feat: complete task 015 async speech-ai execution",
+      "85acc51 test: validate task 015 async speech-ai execution",
+      "29c8f6f feat: add async job controls to test panel",
+      "720a877 feat: execute speech-ai pipeline from async worker",
+      "c853821 feat: add minimal speech-ai async worker",
+      "0c5e981 feat: add async submit endpoint for speech-ai",
+      "33b653f feat: add rabbitmq publisher for jobs",
+      "8308ccd feat: add job status endpoint",
+      "34ddd96 feat: add job schemas",
+      "3037670 feat: add job model for async execution",
+      "29b6ea9 docs: define task 015 async speech-ai execution",
+      "32a3aed baseline task 014B validated"
+    ],
+    "uncommitted_work_at_time_of_this_export": {
+      "note": "o trabalho de code-ai e da reforma do /ui feito nesta sessao AINDA NAO FOI COMMITADO (usuario nao pediu commit). git status mostra:",
+      "modified": [
+        "platform/saas-backend/app/jobs/publisher.py (generalizado para multi-fila)",
+        "platform/saas-backend/app/routes/products.py (rotas code-ai + helpers refatorados)",
+        "platform/saas-backend/app/static/index.html (reforma completa da navegacao)",
+        "products/speech-ai/input/script.txt (sobrescrito por testes)"
+      ],
+      "untracked": [
+        "platform/saas-backend/app/products/code_ai_adapter.py",
+        "platform/tap-runtime/workers/code-ai-worker/",
+        "products/code-ai/ (agora com .venv, integration/, e o conversor_markdown.py corrigido)",
+        "task15_teste_integrado.md",
+        "Stellantis_Copilot_Token_Optimization_Best_Practices.pdf (arquivo de teste solto na raiz - provavelmente deveria ser removido ou movido para products/code-ai/input/)"
+      ]
+    },
+    "background_processes_left_running": {
+      "note": "workers deixados rodando em background para permitir testes continuos do usuario; nao sao gerenciados por systemd/supervisor, morrem se o shell/maquina reiniciar",
+      "processes": [
+        "2x platform/tap-runtime/workers/speech-ai-worker/worker.py (um deles remanescente de sessoes anteriores, outro iniciado nesta sessao)",
+        "1x platform/tap-runtime/workers/code-ai-worker/worker.py (iniciado nesta sessao)"
+      ]
+    },
+    "not_yet_implemented": ["refresh token", "RBAC (roles/perfis)", "multi-tenant", "billing/pagamentos", "retry/DLQ nas filas", "dashboard de jobs", "cancelamento de jobs", "MinIO para outputs", "backend real de edital-ai e educa-ai", "isolamento por usuario dos arquivos de input/output de speech-ai e code-ai (hoje sao compartilhados globalmente, nao por usuario/sessao)"],
+    "known_observations": [
+      "app/routes/users.py existe mas nao esta incluido em app/main.py (endpoint /users/me nao montado) - herdado do snapshot anterior, nao mexido nesta sessao.",
+      "testes.sh exporta SECRET_KEY, mas o codigo (app/security.py) le JWT_SECRET_KEY - herdado, nao corrigido.",
+      "products.py NAO usa mais validacao de subscription inline duplicada - foi refatorado nesta sessao para os helpers _require_active_subscription() e _submit_job(), compartilhados entre speech-ai e code-ai.",
+      "speech-ai e code-ai compartilham o padrao de 'arquivo de entrada unico e global' (script.txt para speech-ai; input/documento.<ext> para code-ai) - nao ha isolamento por usuario/sessao/tenant. Em teste manual isso e aceitavel; para producao multiusuario precisa de replanejamento (ex.: pasta por job_id).",
+      "Product.slug 'code-ai' ficou com id=5 no banco (nao 4) porque um id=4 foi criado e removido durante os testes desta sessao - sem impacto funcional, so estetico."
+    ]
+  },
+
+  "how_to_resume": {
+    "for_assistant": "Voce e um engenheiro operando a plataforma TAPOS a partir de /workspace/tecle. Respeite a constitution: modularidade, desacoplamento, simplicidade, incrementalidade (1 modulo por vez, testar, commitar). Produtos nunca acessam banco direto; comunicacao via API/adapter/fila. O backend (uvicorn, porta 8000) e os workers de speech-ai e code-ai provavelmente ja estao rodando em background de sessoes anteriores - confira com 'ps aux | grep -E \"uvicorn|worker.py\"' e 'docker ps' antes de subir novas instancias.",
+    "immediate_pending_items": [
+      "Nada foi commitado nesta sessao - revisar o diff (git status/diff) e decidir o que commitar antes de seguir.",
+      "Considerar formalizar a integracao do code-ai e a reforma do /ui como tasks numeradas em tasks/saas/, se a equipe quiser manter o padrao de documentacao.",
+      "Remover ou mover o arquivo solto Stellantis_Copilot_Token_Optimization_Best_Practices.pdf da raiz do repositorio.",
+      "Avaliar bump de VERSION (hoje ainda 1.0.0 apesar de Task 015 + code-ai + reforma do /ui estarem prontos)."
+    ],
+    "validation": "Usar test_task015.sh (speech-ai) e task15_teste_integrado.md secao 8 (code-ai) para validar o fluxo ponta a ponta apos qualquer mudanca nas rotas, publisher ou workers."
+  }
+}

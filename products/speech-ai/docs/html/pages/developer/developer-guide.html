@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Guide - Speech AI Docs</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                🎙️ Speech AI Docs
+            </a>
+            <nav class="nav-main">
+                <a href="../../index.html">Início</a>
+                <a href="../../index.html#packs">Packs</a>
+                <a href="index.html">Pack: Developer</a>
+                <input type="text" id="search-input" class="search-box" placeholder="Buscar documentação...">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>📦 Developer Pack</h3>
+                <ul class="sidebar-nav"><li><a href="developer-guide.html">Developer Guide</a></li><li><a href="coding-standards.html">Coding Standards</a></li><li><a href="contributing.html">Contributing</a></li><li><a href="testing-guide.html">Testing Guide</a></li></ul>
+                
+                <h3>🔗 Geral</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="../../index.html">Voltar ao Início</a></li>
+                    <li><a href="index.html">Índice do Pack</a></li>
+                    <li><a href="../../diagrams/index.html">Diagramas</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="index.html">Developer</a>
+                    <span>/</span>
+                    <span>Developer Guide</span>
+                </div>
+
+                <!-- Content -->
+                <h1>Developer Guide</h1>
+<h2>1. Introduction</h2>
+<p>Welcome to the Speech AI project. This guide is intended for software engineers, particularly junior AI engineers, who are onboarding to the project. It covers the local setup, the core data flow, and instructions on how to extend the system.</p>
+<h2>2. Local Environment Setup</h2>
+<p>To ensure a consistent development environment, follow these steps:</p>
+<ol>
+<li><strong>Clone the Repository</strong>: Clone the main project repository to your local machine.</li>
+<li><strong>Create a Virtual Environment</strong>: It is highly recommended to use a virtual environment to isolate dependencies.
+    <code>bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows: venv\Scripts\activate</code></li>
+<li><strong>Install Dependencies</strong>: Install the required packages listed in <code>requirements.txt</code>.
+    <code>bash
+    pip install -r requirements.txt</code></li>
+<li><strong>Verify Setup</strong>: Run the main script to ensure everything is working correctly.
+    <code>bash
+    python main.py</code></li>
+</ol>
+<h2>3. Understanding the Core Flow</h2>
+<p>The application execution is orchestrated by <code>SpeechAIApp</code> located in <code>app/speech_ai_app.py</code>. Understanding this file is crucial.</p>
+<p>The flow operates as follows:
+1.  <code>TextAnalyzer</code> reads the input script and converts it into a <code>Presentation</code> object.
+2.  <code>SpeechIntelligenceEngine</code> evaluates the text, detects the language, and generates a <code>SpeechProfile</code>.
+3.  <code>NarrationBuilder</code> and <code>SpeechBuilder</code> format the text for synthesis.
+4.  <code>SpeechService</code> utilizes the <code>ProviderFactory</code> to instantiate the configured TTS provider (e.g., <code>EdgeProvider</code>) and generates the final audio file.</p>
+<h2>4. Adding a New TTS Provider</h2>
+<p>The system is designed to be easily extensible. To add a new TTS provider (e.g., Azure or OpenAI), you must adhere to the established provider architecture.</p>
+<ol>
+<li><strong>Create the Provider Class</strong>: Create a new file in the <code>providers/</code> directory (e.g., <code>azure_provider.py</code>).</li>
+<li><strong>Inherit from BaseProvider</strong>: Your new class must inherit from <code>BaseProvider</code> and implement the required <code>generate()</code> method.</li>
+<li><strong>Register the Provider</strong>: The provider must be registered within the system so the <code>ProviderFactory</code> can instantiate it based on the configuration in <code>settings.json</code>.</li>
+</ol>
+<p>By following this pattern, the core application logic remains completely unaware of the specific provider implementation, adhering to the Open/Closed Principle.</p>
+<h2>5. Modifying Voice Profiles</h2>
+<p>Voice profiles dictate how the TTS engine sounds. They are managed via JSON configuration rather than hardcoded logic.</p>
+<p>To modify or add a voice:
+1.  Open <code>config/voices.json</code>.
+2.  Add a new profile entry specifying the <code>provider</code>, <code>language</code>, <code>locale</code>, <code>voice</code> ID (specific to the provider), and characteristics like <code>rate</code> and <code>pitch</code>.
+3.  Update the <code>defaults</code> section if you want this new voice to be the default for a specific language.</p>
+<h2>6. Debugging</h2>
+<p>Logs are automatically written to the <code>logs/</code> directory. The <code>app.log</code> file contains detailed information about the pipeline execution, including language detection results, selected voice profiles, and any errors encountered during API calls to the TTS providers. Always check this file first when troubleshooting issues arise.</p>
+
+                <!-- Navigation -->
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border-color); display: flex; justify-content: space-between; gap: 1rem;">
+                    <a href="../../index.html" class="btn">← Voltar</a>
+                    <a href="index.html" class="btn">Índice do Pack</a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Speech AI Project. Documentação gerada por <a href="#">Manus AI</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

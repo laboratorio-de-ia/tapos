@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contributing - Speech AI Docs</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                🎙️ Speech AI Docs
+            </a>
+            <nav class="nav-main">
+                <a href="../../index.html">Início</a>
+                <a href="../../index.html#packs">Packs</a>
+                <a href="index.html">Pack: Developer</a>
+                <input type="text" id="search-input" class="search-box" placeholder="Buscar documentação...">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>📦 Developer Pack</h3>
+                <ul class="sidebar-nav"><li><a href="developer-guide.html">Developer Guide</a></li><li><a href="coding-standards.html">Coding Standards</a></li><li><a href="contributing.html">Contributing</a></li><li><a href="testing-guide.html">Testing Guide</a></li></ul>
+                
+                <h3>🔗 Geral</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="../../index.html">Voltar ao Início</a></li>
+                    <li><a href="index.html">Índice do Pack</a></li>
+                    <li><a href="../../diagrams/index.html">Diagramas</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="index.html">Developer</a>
+                    <span>/</span>
+                    <span>Contributing</span>
+                </div>
+
+                <!-- Content -->
+                <h1>Contributing Guide</h1>
+<h2>1. Welcome</h2>
+<p>Thank you for your interest in contributing to the Speech AI project. This document outlines the process for submitting contributions, reporting bugs, and proposing new features.</p>
+<h2>2. Reporting Bugs</h2>
+<p>If you encounter a bug, please ensure you check the existing issue tracker first to avoid duplicates. When opening a new bug report, provide the following information:
+-   A clear, descriptive title.
+-   The exact steps to reproduce the issue.
+-   The expected behavior versus the actual behavior.
+-   Relevant logs from the <code>logs/</code> directory.
+-   The environment details (OS, Python version).</p>
+<h2>3. Proposing Features</h2>
+<p>We welcome suggestions for new features, especially integrations with new TTS providers or improvements to the text analysis algorithms.
+-   Open an issue describing the feature.
+-   Explain the use case and why it would be beneficial to the enterprise platform.
+-   If proposing a significant architectural change, consider drafting an Architecture Decision Record (ADR) draft for discussion.</p>
+<h2>4. Development Workflow</h2>
+<ol>
+<li>
+<p><strong>Branching Strategy</strong>:</p>
+<ul>
+<li><code>main</code>: Represents the stable, production-ready code.</li>
+<li><code>develop</code>: The integration branch for the next release.</li>
+<li>Feature branches: Create a new branch off <code>develop</code> for your work, naming it descriptively (e.g., <code>feature/azure-tts-integration</code> or <code>bugfix/regex-slide-parsing</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Making Changes</strong>:</p>
+<ul>
+<li>Ensure your code adheres to the guidelines in <code>CODING_STANDARDS.md</code>.</li>
+<li>Write unit tests for any new logic introduced.</li>
+<li>Update relevant documentation (including the Architecture and Developer guides if necessary).</li>
+</ul>
+</li>
+<li>
+<p><strong>Committing</strong>:</p>
+<ul>
+<li>Write clear, concise commit messages.</li>
+<li>Reference any related issue numbers in the commit message.</li>
+</ul>
+</li>
+<li>
+<p><strong>Pull Requests</strong>:</p>
+<ul>
+<li>Submit a Pull Request (PR) against the <code>develop</code> branch.</li>
+<li>Ensure all tests pass before requesting a review.</li>
+<li>A project maintainer will review the code. Address any feedback provided during the review process. Once approved, the PR will be merged.</li>
+</ul>
+</li>
+</ol>
+
+                <!-- Navigation -->
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border-color); display: flex; justify-content: space-between; gap: 1rem;">
+                    <a href="../../index.html" class="btn">← Voltar</a>
+                    <a href="index.html" class="btn">Índice do Pack</a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Speech AI Project. Documentação gerada por <a href="#">Manus AI</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

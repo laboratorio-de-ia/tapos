@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README - Speech AI Docs</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                🎙️ Speech AI Docs
+            </a>
+            <nav class="nav-main">
+                <a href="../../index.html">Início</a>
+                <a href="../../index.html#packs">Packs</a>
+                <a href="index.html">Pack: Foundation</a>
+                <input type="text" id="search-input" class="search-box" placeholder="Buscar documentação...">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>📦 Foundation Pack</h3>
+                <ul class="sidebar-nav"><li><a href="readme.html">README</a></li><li><a href="engineering-docs.html">Engineering Docs</a></li><li><a href="architecture.html">Architecture</a></li><li><a href="diagrams.html">Diagrams</a></li></ul>
+                
+                <h3>🔗 Geral</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="../../index.html">Voltar ao Início</a></li>
+                    <li><a href="index.html">Índice do Pack</a></li>
+                    <li><a href="../../diagrams/index.html">Diagramas</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="index.html">Foundation</a>
+                    <span>/</span>
+                    <span>README</span>
+                </div>
+
+                <!-- Content -->
+                <h1>Speech AI - Enterprise Text-to-Audio Platform</h1>
+<h2>Overview</h2>
+<p>Speech AI is a modern, scalable, and modular Text-to-Audio (TTS) platform built with Python. It transforms written scripts in multiple languages (English, Portuguese, Spanish) into high-quality, natural-sounding audio files. Designed with an enterprise-grade architecture, it acts as a robust pipeline capable of analyzing text, extracting intelligence, optimizing speech patterns, and orchestrating synthesis through extensible providers.</p>
+<p>This documentation suite serves as the single source of truth for the project, covering architecture, development standards, operations, and strategic roadmaps.</p>
+<h2>Core Capabilities</h2>
+<ul>
+<li><strong>Multi-Language Support</strong>: Automatically detects and processes English, Portuguese, and Spanish.</li>
+<li><strong>Speech Intelligence Engine</strong>: Analyzes text complexity, calculates pacing, and recommends optimal reading styles and speeds.</li>
+<li><strong>Provider Abstraction</strong>: A factory and registry pattern allows seamless switching between TTS providers (currently using Microsoft Edge TTS, with planned support for Azure, OpenAI, ElevenLabs, and Amazon Polly).</li>
+<li><strong>Voice Profiles</strong>: Configuration-driven voice selection based on language, gender, and reading style (<code>voices.json</code>).</li>
+<li><strong>Modular Pipeline</strong>: Decoupled stages for Text Analysis, Narration Building, Speech Building, and TTS Generation.</li>
+</ul>
+<h2>Documentation Structure</h2>
+<p>This repository contains a comprehensive Enterprise Documentation Suite, organized into four main packs:</p>
+<h3>📦 Foundation Pack</h3>
+<p>Core documents explaining what the system is and how it is structured.
+- <a href="ENGINEERING_DOCUMENTATION.md">Engineering Documentation</a>
+- <a href="ARCHITECTURE.md">Architecture Overview</a>
+- <a href="DIAGRAMS.md">Diagrams Index</a></p>
+<h3>📦 Sprint Pack</h3>
+<p>Strategic and tactical planning, decisions, and history.
+- <code>SPRINT_ROADMAP.md</code>
+- <code>ADR.md</code> (Architecture Decision Records)
+- <code>CHANGELOG.md</code>
+- <code>ROADMAP.md</code></p>
+<h3>📦 Developer Pack</h3>
+<p>Guidelines and references for software engineers contributing to the project.
+- <code>DEVELOPER_GUIDE.md</code>
+- <code>CODING_STANDARDS.md</code>
+- <code>CONTRIBUTING.md</code>
+- <code>TESTING_GUIDE.md</code></p>
+<h3>📦 Operations Pack</h3>
+<p>Runbooks, security, and deployment metrics for DevOps and SRE teams.
+- <code>SECURITY.md</code>
+- <code>OPERATIONS_GUIDE.md</code>
+- <code>PROJECT_METRICS.md</code>
+- <code>RELEASE_PROCESS.md</code></p>
+<h2>Getting Started</h2>
+<p>To run the Speech AI pipeline locally:</p>
+<ol>
+<li>
+<p><strong>Install Dependencies</strong>:
+   <code>bash
+   pip install -r requirements.txt</code></p>
+</li>
+<li>
+<p><strong>Configure Input</strong>:
+   Place your text file in the <code>input/</code> directory (e.g., <code>input/script.txt</code>).
+   Update <code>config/settings.json</code> if necessary.</p>
+</li>
+<li>
+<p><strong>Run Pipeline</strong>:
+   <code>bash
+   python main.py</code></p>
+</li>
+<li>
+<p><strong>Retrieve Output</strong>:
+   Check the <code>output/</code> directory for the generated <code>.mp3</code> file and text reports.</p>
+</li>
+</ol>
+<hr />
+<p><em>Generated by Contexto Global AI Lab - CTO Advisory</em></p>
+
+                <!-- Navigation -->
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border-color); display: flex; justify-content: space-between; gap: 1rem;">
+                    <a href="../../index.html" class="btn">← Voltar</a>
+                    <a href="index.html" class="btn">Índice do Pack</a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Speech AI Project. Documentação gerada por <a href="#">Manus AI</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+# Extração de documentos
+pdfplumber
+pdf2image
+pytesseract
+python-docx
+python-pptx
+Pillow
+
+# Processamento
+pandas
+tabulate
+
+# Geração de artefatos
+openpyxl
+reportlab
+jinja2
+
+# IA e integração
+requests
+
+# Utilitários
+python-dotenv

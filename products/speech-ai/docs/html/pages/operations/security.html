@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security - Speech AI Docs</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                🎙️ Speech AI Docs
+            </a>
+            <nav class="nav-main">
+                <a href="../../index.html">Início</a>
+                <a href="../../index.html#packs">Packs</a>
+                <a href="index.html">Pack: Operations</a>
+                <input type="text" id="search-input" class="search-box" placeholder="Buscar documentação...">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>📦 Operations Pack</h3>
+                <ul class="sidebar-nav"><li><a href="security.html">Security</a></li><li><a href="operations-guide.html">Operations Guide</a></li><li><a href="project-metrics.html">Project Metrics</a></li><li><a href="release-process.html">Release Process</a></li></ul>
+                
+                <h3>🔗 Geral</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="../../index.html">Voltar ao Início</a></li>
+                    <li><a href="index.html">Índice do Pack</a></li>
+                    <li><a href="../../diagrams/index.html">Diagramas</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="index.html">Operations</a>
+                    <span>/</span>
+                    <span>Security</span>
+                </div>
+
+                <!-- Content -->
+                <h1>Security Guidelines</h1>
+<h2>1. Overview</h2>
+<p>This document outlines the security posture, threat model, and best practices for deploying and operating the Speech AI platform in an enterprise environment. As the system processes text and interacts with external APIs, safeguarding data integrity and securing credentials are top priorities.</p>
+<h2>2. Threat Model and Mitigations</h2>
+<p>The primary security concerns involve unauthorized access to API credentials, data leakage during processing, and injection attacks via input scripts.</p>
+<h3>2.1. Credential Management</h3>
+<p>The application requires API keys to authenticate with commercial TTS providers (e.g., Azure, OpenAI).
+-   <strong>Never hardcode credentials</strong> in the source code or configuration files like <code>settings.json</code>.
+-   Use the <code>python-dotenv</code> library to load sensitive information from a <code>.env</code> file during local development.
+-   In production environments, utilize secure secret management services such as Azure Key Vault, AWS Secrets Manager, or HashiCorp Vault. The application should retrieve these secrets dynamically at runtime.</p>
+<h3>2.2. Input Validation and Sanitization</h3>
+<p>The system ingests raw text files (<code>script.txt</code>) which are parsed by the <code>TextAnalyzer</code>.
+-   The text normalization process currently handles whitespace and formatting. However, to prevent potential injection vulnerabilities if the system is later exposed via a web API, all input must be strictly sanitized.
+-   Ensure that the text processing logic does not execute or evaluate any part of the input script as code.</p>
+<h3>2.3. Data Privacy in Transit</h3>
+<p>When the <code>SpeechService</code> sends text to external providers, the data traverses the public internet.
+-   All communication with external TTS APIs must be conducted over encrypted channels using TLS 1.2 or higher (HTTPS).
+-   The application must verify the SSL certificates of the provider endpoints to prevent Man-in-the-Middle (MitM) attacks.</p>
+<h2>3. File System Security</h2>
+<p>The application reads from an <code>input/</code> directory and writes to an <code>output/</code> directory.</p>
+<ul>
+<li><strong>Principle of Least Privilege</strong>: The service account running the application should only have read access to the input directory and write access to the output and log directories. It should not have permission to modify the application source code or configuration files.</li>
+<li>Regularly audit the <code>output/</code> directory and implement retention policies to delete generated audio files that are no longer needed, minimizing the exposure of potentially sensitive generated content.</li>
+</ul>
+<h2>4. Vulnerability Reporting</h2>
+<p>If you discover a security vulnerability within the Speech AI platform, please report it immediately to the security team via the designated internal channels. Do not disclose vulnerability details publicly until a patch has been developed and deployed.</p>
+
+                <!-- Navigation -->
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border-color); display: flex; justify-content: space-between; gap: 1rem;">
+                    <a href="../../index.html" class="btn">← Voltar</a>
+                    <a href="index.html" class="btn">Índice do Pack</a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Speech AI Project. Documentação gerada por <a href="#">Manus AI</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

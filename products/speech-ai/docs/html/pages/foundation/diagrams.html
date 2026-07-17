@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagrams - Speech AI Docs</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                🎙️ Speech AI Docs
+            </a>
+            <nav class="nav-main">
+                <a href="../../index.html">Início</a>
+                <a href="../../index.html#packs">Packs</a>
+                <a href="index.html">Pack: Foundation</a>
+                <input type="text" id="search-input" class="search-box" placeholder="Buscar documentação...">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>📦 Foundation Pack</h3>
+                <ul class="sidebar-nav"><li><a href="readme.html">README</a></li><li><a href="engineering-docs.html">Engineering Docs</a></li><li><a href="architecture.html">Architecture</a></li><li><a href="diagrams.html">Diagrams</a></li></ul>
+                
+                <h3>🔗 Geral</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="../../index.html">Voltar ao Início</a></li>
+                    <li><a href="index.html">Índice do Pack</a></li>
+                    <li><a href="../../diagrams/index.html">Diagramas</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>/</span>
+                    <a href="index.html">Foundation</a>
+                    <span>/</span>
+                    <span>Diagrams</span>
+                </div>
+
+                <!-- Content -->
+                <h1>Diagrams Index</h1>
+<p>This document serves as an index for all architectural and flow diagrams associated with the Speech AI project. The actual diagram files are stored in the <code>../Diagrams/</code> directory.</p>
+<h2>1. System Architecture</h2>
+<ul>
+<li><strong>File</strong>: <code>../Diagrams/system_architecture.puml</code> (PlantUML)</li>
+<li><strong>Description</strong>: High-level component diagram showing the relationship between the App Kernel, Pipeline, Intelligence Engine, and Providers.</li>
+</ul>
+<h2>2. Pipeline Data Flow</h2>
+<ul>
+<li><strong>File</strong>: <code>../Diagrams/pipeline_flow.mmd</code> (Mermaid)</li>
+<li><strong>Description</strong>: Sequence diagram detailing the step-by-step transformation of raw text into a final audio file.</li>
+</ul>
+<h2>3. Class Structure (Domain Models)</h2>
+<ul>
+<li><strong>File</strong>: <code>../Diagrams/domain_models.puml</code> (PlantUML)</li>
+<li><strong>Description</strong>: UML Class diagram illustrating the <code>Presentation</code>, <code>Slide</code>, <code>Paragraph</code>, and <code>SpeechProfile</code> entities.</li>
+</ul>
+<p><em>(Note: Diagram source files are provided in the release package and can be rendered using standard PlantUML or Mermaid rendering tools).</em></p>
+
+                <!-- Navigation -->
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border-color); display: flex; justify-content: space-between; gap: 1rem;">
+                    <a href="../../index.html" class="btn">← Voltar</a>
+                    <a href="index.html" class="btn">Índice do Pack</a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Speech AI Project. Documentação gerada por <a href="#">Manus AI</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+{
+    "defaults": {
+        "en": "en-us-guy",
+        "pt": "pt-br-francisca"
+    },
+
+    "profiles": {
+
+        "en-us-guy": {
+
+            "provider": "edge",
+
+            "language": "en",
+
+            "locale": "en-US",
+
+            "voice": "en-US-GuyNeural",
+
+            "name": "English US - Guy",
+
+            "description": "Default English male narrator.",
+
+            "rate": "-15%",
+
+            "pitch": "+0Hz",
+
+            "volume": "+0%",
+
+            "style": "default",
+
+            "role": "narrator",
+
+            "gender": "male"
+
+        },
+
+        "en-us-jenny": {
+
+            "provider": "edge",
+
+            "language": "en",
+
+            "locale": "en-US",
+
+            "voice": "en-US-JennyNeural",
+
+            "name": "English US - Jenny",
+
+            "description": "English female presenter.",
+
+            "rate": "-10%",
+
+            "pitch": "+0Hz",
+
+            "volume": "+0%",
+
+            "style": "friendly",
+
+            "role": "presenter",
+
+            "gender": "female"
+
+        },
+
+        "pt-br-francisca": {
+
+            "provider": "edge",
+
+            "language": "pt",
+
+            "locale": "pt-BR",
+
+            "voice": "pt-BR-FranciscaNeural",
+
+            "name": "Português Brasil - Francisca",
+
+            "description": "Narradora brasileira.",
+
+            "rate": "-8%",
+
+            "pitch": "+0Hz",
+
+            "volume": "+0%",
+
+            "style": "default",
+
+            "role": "narrator",
+
+            "gender": "female"
+
+        },
+
+        "pt-br-antonio": {
+
+            "provider": "edge",
+
+            "language": "pt",
+
+            "locale": "pt-BR",
+
+            "voice": "pt-BR-AntonioNeural",
+
+            "name": "Português Brasil - Antonio",
+
+            "description": "Narrador brasileiro.",
+
+            "rate": "-8%",
+
+            "pitch": "+0Hz",
+
+            "volume": "+0%",
+
+            "style": "default",
+
+            "role": "narrator",
+
+            "gender": "male"
+
+        }
+
+    }
+}

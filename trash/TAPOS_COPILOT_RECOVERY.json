@@ -1,0 +1,258 @@
+{
+  "schema": "tapos.copilot.recovery/v1",
+  "purpose": "Arquivo de recuperacao de contexto da plataforma TAPOS para reimportar em um assistente (Microsoft Copilot / Claude) e retomar o desenvolvimento a partir da Task 015. Todo o conteudo foi extraido diretamente do repositorio /workspace/tecle em 2026-07-12, sem invencao.",
+  "generated_at": "2026-07-12",
+  "generated_from": "/workspace/tecle",
+  "source_of_truth": {
+    "context_files": [
+      ".claude/workspace.md",
+      ".claude/constitution.md",
+      ".claude/current-phase.md",
+      "readme.md",
+      "architecture.md",
+      "changelog.md",
+      "VERSION"
+    ],
+    "task_files": "tasks/saas/*/{task.md,notes.md,acceptance.md}",
+    "existing_exports": [
+      "TAPOS_FORENSIC_EXPORT.json",
+      "TAPOS_FORENSIC_FULL.json",
+      "TECLE_FULL_KNOWLEDGE_EXPORT.json"
+    ],
+    "note": "Os exports acima sao dumps forenses (conteudo bruto de arquivos). Este arquivo e um resumo estruturado de contexto/orientacao, focado em retomar as tasks."
+  },
+
+  "platform": {
+    "name": "TAPOS",
+    "long_name": "Tecle AI Platform Operating System",
+    "version": "1.0.0",
+    "description": "Plataforma de engenharia para construcao e operacao de produtos SaaS baseados em IA. Organiza desenvolvimento, runtime e infraestrutura de forma modular, desacoplada e escalavel, com evolucao incremental e uso de IA local (Ollama) em arquitetura hibrida.",
+    "goals": [
+      "Suportar multiplos produtos SaaS independentes",
+      "Centralizar autenticacao e controle de acesso",
+      "Padronizar desenvolvimento e operacao",
+      "Reduzir custo e dependencia de fornecedores externos",
+      "Utilizar IA local (Ollama) e arquitetura hibrida",
+      "Garantir reprodutibilidade do ambiente"
+    ],
+    "core_principles": [
+      "Modularidade: componentes independentes (backend, produtos, infraestrutura nao dependem diretamente entre si)",
+      "Desacoplamento: produtos NUNCA acessam banco diretamente; comunicacao sempre via API",
+      "Simplicidade: implementar apenas o necessario, sem antecipar problemas futuros",
+      "Incrementalidade: 1 modulo por vez, testar antes de avancar, commit constante",
+      "Testabilidade: todo codigo executavel e validavel isoladamente",
+      "Reprodutibilidade: ambiente recriavel do zero, infraestrutura declarativa",
+      "Persistencia correta: dados nunca dentro de containers, sempre em /data/platform/storage"
+    ],
+    "forbidden_practices": [
+      "Acesso direto ao banco por produtos",
+      "Logica de negocio dentro da infraestrutura",
+      "Hardcode de configuracoes criticas",
+      "Implementar multiplas features sem validacao"
+    ]
+  },
+
+  "architecture": {
+    "layers": [
+      "User",
+      "SaaS Backend (platform) - FastAPI",
+      "Products (speech-ai, edital-ai, educa-ai)",
+      "Infrastructure (/data/platform)"
+    ],
+    "logical_stack": {
+      "api_layer": "FastAPI",
+      "auth_layer": "JWT (HS256) + bcrypt",
+      "business_layer": "Products + Subscriptions + Authorization",
+      "data_layer": "PostgreSQL",
+      "infrastructure_layer": "Docker + IA local (Ollama)"
+    },
+    "backend_stack": ["FastAPI", "SQLAlchemy", "passlib/bcrypt", "python-jose (JWT)", "PostgreSQL (psycopg2)"],
+    "infrastructure_services": [
+      "Docker", "PostgreSQL", "Redis", "RabbitMQ", "MinIO", "Qdrant", "Ollama", "Open WebUI", "Portainer"
+    ],
+    "workspace_structure": {
+      "root": "/workspace/tecle",
+      "directories": {
+        "platform/": "Base da plataforma e servicos centrais (saas-backend, tap-os, runtime)",
+        "products/": "Produtos SaaS independentes (speech-ai, edital-ai, educa-ai). Consomem APIs da camada SaaS, nao acessam infra direto",
+        "shared/": "Componentes reutilizaveis (SDKs, bibliotecas, templates, prompts, agentes)",
+        "governance/": "Padroes e regras (arquitetura, politicas, roadmap, ADRs)",
+        "developers/": "Config do ambiente de dev (VSCode, Claude Code, scripts)",
+        "automation/": "IaC e automacao (Terraform, Ansible, scripts)",
+        "playground/": "Experimentacao",
+        "tests/": "Testes",
+        ".claude/": "Contexto persistente do assistente (workspace.md, constitution.md, current-phase.md, readme.md)",
+        "tasks/": "Tarefas documentadas (tasks/kernel, tasks/saas)"
+      }
+    },
+    "runtime_structure": {
+      "root": "/data/platform",
+      "infra": "docker-compose e servicos",
+      "runtime": "execucao de containers",
+      "storage": ["db", "redis", "rabbitmq", "minio", "qdrant", "models", "portainer"]
+    }
+  },
+
+  "application": {
+    "name": "saas-backend",
+    "path": "platform/saas-backend",
+    "framework": "FastAPI",
+    "entrypoint": "app.main:app",
+    "run_command": "uvicorn app.main:app --reload (porta 8000)",
+    "env_vars": {
+      "DATABASE_URL": "postgresql+psycopg2://admin:admin@postgres:5432/platform (default). Em dev local: ...@localhost:5432/platform",
+      "JWT_SECRET_KEY": "dev-secret-key (default). Nota: testes.sh exporta SECRET_KEY, mas o codigo le JWT_SECRET_KEY",
+      "JWT_ALGORITHM": "HS256 (fixo no codigo)",
+      "JWT_EXPIRE_MINUTES": "60 (default)"
+    },
+    "modules": {
+      "app/main.py": "App FastAPI. Registra routers auth, subscriptions, products. Endpoint /health. Monta static em /ui (StaticFiles em app/static, html=True)",
+      "app/db.py": "Engine SQLAlchemy, SessionLocal, Base declarativa, dependencia get_db()",
+      "app/models.py": "Modelos User, Product, Subscription (SQLAlchemy ORM)",
+      "app/security.py": "hash_password, verify_password (bcrypt), create_access_token (JWT HS256)",
+      "app/deps.py": "get_current_user (valida JWT Bearer) e get_product_access (valida subscription ativa por slug)",
+      "app/routes/auth.py": "POST /auth/register, POST /auth/login",
+      "app/routes/users.py": "GET /users/me (NOTA: router existe mas NAO esta incluido em main.py)",
+      "app/routes/subscriptions.py": "POST /subscriptions, GET /subscriptions",
+      "app/routes/products.py": "GET /products, GET /products/{slug}/access, POST /products/speech-ai/run, POST /products/speech-ai/upload",
+      "app/products/speech_ai_adapter.py": "Adapter TAPOS -> speech-ai. Executa integration/cli.py no .venv do produto via subprocess e faz json.loads do stdout"
+    },
+    "data_models": {
+      "User": {
+        "table": "users",
+        "fields": ["id (PK)", "email (unique, not null)", "password (hash bcrypt, not null)", "created_at (tz)", "is_active (bool, default true)"],
+        "relationships": ["subscriptions -> Subscription"]
+      },
+      "Product": {
+        "table": "products",
+        "fields": ["id (PK)", "name (not null)", "slug (unique, not null)", "is_active (bool, default true)", "created_at (tz)"],
+        "relationships": ["subscriptions -> Subscription"],
+        "seed": ["speech-ai", "edital-ai", "educa-ai"]
+      },
+      "Subscription": {
+        "table": "subscriptions",
+        "fields": ["id (PK)", "user_id (FK users.id)", "product_id (FK products.id)", "is_active (bool, default true)", "created_at (tz)"],
+        "relationships": ["user -> User", "product -> Product"]
+      }
+    },
+    "endpoints": [
+      {"method": "GET", "path": "/health", "auth": false, "returns": "{\"status\": \"ok\"}"},
+      {"method": "POST", "path": "/auth/register", "auth": false, "body": "{email, password}", "returns": "{id, email}", "errors": "400 email ja registrado"},
+      {"method": "POST", "path": "/auth/login", "auth": false, "body": "{email, password}", "returns": "{access_token, token_type: bearer}", "errors": "401 credenciais invalidas"},
+      {"method": "GET", "path": "/users/me", "auth": "JWT", "returns": "{id, email, created_at, is_active}", "note": "router definido mas NAO montado no main.py atual"},
+      {"method": "GET", "path": "/products", "auth": false, "returns": "lista de produtos ativos"},
+      {"method": "POST", "path": "/subscriptions", "auth": "JWT", "body": "{product_slug}", "returns": "subscription serializada", "errors": "404 produto nao encontrado"},
+      {"method": "GET", "path": "/subscriptions", "auth": "JWT", "returns": "lista de subscriptions do usuario autenticado"},
+      {"method": "GET", "path": "/products/{product_slug}/access", "auth": "JWT", "returns": "{product_slug, access: true}", "errors": "404 produto / 403 sem subscription"},
+      {"method": "POST", "path": "/products/speech-ai/run", "auth": "JWT + subscription ativa", "returns": "resultado padronizado da facade (SpeechRunResult)", "errors": "401 sem token / 403 sem subscription / 404 produto"},
+      {"method": "POST", "path": "/products/speech-ai/upload", "auth": "JWT + subscription ativa", "body": "multipart file", "action": "grava input/script.txt e executa a pipeline", "returns": "resultado padronizado da facade"}
+    ],
+    "auth_flow": [
+      "Cliente -> POST /auth/login",
+      "Backend valida email+senha (verify_password bcrypt)",
+      "JWT gerado (sub=email, exp) com create_access_token",
+      "Cliente usa header Authorization: Bearer <token>",
+      "get_current_user decodifica JWT, busca User por email; falha => 401",
+      "get_product_access valida produto ativo + subscription ativa; falha => 404/403"
+    ]
+  },
+
+  "products": {
+    "speech-ai": {
+      "path": "products/speech-ai",
+      "status": "funcional e integrado ao SaaS (Tasks 014A e 014B concluidas)",
+      "description": "Transforma entradas de texto em narracao, speech e audio (mp3). Roda como app local via main.py/SpeechAIApp e tambem via facade programatica.",
+      "integration_layer": {
+        "path": "products/speech-ai/integration",
+        "files": {
+          "facade.py": "run_speech_ai() -> chama execute_current_pipeline().to_dict()",
+          "runner.py": "execute_current_pipeline(): TextAnalyzer -> SpeechIntelligenceEngine.build_profile -> NarrationBuilder -> SpeechBuilder -> SpeechService.synthesize. Retorna SpeechRunResult",
+          "schemas.py": "dataclass SpeechRunResult {status, input_file, narration_file, speech_file, audio_file, provider, voice, language, estimated_minutes}",
+          "cli.py": "Entrada por linha de comando: chama run_speech_ai() e imprime JSON no stdout (erros vao para stderr, exit 1)"
+        }
+      },
+      "pipeline": ["TextAnalyzer (texto->Presentation)", "SpeechIntelligenceEngine (build_profile)", "NarrationBuilder (narration.txt)", "SpeechBuilder (speech.txt)", "SpeechService.synthesize (audio.mp3)"],
+      "io": {
+        "input": "products/speech-ai/input/script.txt",
+        "outputs": ["output/narration.txt", "output/speech.txt", "output/audio.mp3", "output/speech.xml", "output/speech_report.json"]
+      }
+    },
+    "edital-ai": {
+      "path": "products/edital-ai",
+      "status": "planejado (diretorio existe, sem implementacao no baseline)",
+      "description": "Recebera documentos de editais; fara analise e geracao de artefatos (Excel, PDF, Word, e-mail). Usara a camada SaaS para auth/autorizacao."
+    },
+    "educa-ai": {
+      "path": "products/educa-ai",
+      "status": "planejado (diretorio existe, sem implementacao no baseline)",
+      "description": "Recebera dados/documentos financeiros; apoiara educacao financeira e acompanhamento de mercado. Usara a mesma base SaaS."
+    }
+  },
+
+  "communication": {
+    "user_to_backend": "HTTP REST (JSON) via FastAPI na porta 8000. Auth por header Authorization: Bearer <JWT>.",
+    "backend_to_product_speech_ai": "Import/adapter local (nao HTTP). app/products/speech_ai_adapter.py executa products/speech-ai/integration/cli.py usando o Python do .venv do proprio produto via subprocess, capturando stdout (JSON) -> json.loads. Mantem produtos desacoplados do backend (sem import direto do codigo do produto).",
+    "product_internal": "integration/cli.py -> integration/facade.run_speech_ai -> integration/runner.execute_current_pipeline -> pipeline+services do speech-ai.",
+    "data_persistence": "PostgreSQL (users, products, subscriptions).",
+    "planned_async": "RabbitMQ para execucao assincrona / fila (previsto para a Task 015).",
+    "e2e_test": "test_auth.sh valida: health -> login -> subscription -> access -> run speech-ai -> validacao de arquivos -> teste sem token (401)."
+  },
+
+  "tasks": {
+    "convention": {
+      "location": "tasks/saas/<NNN-nome>/",
+      "files": ["task.md (contexto, objetivo, requisitos, constraints)", "notes.md (decisoes e futuro)", "acceptance.md (criterios de aceite e validacao)"],
+      "development_cycle": "Definir tarefa -> Implementar 1 modulo -> Testar -> Commit -> Proxima tarefa",
+      "rules": ["1 modulo por vez", "testar antes de avancar", "commitar apos cada etapa", "nunca gerar multiplos modulos simultaneamente"]
+    },
+    "completed": [
+      {"id": "005-password-hash", "title": "Password Hash", "summary": "app/security.py com hash_password/verify_password (bcrypt)", "status": "done"},
+      {"id": "006-register-hash", "title": "Update Register with Password Hash", "summary": "register passa a salvar senha com hash", "status": "done"},
+      {"id": "007-login", "title": "User Login", "summary": "POST /auth/login valida email+senha", "status": "done"},
+      {"id": "008-jwt", "title": "JWT Token Generation", "summary": "login retorna JWT (HS256, sub+exp, 60min)", "status": "done"},
+      {"id": "009-protected-route", "title": "Protected Route (/users/me)", "summary": "app/deps.py get_current_user; rota protegida", "status": "done"},
+      {"id": "010-user-profile", "title": "User Profile Enrichment", "summary": "/users/me retorna id, email, created_at, is_active", "status": "done"},
+      {"id": "011-products", "title": "Products", "summary": "modelo Product + GET /products + seed speech-ai/edital-ai/educa-ai", "status": "done"},
+      {"id": "012-subscriptions", "title": "Subscriptions", "summary": "modelo Subscription + POST/GET /subscriptions", "status": "done"},
+      {"id": "013-authorization", "title": "Product Authorization", "summary": "GET /products/{slug}/access valida subscription ativa", "status": "done"},
+      {"id": "014-product-gateway", "title": "Product Gateway (speech-ai integration)", "summary": "GET /products/{slug}/run - execucao simulada (gateway)", "status": "done"},
+      {"id": "014a-speech-ai-facade", "title": "Speech-AI Facade", "summary": "camada integration/ (facade, runner, schemas) para execucao programatica do pipeline", "status": "done"},
+      {"id": "014b-tapos-speech-ai-integration", "title": "TAPOS integrates with speech-ai", "summary": "POST /products/speech-ai/run executa a facade real via adapter; valida JWT+subscription", "status": "done"}
+    ],
+    "next": {
+      "id": "015",
+      "title": "Execucao assincrona / fila",
+      "status": "planned",
+      "source": "Referenciada explicitamente em notes.md das tasks 014A, 014B e 014: 'Task 015: execucao assincrona com fila' / 'Task 015: execucao assincrona / fila'. Ainda NAO existe diretorio tasks/saas/015-*, portanto o escopo detalhado ainda nao foi redigido.",
+      "known_intent": [
+        "Tornar a execucao do speech-ai assincrona (nao bloquear a request HTTP)",
+        "Usar fila de mensagens (RabbitMQ ja previsto na stack de infraestrutura)",
+        "Evolucao posterior: transformar speech-ai em microservico isolado"
+      ],
+      "not_invented_disclaimer": "Requisitos, endpoints e criterios de aceite detalhados da Task 015 ainda nao foram escritos no repositorio. O acima e apenas a intencao registrada nas notes das tasks anteriores. Nao inferir contrato de API alem disso."
+    }
+  },
+
+  "current_state": {
+    "version": "1.0.0",
+    "baseline_commit": "2dd17ee TAPOS v1.0.0 - operational SaaS baseline",
+    "latest_commit": "67163ed script",
+    "changelog_v1_0_0": {
+      "plataforma": ["JWT Authentication", "Products", "Subscriptions", "Authorization", "Product Gateway"],
+      "produtos": ["Speech-AI integrado"],
+      "integracao": ["Task 014A concluida", "Task 014B concluida"]
+    },
+    "not_yet_implemented": ["refresh token", "RBAC (roles/perfis)", "multi-tenant", "billing/pagamentos", "execucao assincrona com fila (Task 015)"],
+    "known_observations": [
+      "app/routes/users.py existe mas nao esta incluido em app/main.py (endpoint /users/me nao montado no estado atual).",
+      "testes.sh exporta SECRET_KEY, mas o codigo (app/security.py) le JWT_SECRET_KEY.",
+      "products.py implementa a validacao de acesso inline em vez de reutilizar deps.get_product_access."
+    ]
+  },
+
+  "how_to_resume": {
+    "for_assistant": "Voce e um engenheiro operando a plataforma TAPOS a partir de /workspace/tecle. Respeite a constitution: modularidade, desacoplamento, simplicidade, incrementalidade (1 modulo por vez, testar, commitar). Produtos nunca acessam banco direto; comunicacao via API/adapter. Continue a partir da Task 015 (execucao assincrona / fila com RabbitMQ).",
+    "recommended_first_step_for_task_015": "Antes de implementar, escrever tasks/saas/015-*/task.md, notes.md e acceptance.md definindo escopo (endpoint de submissao assincrona, worker consumidor RabbitMQ, status/polling do job) seguindo o padrao das tasks anteriores. Nao implementar codigo antes de definir e validar o escopo.",
+    "validation": "Usar/estender test_auth.sh para validar o fluxo ponta a ponta apos cada etapa."
+  }
+}
